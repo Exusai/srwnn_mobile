@@ -39,7 +39,9 @@ class _InferenceViewState extends State<InferenceView> {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => ImageView(image: newImage, orgImage: image,)),
+            
           );
+          //gen = null;
         },
         child: Text(AppLocalizations.of(context).translate('start_btn')),
       ),
@@ -54,7 +56,7 @@ class _InferenceViewState extends State<InferenceView> {
               ),
 
               SizedBox(height: 10),
-              
+
               Row(
                 children: [
                   Spacer(),

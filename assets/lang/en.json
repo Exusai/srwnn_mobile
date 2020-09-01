@@ -34,5 +34,9 @@
     "loading_dialog": "The app is working... this may take a while but it's ok as long as it doesn't crashes and closes.",
     "about": "About",
     "tip": "Tip",
-    "mail": "Mail"
+    "mail": "Mail",
+
+    "about_text1": "Super Resolution Waifu Neural Network is a convolutional neural network. Escentially an implementation of waifu2x (by nagadomi) on tensorflow but using my own anime gurl pics dataset (8k+ images) and making some tweaks to the model architecture which is based on VGG11.",
+    "about_text2": "A reduced version of the model (tflite) is used to run on-device whereas the full model runs on web.",
+    "about_text3": "More info about the model on my github." 
 }

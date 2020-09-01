@@ -34,5 +34,9 @@
     "loading_dialog": "La app esta trabajando... esto puede tomar un rato pero esta bien mientras no se cierre.",
     "about": "Acerca de",
     "tip": "Dona",
-    "mail": "Correo"
+    "mail": "Correo",
+
+    "about_text1": "Super Resolution Waifu Neural Network es una red neuronal convolucional. Escencialmente una implementación de waifu2x (por nagadomi) en tensorflow pero usando mis propio dataset de imagenes de monas chinas (8k+) y haciendo algunos cambios en la arquitectura del modelo el cual esta basado en VGG11.",
+    "about_text2": "Una versión reducida del modelo (tflite) es usada para ejecutarse en el dispositivo mientras que la versión completa se ejecuta en web.",
+    "about_text3": "Más detalles de modelo en mi github"
 }

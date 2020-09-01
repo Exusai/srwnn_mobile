@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
+import 'package:srwnn_mobile/Controllers/urlLauncher.dart';
+import 'package:srwnn_mobile/dialogs.dart';
 import 'package:srwnn_mobile/workingView.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
@@ -89,10 +91,21 @@ class _MyHomePageState extends State<MyHomePage> {
         centerTitle: false,
         actions: [
           new PopupMenuButton<Options>(
-            icon: Icon(Icons.more_vert,),
+            icon: Icon(Icons.more_horiz,),
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20),),
-            onSelected: (Options result) {
-              print(result);
+            onSelected: (Options result) async {
+              //print(result);
+              if (result == Options.github){
+                //https://github.com/Exusai/srwnn_mobile
+                await launchURL('https://github.com/Exusai/srwnn_mobile');
+              } 
+              if (result == Options.mail){
+                await launchMail();
+              } 
+
+              if (result == Options.about){
+                showDialog(context: context, builder: (_) => aboutDialog(context));
+              } 
             },
             itemBuilder: (BuildContext context) => <PopupMenuEntry<Options>>[
               PopupMenuItem<Options>(
@@ -116,13 +129,13 @@ class _MyHomePageState extends State<MyHomePage> {
                   leading: Icon(Icons.mail),
                 ),
               ),
-              PopupMenuItem<Options>(
+              /*PopupMenuItem<Options>(
                 value: Options.tip,
                 child: ListTile(
-                  title: Text(AppLocalizations.of(context).translate('about')),
+                  title: Text(AppLocalizations.of(context).translate('tip')),
                   leading: Icon(Icons.monetization_on),
                 ),
-              ),
+              ),*/
             ],
           ),
 

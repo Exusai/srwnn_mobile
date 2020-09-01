@@ -11,7 +11,14 @@ class SRWGenerator {
   String modelPath; 
   File image;
   SRWGenerator({this.image, this.modelPath});
-
+  //TensorImage tensorImage;
+  //ImageProcessor imageProcessor;
+  //TensorBuffer reShapeImgBuffer;
+  //TensorBuffer probabilityBuffer;
+  //TensorProcessor outputProcessor;
+  //TensorBuffer outCasted;
+  //TensorImage output;
+  //File twoXimage;
 
   Future generate2xImage() async {
     TensorImage tensorImage = TensorImage.fromFile(image);
