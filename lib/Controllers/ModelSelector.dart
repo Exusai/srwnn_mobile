@@ -61,6 +61,10 @@ class SRModelSelector{
     //return 'models/latency.tflite';
   }
 
+  String getModelConfig(){
+    return '0000';
+  }
+
   String getImageOutExmaple(){
     if (execution == 1){
       return 'assets/images/modelExamples/OutBaseModelWeb.png';

@@ -8,6 +8,7 @@ import 'package:tflite_flutter_helper/tflite_flutter_helper.dart';
 
 import 'Controllers/app_localizations.dart';
 import 'Models/Inference.dart';
+import 'Models/onlineGenerator.dart';
 import 'loading.dart';
 
 class InferenceView extends StatefulWidget {
@@ -33,13 +34,21 @@ class _InferenceViewState extends State<InferenceView> {
       floatingActionButton: FloatingActionButton(
         onPressed: ()async{
           setState(() => loading = true);
-          var gen = SRWGenerator(image: image, modelPath: selector.getModelPath());
-          newImage = await gen.generate2xImage();
+          
+          if (selector.execution == 1) {
+            var genOnline = SRWGeneratorOnline(image: image, modelConfig: selector.getModelConfig());
+            newImage = await genOnline.generate2xImage();
+          }
+
+          else if (selector.execution == 0){
+            var gen = SRWGenerator(image: image, modelPath: selector.getModelPath());
+            newImage = await gen.generate2xImage();
+          }
+          
           setState(() => loading = false);
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => ImageView(image: newImage, orgImage: image,)),
-            
+            MaterialPageRoute(builder: (context) => ImageView(image: newImage, orgImage: image,)),  
           );
           //gen = null;
         },

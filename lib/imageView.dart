@@ -34,7 +34,7 @@ class _ImageViewState extends State<ImageView> {
               //Navigator.pop(context);
               //Navigator.pop(context);
               GallerySaver.saveImage(widget.image.path);
-              print('Saved');
+              //print('Saved');
               showDialog(context: context, builder: (_) => imageSaved(context));
             },
           ),

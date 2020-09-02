@@ -6,7 +6,6 @@ import 'package:tflite_flutter_helper/tflite_flutter_helper.dart';
 import 'package:path_provider/path_provider.dart';
 
 
-
 class SRWGenerator {
   String modelPath; 
   File image;
