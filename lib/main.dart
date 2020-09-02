@@ -244,7 +244,7 @@ class _MyHomePageState extends State<MyHomePage> {
             Row(
               children: [
                 Spacer(),
-                Column(
+                /*Column(
                   children: [
                     Text(
                       AppLocalizations.of(context).translate('expand_tr'),
@@ -288,7 +288,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ],
                 ),
 
-                SizedBox(width: 15,),
+                SizedBox(width: 15,),*/
 
                 Column(
                   children: [
@@ -301,16 +301,21 @@ class _MyHomePageState extends State<MyHomePage> {
                       children: execution, 
                       onValueChanged: (int val) {
                         setState(() {
-                          selector.execution = val;
+                          if (val == 0){
+                            selector.executionOnline = false;
+                          } else {
+                            selector.executionOnline = true;
+                          }
+                          
                           message = selector.updateParameters();
                         });
                       },
-                      groupValue: selector.execution,
+                      groupValue: selector.executionOnline == true ? 1 : 0,
                     ),
                     SizedBox(height: 10,),
                   ],
                 ),
-                Spacer(),
+                Spacer(), 
               ],
             ),
 

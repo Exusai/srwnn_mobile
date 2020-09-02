@@ -4,6 +4,8 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'Controllers/app_localizations.dart';
 
 class Loading extends StatelessWidget {
+  final bool dispMesage;
+  Loading({this.dispMesage});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -20,7 +22,7 @@ class Loading extends StatelessWidget {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 30),
               child: Text(
-                AppLocalizations.of(context).translate('loading_dialog'),
+                dispMesage ? AppLocalizations.of(context).translate('loading_dialog'): '',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Colors.blue,

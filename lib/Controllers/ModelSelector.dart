@@ -7,7 +7,7 @@ class SRModelSelector{
   int blurLevel = 0;
   int expansion = 0;
   int upscaleLevel = 0;
-  int execution = 1;
+  bool executionOnline = true;
 
   //SRModelSelector({this.model, this.style, this.noiseLevel, this.blurLevel, this.expansion, this.upscaleLevel});
 
@@ -42,11 +42,11 @@ class SRModelSelector{
     else if (expansion == 1) {
       return 'msg_experimental_feature';
     }
-    else if (execution == 0) {
+    else if (executionOnline == false) {
       return 'msg_local_warning';
     }
 
-    else if (execution == 1) {
+    else if (executionOnline == true) {
       //return '''Requieres internet connection, but server computing power and usage is limited becuse I don't have money. 
       //and it may or may not be available. If it is not, your image is going to be processed on your device.'''; 
       return 'msg_web_wanrning';
@@ -66,7 +66,7 @@ class SRModelSelector{
   }
 
   String getImageOutExmaple(){
-    if (execution == 1){
+    if (executionOnline == true){
       return 'assets/images/modelExamples/OutBaseModelWeb.png';
     }
     else {

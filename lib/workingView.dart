@@ -1,7 +1,5 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-//import 'package:photo_view/photo_view.dart';
-//import 'package:image/image.dart' as image2;
 import 'package:srwnn_mobile/imageView.dart';
 import 'package:srwnn_mobile/main.dart';
 import 'package:tflite_flutter_helper/tflite_flutter_helper.dart';
@@ -25,23 +23,32 @@ File newImage;
 class _InferenceViewState extends State<InferenceView> {
   TensorImage tensorImage = TensorImage.fromFile(image);
   bool loading = false;
+  bool dispMSG = false;
+  //String warning = ;
+  
   @override
   Widget build(BuildContext context) {
-    return loading ? Loading(): Scaffold(
+    return loading ? Loading(dispMesage: dispMSG,): Scaffold(
       appBar: AppBar(
         title: Text(AppLocalizations.of(context).translate('confirmation_title')),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: ()async{
-          setState(() => loading = true);
           
-          if (selector.execution == 1) {
-            var genOnline = SRWGeneratorOnline(image: image, modelConfig: selector.getModelConfig());
+          
+          if (selector.executionOnline == true) {
+            setState(() => loading = true);
+            setState(() => dispMSG = false);
+            imageCache.clear();
+            SRWGeneratorOnline genOnline = SRWGeneratorOnline(image: image, modelConfig: selector.getModelConfig());
             newImage = await genOnline.generate2xImage();
           }
 
-          else if (selector.execution == 0){
-            var gen = SRWGenerator(image: image, modelPath: selector.getModelPath());
+          else if (selector.executionOnline == false){
+            setState(() => loading = true);
+            setState(() => dispMSG = true);
+            imageCache.clear();
+            SRWGenerator gen = SRWGenerator(image: image, modelPath: selector.getModelPath());
             newImage = await gen.generate2xImage();
           }
           
@@ -101,7 +108,7 @@ class _InferenceViewState extends State<InferenceView> {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20),
                 child: Text(
-                  AppLocalizations.of(context).translate('pre_process_warning'),
+                  AppLocalizations.of(context).translate(selector.executionOnline ? 'pre_process_warning2' : 'pre_process_warning'),
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Colors.orange[900],
