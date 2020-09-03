@@ -1,9 +1,11 @@
 import 'dart:io';
+import 'package:firebase_admob/firebase_admob.dart';
 import 'package:flutter/material.dart';
 import 'package:srwnn_mobile/imageView.dart';
 import 'package:srwnn_mobile/main.dart';
 import 'package:tflite_flutter_helper/tflite_flutter_helper.dart';
 
+import 'Controllers/adds.dart';
 import 'Controllers/app_localizations.dart';
 import 'Models/Inference.dart';
 import 'Models/onlineGenerator.dart';
@@ -25,6 +27,19 @@ class _InferenceViewState extends State<InferenceView> {
   bool loading = false;
   bool dispMSG = false;
   //String warning = ;
+  BannerAd _bannerAd;
+
+  @override
+  void initState(){
+    super.initState();
+    _bannerAd = BannerAd(adUnitId: Adds.banner, size: AdSize.banner);
+    _loadBanner();
+  }
+
+  @override
+  void dispose(){
+    _bannerAd.dispose();
+  }  
   
   @override
   Widget build(BuildContext context) {
@@ -121,5 +136,9 @@ class _InferenceViewState extends State<InferenceView> {
         ),
       ),
     );
+  }
+
+  _loadBanner(){
+    _bannerAd..load()..show(anchorType: AnchorType.top);
   }
 }

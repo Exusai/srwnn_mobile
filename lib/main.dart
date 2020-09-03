@@ -1,3 +1,4 @@
+import 'package:firebase_admob/firebase_admob.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
@@ -10,6 +11,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'Controllers/ModelConfigs.dart';
 import 'Controllers/ModelSelector.dart';
+import 'Controllers/adds.dart';
 import 'Controllers/app_localizations.dart';
 
 void main() {
@@ -30,7 +32,18 @@ pickerGallery() async {
   }*/
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  void initState(){
+    super.initState();
+    FirebaseAdMob.instance.initialize(appId: Adds.appID);
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
