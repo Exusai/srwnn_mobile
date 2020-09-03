@@ -38,6 +38,7 @@ class _InferenceViewState extends State<InferenceView> {
 
   @override
   void dispose(){
+    super.dispose();
     _bannerAd.dispose();
   }  
   
