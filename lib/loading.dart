@@ -37,6 +37,8 @@ class _LoadingState extends State<Loading> {
               break;
             case MobileAdEvent.closed:
               break;
+            default:
+              break;
           }
         }
       );
