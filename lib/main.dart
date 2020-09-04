@@ -54,8 +54,8 @@ class _MyAppState extends State<MyApp> {
       ),
       // List all of the app's supported locales here
       supportedLocales: [
-        Locale('en', 'US'),
-        Locale('es', 'MX'),  
+        Locale('en', ''),
+        Locale('es', ''),  
       ],
       localizationsDelegates: [
         // THIS CLASS WILL BE ADDED LATER
