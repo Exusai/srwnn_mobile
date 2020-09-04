@@ -50,6 +50,7 @@ class _LoadingState extends State<Loading> {
   void dispose(){
     super.dispose();
     _interstitialAd.dispose();
+    
   }  
 
   @override

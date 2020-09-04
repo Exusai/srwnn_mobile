@@ -7,7 +7,7 @@ import 'package:tflite_flutter_helper/tflite_flutter_helper.dart';
 
 import 'Controllers/adds.dart';
 import 'Controllers/app_localizations.dart';
-import 'Models/Inference.dart';
+import 'Models/generator.dart';
 import 'Models/onlineGenerator.dart';
 import 'loading.dart';
 
