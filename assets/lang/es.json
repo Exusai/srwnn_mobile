@@ -31,7 +31,7 @@
     "confirmation_title": "Confirmación",
     "msg_image_saved": "Guardado",
     "pre_process_warning": "Si la app falla después de oprimir el botón de inicio, significa que tu imagen es demasiado grande como para ser procesada en tu sipositivo. Intenta de nuevo con una imagen más pequeña o intenta procesar en web en lugar de local",
-    "pre_process_warning2": "Tu imagen esta por ser procesada en un servidor, porfavor ve un anuncio mientras esperas para ayudarme a mantener el servidor.",
+    "pre_process_warning2": "Tu imagen esta por ser procesada en un servidor, porfavor ve un anuncio (y considera hacer click) mientras esperas para ayudarme a mantener el servidor.",
     "loading_dialog": "La app esta trabajando... esto puede tomar un rato pero esta bien mientras no se cierre.",
     "about": "Acerca de",
     "tip": "Dona",

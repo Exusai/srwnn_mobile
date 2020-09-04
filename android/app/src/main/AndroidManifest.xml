@@ -5,10 +5,14 @@
          In most cases you can leave this as-is, but you if you want to provide
          additional functionality it is fine to subclass or reimplement
          FlutterApplication and put your custom class here. -->
+         
     <application
         android:name="io.flutter.app.FlutterApplication"
         android:label="srwnn_mobile"
         android:icon="@mipmap/ic_launcher">
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-5774957205453296~7753339733"/>
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
@@ -22,7 +26,7 @@
                  to determine the Window background behind the Flutter UI. -->
             <meta-data
               android:name="io.flutter.embedding.android.NormalTheme"
-              android:value="ca-app-pub-5774957205453296~7753339733"
+              
               android:resource="@style/NormalTheme"
               />
             <!-- Displays an Android View that continues showing the launch screen
@@ -43,6 +47,7 @@
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
         <meta-data
             android:name="flutterEmbedding"
-            android:value="2" />
+            android:value="2" 
+            />
     </application>
 </manifest>

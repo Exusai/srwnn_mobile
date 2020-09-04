@@ -1,11 +1,57 @@
+//import 'dart:html';
+
+import 'package:firebase_admob/firebase_admob.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
+import 'Controllers/adds.dart';
 import 'Controllers/app_localizations.dart';
 
-class Loading extends StatelessWidget {
+class Loading extends StatefulWidget {
   final bool dispMesage;
   Loading({this.dispMesage});
+
+  @override
+  _LoadingState createState() => _LoadingState();
+}
+
+class _LoadingState extends State<Loading> {
+
+  InterstitialAd _interstitialAd;
+  bool isInstertitialReady = false;
+
+  @override
+  void initState(){
+    super.initState();
+
+    if (widget.dispMesage == false){
+      _interstitialAd = InterstitialAd(
+        adUnitId: Adds.loading,
+        listener: (MobileAdEvent event){
+          switch (event) {
+            case MobileAdEvent.loaded:
+              isInstertitialReady = true;
+              break;
+            case MobileAdEvent.failedToLoad:
+              isInstertitialReady = false;
+              break;
+            case MobileAdEvent.closed:
+              break;
+          }
+        }
+      );
+      if (isInstertitialReady = true){
+        _loadInterstitial();
+      }
+    }
+  }
+
+  @override
+  void dispose(){
+    super.dispose();
+    _interstitialAd.dispose();
+  }  
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -22,7 +68,7 @@ class Loading extends StatelessWidget {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 30),
               child: Text(
-                dispMesage ? AppLocalizations.of(context).translate('loading_dialog'): '',
+                widget.dispMesage ? AppLocalizations.of(context).translate('loading_dialog'): '',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Colors.blue,
@@ -35,5 +81,8 @@ class Loading extends StatelessWidget {
         )
       ),
     );
+  }
+  _loadInterstitial(){
+    _interstitialAd..load()..show();
   }
 }
