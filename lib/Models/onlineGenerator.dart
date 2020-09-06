@@ -15,13 +15,13 @@ class SRWGeneratorOnline {
   SRWGeneratorOnline({this.image, this.modelConfig});
 
   Future generate2xImage() async {
-    String url = 'http://127.0.0.1:5000/generate';
+    String url = 'http://srwserver.uc.r.appspot.com/generate';
 
     FormData formData = new FormData.fromMap({
       "model": modelConfig.toString(),
       "image": await MultipartFile.fromFile(image.path.toString())
     });
-    
+      
     Dio dio = new Dio();
     dio.options.connectTimeout = 120000;
     dio.options.receiveTimeout = 120000;

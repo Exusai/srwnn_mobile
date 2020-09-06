@@ -21,7 +21,6 @@ dependencies:
   gallery_saver: ^2.0.1
   flutter_spinkit: ^4.1.2
   url_launcher: ^5.5.2
-  http:
   dio: ^3.0.10
   firebase_admob: ^0.9.3
 
