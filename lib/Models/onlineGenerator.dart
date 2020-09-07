@@ -15,7 +15,7 @@ class SRWGeneratorOnline {
   SRWGeneratorOnline({this.image, this.modelConfig});
 
   Future generate2xImage() async {
-    String url = 'http://srwserver.uc.r.appspot.com/generate';
+    String url = 'https://guarded-wave-83817.herokuapp.com/generate';
 
     FormData formData = new FormData.fromMap({
       "model": modelConfig.toString(),
