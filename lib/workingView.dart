@@ -137,6 +137,7 @@ class _InferenceViewState extends State<InferenceView> {
                   ),
                 ),
               ),
+              
               //Spacer(),
             ],
           ),
@@ -146,6 +147,6 @@ class _InferenceViewState extends State<InferenceView> {
   }
   
   _loadBanner(){
-    _bannerAd..load()..show(anchorType: AnchorType.top);
+    _bannerAd..load()..show(anchorType: AnchorType.bottom, anchorOffset: 80.0);
   }
 }
