@@ -23,17 +23,27 @@ dependencies:
   url_launcher: ^5.5.2
   dio: ^3.0.10
   firebase_admob: ^0.9.3
+  flutter_launcher_icons: ^0.7.5
 
 dev_dependencies:
+  flutter_launcher_icons: "^0.7.3"
   flutter_test:
     sdk: flutter
 
+flutter_icons:
+  ios: true
+  android: true
+  image_path_ios: "assets/launcher/icon.png"
+  image_path_android: "assets/launcher/icon.png"
+  adaptive_icon_background: "assets/launcher/background.png"
+  adaptive_icon_foreground: "assets/launcher/foreground.png"
 
 flutter:
   uses-material-design: true
   assets:
     #- assets/images/test.jpg
     - assets/models/srwnn.tflite
+    - assets/models/
     - assets/images/test.png
     - assets/images/modelExamples/
     - assets/lang/en.json

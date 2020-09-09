@@ -9,6 +9,7 @@ import 'Controllers/adds.dart';
 import 'Controllers/app_localizations.dart';
 import 'Models/generator.dart';
 import 'Models/onlineGenerator.dart';
+import 'dialogs.dart';
 import 'loading.dart';
 
 class InferenceView extends StatefulWidget {
@@ -63,7 +64,13 @@ class _InferenceViewState extends State<InferenceView> {
             _bannerAd = null;
             imageCache.clear();
             SRWGeneratorOnline genOnline = SRWGeneratorOnline(image: image, modelConfig: selector.getModelConfig());
-            newImage = await genOnline.generate2xImage();
+            try{
+              newImage = await genOnline.generate2xImage();
+            } on Exception {
+              serverErrorDialog(context);
+            }
+            
+
           }
 
           else if (selector.executionOnline == false){

@@ -105,7 +105,6 @@ class _MyHomePageState extends State<MyHomePage> {
             onSelected: (Options result) async {
               //print(result);
               if (result == Options.github){
-                //https://github.com/Exusai/srwnn_mobile
                 await launchURL('https://github.com/Exusai/srwnn_mobile');
               } 
               if (result == Options.mail){
