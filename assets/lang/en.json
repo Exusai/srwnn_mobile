@@ -39,5 +39,12 @@
 
     "about_text1": "Super Resolution Waifu Neural Network is a convolutional neural network. Escentially an implementation of waifu2x (by nagadomi) on tensorflow but using my own anime gurl pics dataset (8k+ images) and making some tweaks to the model architecture which is based on VGG11.",
     "about_text2": "A reduced version of the model (tflite) is used to run on-device whereas the full model runs on web.",
-    "about_text3": "More info about the model on my github." 
+    "about_text3": "More info about the model on my github.",
+    
+    "server_error": "Server error.",
+    "common_errors":"Common errors:",
+    "posible_error1":"- The server has decided to die and I'll have to fix it, try again later.",
+    "posible_error2":"- Your app may be outdated, I recomend updating to the latest version in order to process your image on the server.",
+    "posible_error3":"- Mantainace or updates are being deployed on the server, try again later.",
+    "posible_error4":"- Keeping the server has become to expensive so I decided to stop the service and it may never return. I hope that this last one never happens, but in case it does you may still be able to process your images on your device."
 }

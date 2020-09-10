@@ -7,9 +7,9 @@ AlertDialog aboutDialog(context) {
     content: SingleChildScrollView(
       child: ListBody(
         children: [
-          Text(AppLocalizations.of(context).translate('about_text1'), textAlign: TextAlign.justify),
-          Text(AppLocalizations.of(context).translate('about_text2'), textAlign: TextAlign.justify),
-          Text(AppLocalizations.of(context).translate('about_text3'), textAlign: TextAlign.justify),
+          Text(AppLocalizations.of(context).translate('about_text1'), textAlign: TextAlign.left),
+          Text(AppLocalizations.of(context).translate('about_text2'), textAlign: TextAlign.left),
+          Text(AppLocalizations.of(context).translate('about_text3'), textAlign: TextAlign.left),
         ],
       ),
     ),
@@ -26,13 +26,15 @@ AlertDialog aboutDialog(context) {
 
 AlertDialog serverErrorDialog(context) {
   return AlertDialog(
-    title: Text(AppLocalizations.of(context).translate('about')),
+    title: Text(AppLocalizations.of(context).translate('server_error')),
     content: SingleChildScrollView(
       child: ListBody(
         children: [
-          Text(AppLocalizations.of(context).translate('about_text1'), textAlign: TextAlign.justify),
-          Text(AppLocalizations.of(context).translate('about_text2'), textAlign: TextAlign.justify),
-          Text(AppLocalizations.of(context).translate('about_text3'), textAlign: TextAlign.justify),
+          Text(AppLocalizations.of(context).translate('common_errors'), textAlign: TextAlign.left),
+          Text(AppLocalizations.of(context).translate('posible_error1'), textAlign: TextAlign.left),
+          Text(AppLocalizations.of(context).translate('posible_error2'), textAlign: TextAlign.left),
+          Text(AppLocalizations.of(context).translate('posible_error3'), textAlign: TextAlign.left),
+          Text(AppLocalizations.of(context).translate('posible_error4'), textAlign: TextAlign.left),
         ],
       ),
     ),

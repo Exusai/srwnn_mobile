@@ -39,5 +39,12 @@
 
     "about_text1": "Super Resolution Waifu Neural Network es una red neuronal convolucional. Escencialmente una implementación de waifu2x (por nagadomi) en tensorflow pero usando mis propio dataset de imagenes de monas chinas (8k+) y haciendo algunos cambios en la arquitectura del modelo el cual esta basado en VGG11.",
     "about_text2": "Una versión reducida del modelo (tflite) es usada para ejecutarse en el dispositivo mientras que la versión completa se ejecuta en web.",
-    "about_text3": "Más detalles de modelo en mi github"
+    "about_text3": "Más detalles de modelo en mi github",
+
+    "server_error": "Error de servidor.",
+    "common_errors":"Errores comúnes",
+    "posible_error1":"- El servidor ha decidido morir y lo tendré que arreglar, intenta de nuevo más tarde.",
+    "posible_error2":"- Puede que tu aplicación este desactualizada, recomiendo que la actualices para poder procesar tu imágen en el servidor.",
+    "posible_error3":"- Se esta llevando a cabo mantenimiento o se estan implementando actualizaciones, intenta más tarde.",
+    "posible_error4":"- Mantener el servidor se ha vuelto muy caro, decidí detener el servicio y puede que nunca regrese. Espero que esta última no pase, pero en caso de que suceda, aún podrás procesar tus imágenes en tu dispositivo."
 }

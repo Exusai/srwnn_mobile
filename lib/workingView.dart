@@ -27,6 +27,7 @@ class _InferenceViewState extends State<InferenceView> {
   TensorImage tensorImage = TensorImage.fromFile(image);
   bool loading = false;
   bool dispMSG = false;
+  bool error = false;
   //String warning = ;
   
   BannerAd _bannerAd;
@@ -66,11 +67,10 @@ class _InferenceViewState extends State<InferenceView> {
             SRWGeneratorOnline genOnline = SRWGeneratorOnline(image: image, modelConfig: selector.getModelConfig());
             try{
               newImage = await genOnline.generate2xImage();
-            } on Exception {
-              serverErrorDialog(context);
+            } on Error {
+              //setState(() => loading = false);
+              setState(() => error = true);
             }
-            
-
           }
 
           else if (selector.executionOnline == false){
@@ -82,11 +82,15 @@ class _InferenceViewState extends State<InferenceView> {
           }
           
           setState(() => loading = false);
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => ImageView(image: newImage, orgImage: image,)),  
-          );
-          //gen = null;
+          if (error == false){
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ImageView(image: newImage, orgImage: image,)),  
+            );
+          } else if (error == true) {
+            showDialog(context: context, builder: (_) => serverErrorDialog(context));
+            
+          }
         },
         child: Text(AppLocalizations.of(context).translate('start_btn')),
       ),

@@ -32,7 +32,7 @@ class SRWGeneratorOnline {
       response = await dio.post(url, data: formData);
     } on DioError {
       //print('error');
-      throw Exception('Server error');
+      throw Error();
     }
     
 
