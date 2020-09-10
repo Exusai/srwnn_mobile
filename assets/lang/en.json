@@ -16,9 +16,9 @@
     "please_select_img": "Please select image",
 
     "msg_none": "",
-    "msg_invalid_config": "Invalid configuration. Returning to default values.",
-    "msg_esergan_not_av": "ESRGAN model not available, it may be added on the future",
-    "msg_photo_not_av": "Only anime pictures are supported right now, but if you enter a photo, you may get an interesting result.",
+    "msg_invalid_config": "Invalid configuration.",
+    "msg_esergan_not_av": "ESRGAN model not available for local processing. ESRGAN works better on photos.",
+    "msg_photo_not_av": "SRWNN model for photos is still a work in progress.",
     "heavy_op_warning": "This is a heavy operation.",
     "msg_experimental_feature": "This is an experimental feature. It may produce nightmare fuel content.",
     "msg_local_warning": "Local results are inferior due to the compressed model, app may crash if your image is too big and/or if you don't have enough computing resources on your device.",

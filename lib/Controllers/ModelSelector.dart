@@ -1,5 +1,5 @@
 //import 'package:srwnn_mobile/Controllers/ModelConfigs.dart';
-
+//import 'package:srwnn_mobile/Controllers/ModelConfigs.dart';
 class SRModelSelector{
   int model = 0;
   int style = 0;
@@ -9,11 +9,7 @@ class SRModelSelector{
   int upscaleLevel = 0;
   bool executionOnline = true;
 
-  //SRModelSelector({this.model, this.style, this.noiseLevel, this.blurLevel, this.expansion, this.upscaleLevel});
-
   String updateParameters(){
-    //if wea happens, update restrictions and change to valid config
-
     if (expansion == 1 && (model + style + noiseLevel + blurLevel + upscaleLevel) != 0){
       model = 0;
       style = 0;
@@ -30,21 +26,19 @@ class SRModelSelector{
       upscaleLevel = 0;
       return 'msg_invalid_config';
     } 
-    else if(noiseLevel > 0 && blurLevel != 0 ){
+    else if(noiseLevel > 0 && blurLevel > 0){
       blurLevel = 0;
-      return 'msg_invalid_config';
-    }
-    else if(blurLevel > 0 && noiseLevel != 0 ){
       noiseLevel = 0;
       return 'msg_invalid_config';
     }
-
     else if (model == 1) {
-      //model = 0;
+      style = 1;
+      executionOnline = true;
+      noiseLevel = 0;
+      blurLevel = 0;
       return 'msg_esergan_not_av';
     }
     else if (style == 1) {
-      //style = 0;
       return 'msg_photo_not_av';
     }
     else return _getMessage();
@@ -63,22 +57,38 @@ class SRModelSelector{
     }
 
     else if (executionOnline == true) {
-      //return '''Requieres internet connection, but server computing power and usage is limited becuse I don't have money. 
-      //and it may or may not be available. If it is not, your image is going to be processed on your device.'''; 
       return 'msg_web_wanrning';
     }
-    
     else return '';
   }
 
   String getModelPath(){
-    //evaluate inputs and return a message based on that
-    return 'models/srwnn.tflite';
-    //return 'models/latency.tflite';
+    //return 'models/srwnn.tflite';
+    String modelConfig = getModelConfig();
+
+    if(modelConfig == '0000') return 'models/srwnn.tflite';
+    if(modelConfig == '0100') return 'models/SRWNNdeNoise1.tflite'; //change later
+    if(modelConfig == '0010') return 'models/SRWNNdeNoise1.tflite';
+    if(modelConfig == '0020') return 'models/SRWNNdeNoise2.tflite';
+    if(modelConfig == '0030') return 'models/SRWNNdeNoise3.tflite';
+    if(modelConfig == '0001') return 'models/SRWNNdeBlur1.tflite';
+    if(modelConfig == '0002') return 'models/SRWNNdeBlur2.tflite';
+    if(modelConfig == '0003') return 'models/SRWNNdeBlur3.tflite';
+    else return 'models/srwnn.tflite';
   }
 
   String getModelConfig(){
-    return '0000';
+    String m = model.toString();
+    String s = style.toString();
+    String n = noiseLevel.toString();
+    String b = blurLevel.toString();
+    //expansion = 0;
+    //upscaleLevel = 0;
+    ///--- MSNB
+    String modelConfigurationString = m + s + n + b;  
+    print('SELECTED MODEL CONFIGURATION: ');
+    print(modelConfigurationString);
+    return modelConfigurationString;
   }
 
   String getImageOutExmaple(){
@@ -99,9 +109,19 @@ class SRModelSelector{
       else if(noiseLevel == 3 && (style + blurLevel + upscaleLevel) == 0 ){
         return 'assets/images/modelExamples/denoise3OUT.png';
       }
+      else if(blurLevel == 1 && (style + noiseLevel + upscaleLevel) == 0 ){
+        return 'assets/images/modelExamples/deblur1OUT.png';
+      }
+      else if(blurLevel == 2 && (style + noiseLevel + upscaleLevel) == 0 ){
+        return 'assets/images/modelExamples/deblur2OUT.png';
+      }
+      else if(blurLevel == 3 && (style + noiseLevel + upscaleLevel) == 0 ){
+        return 'assets/images/modelExamples/deblur3OUT.png';
+      }
       else if(style == 1 && (noiseLevel + blurLevel + upscaleLevel) == 0 ){
         return 'assets/images/modelExamples/srwnnPhotoOUT.png';
-      } 
+      }
+       
 
     }
     else {
@@ -126,6 +146,15 @@ class SRModelSelector{
       }
       else if(noiseLevel == 3 && (style + blurLevel + upscaleLevel) == 0 ){
         return 'assets/images/modelExamples/denoise3IN.png';
+      }
+      else if(blurLevel == 1 && (style + noiseLevel + upscaleLevel) == 0 ){
+        return 'assets/images/modelExamples/deblur1IN.png';
+      }
+      else if(blurLevel == 2 && (style + noiseLevel + upscaleLevel) == 0 ){
+        return 'assets/images/modelExamples/deblur2IN.png';
+      }
+      else if(blurLevel == 3 && (style + noiseLevel + upscaleLevel) == 0 ){
+        return 'assets/images/modelExamples/deblur3IN.png';
       }
       else if(style == 1 && (noiseLevel + blurLevel + upscaleLevel) == 0 ){
         return 'assets/images/modelExamples/srwnnPhotoIN.png';
