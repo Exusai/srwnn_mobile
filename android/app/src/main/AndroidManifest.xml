@@ -8,7 +8,7 @@
          
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="srwnn_mobile"
+        android:label="Super Resolution W.N.N."
         android:icon="@mipmap/ic_launcher">
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
