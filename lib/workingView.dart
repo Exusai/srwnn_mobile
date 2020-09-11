@@ -28,6 +28,7 @@ class _InferenceViewState extends State<InferenceView> {
   bool loading = false;
   bool dispMSG = false;
   bool error = false;
+  bool imageError = false;
   //String warning = ;
   
   BannerAd _bannerAd;
@@ -70,6 +71,8 @@ class _InferenceViewState extends State<InferenceView> {
             } on Error {
               //setState(() => loading = false);
               setState(() => error = true);
+            } on Exception{
+              setState(() => imageError = true);
             }
           }
 
@@ -89,8 +92,10 @@ class _InferenceViewState extends State<InferenceView> {
             );
           } else if (error == true) {
             showDialog(context: context, builder: (_) => serverErrorDialog(context));
-            
+          } else if (imageError == true) {
+            showDialog(context: context, builder: (_) => imageErrorDialog(context));
           }
+
         },
         child: Text(AppLocalizations.of(context).translate('start_btn')),
       ),

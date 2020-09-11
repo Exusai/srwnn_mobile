@@ -49,3 +49,24 @@ AlertDialog serverErrorDialog(context) {
   );
 }
 
+AlertDialog imageErrorDialog(context) {
+  return AlertDialog(
+    title: Text(AppLocalizations.of(context).translate('server_image_error')),
+    content: SingleChildScrollView(
+      child: ListBody(
+        children: [
+          Text(AppLocalizations.of(context).translate('large_errors'), textAlign: TextAlign.left),
+        ],
+      ),
+    ),
+    actions: [
+      FlatButton(
+        onPressed: () {
+          Navigator.pop(context);
+        },
+        child: Text('Ok'),
+      ),
+    ],
+  );
+}
+
