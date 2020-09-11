@@ -1,5 +1,5 @@
 name: srwnn_mobile
-description: Enhance your images with AI.
+description: A new Flutter project.
 
 version: 1.0.0+1
 
@@ -26,6 +26,7 @@ dependencies:
   flutter_launcher_icons: ^0.7.5
 
 dev_dependencies:
+  flutter_launcher_icons: "^0.7.3"
   flutter_test:
     sdk: flutter
 
