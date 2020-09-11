@@ -158,6 +158,7 @@ class _InferenceViewState extends State<InferenceView> {
   }
   
   _loadBanner(){
-    _bannerAd..load()..show(anchorType: AnchorType.bottom, anchorOffset: 80.0);
+    //_bannerAd..load()..show(anchorType: AnchorType.bottom, anchorOffset: 80.0);
+    _bannerAd..load()..show(anchorType: AnchorType.top);
   }
 }
