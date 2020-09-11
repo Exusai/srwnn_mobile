@@ -31,6 +31,7 @@ AlertDialog serverErrorDialog(context) {
       child: ListBody(
         children: [
           Text(AppLocalizations.of(context).translate('common_errors'), textAlign: TextAlign.left),
+          Text(AppLocalizations.of(context).translate('posible_error0'), textAlign: TextAlign.left),
           Text(AppLocalizations.of(context).translate('posible_error1'), textAlign: TextAlign.left),
           Text(AppLocalizations.of(context).translate('posible_error2'), textAlign: TextAlign.left),
           Text(AppLocalizations.of(context).translate('posible_error3'), textAlign: TextAlign.left),

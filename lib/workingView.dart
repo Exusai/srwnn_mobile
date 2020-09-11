@@ -86,16 +86,17 @@ class _InferenceViewState extends State<InferenceView> {
           
           setState(() => loading = false);
           if (error == false){
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => ImageView(image: newImage, orgImage: image,)),  
-            );
+            if (imageError == true) {
+              showDialog(context: context, builder: (_) => imageErrorDialog(context));
+            } else {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ImageView(image: newImage, orgImage: image,)),  
+              );
+            }
           } else if (error == true) {
             showDialog(context: context, builder: (_) => serverErrorDialog(context));
-          } else if (imageError == true) {
-            showDialog(context: context, builder: (_) => imageErrorDialog(context));
           }
-
         },
         child: Text(AppLocalizations.of(context).translate('start_btn')),
       ),

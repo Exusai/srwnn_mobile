@@ -52,6 +52,7 @@ class _MyAppState extends State<MyApp> {
         primaryColor: Color(0xff303030),
         //canvasColor: Color(CE0452),
       ),
+      debugShowCheckedModeBanner: false,
       // List all of the app's supported locales here
       supportedLocales: [
         Locale('en', ''),

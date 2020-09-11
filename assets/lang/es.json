@@ -16,7 +16,7 @@
     "please_select_img": "Seleccione una imagen",
     
     "msg_none": "",
-    "msg_invalid_config": "Configuración invalida.",
+    "msg_invalid_config": "Configuración invalida/no disponible.",
     "msg_esergan_not_av": "Modelo ESRGAN no disponible para procesamiento local. ESRGAN funciona mejor en fotos",
     "msg_photo_not_av": "El modelo de SRWNN para fotos aún es un trabajo en proceso.",
     "heavy_op_warning": "Esta es una operación pesada.",
@@ -43,6 +43,7 @@
 
     "server_error": "Error de servidor.",
     "common_errors":"Errores comúnes",
+    "posible_error0":"Tu archivo es muy grande, intenta con uno más pequeño.",
     "posible_error1":"- El servidor ha decidido morir y lo tendré que arreglar, intenta de nuevo más tarde.",
     "posible_error2":"- Puede que tu aplicación este desactualizada, recomiendo que la actualices para poder procesar tu imágen en el servidor.",
     "posible_error3":"- Se esta llevando a cabo mantenimiento o se estan implementando actualizaciones, intenta más tarde.",

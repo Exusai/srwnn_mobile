@@ -38,7 +38,7 @@ class SRWGeneratorOnline {
 
     //Response response= await dio.post(url, data: formData);
     String message = await response.data['msg'];
-    if (message != 1){
+    if (message != '1'){
       throw Exception();
     }
     String strImage = await response.data['img'];
