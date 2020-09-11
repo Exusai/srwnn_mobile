@@ -121,7 +121,7 @@ class SRModelSelector{
       else if(style == 1 && (noiseLevel + blurLevel + upscaleLevel) == 0 ){
         return 'assets/images/modelExamples/srwnnPhotoOUT.png';
       }
-      //else return deafult
+      else return 'assets/images/modelExamples/OutBaseModelWeb.png';
     }
     else {
       //return 'assets/images/modelExamples/OutBaseModelLite.png';
@@ -149,6 +149,7 @@ class SRModelSelector{
       else if(style == 1 && (noiseLevel + blurLevel + upscaleLevel) == 0 ){
         return 'assets/images/modelExamples/srwnnPhotoLite1OUT.png';
       }
+      else return 'assets/images/modelExamples/OutBaseModelWeb.png';
     }
   }
 
@@ -182,6 +183,7 @@ class SRModelSelector{
       else if(style == 1 && (noiseLevel + blurLevel + upscaleLevel) == 0 ){
         return 'assets/images/modelExamples/srwnnPhotoIN.png';
       } 
+      else return 'assets/images/modelExamples/InBaseModelWeb.png';
     }
     else {
       //return 'assets/images/modelExamples/InBaseModelWeb.png';
@@ -211,7 +213,8 @@ class SRModelSelector{
       }
       else if(style == 1 && (noiseLevel + blurLevel + upscaleLevel) == 0 ){
         return 'assets/images/modelExamples/srwnnPhotoLite1IN.png';
-      } 
+      }
+      else return 'assets/images/modelExamples/InBaseModelWeb.png';
     }
   }
 }
