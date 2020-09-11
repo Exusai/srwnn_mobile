@@ -121,6 +121,7 @@ class SRModelSelector{
       else if(style == 1 && (noiseLevel + blurLevel + upscaleLevel) == 0 ){
         return 'assets/images/modelExamples/srwnnPhotoOUT.png';
       }
+      else return 'assets/images/modelExamples/OutBaseModelWeb.png';
     }
     else {
       //return 'assets/images/modelExamples/OutBaseModelLite.png';
@@ -148,6 +149,7 @@ class SRModelSelector{
       else if(style == 1 && (noiseLevel + blurLevel + upscaleLevel) == 0 ){
         return 'assets/images/modelExamples/srwnnPhotoLite1OUT.png';
       }
+      else return 'assets/images/modelExamples/OutBaseModelLite.png';
     }
   }
 
@@ -181,9 +183,38 @@ class SRModelSelector{
       else if(style == 1 && (noiseLevel + blurLevel + upscaleLevel) == 0 ){
         return 'assets/images/modelExamples/srwnnPhotoIN.png';
       } 
+      else return 'assets/images/modelExamples/InBaseModelWeb.png';
     }
     else {
-      return 'assets/images/modelExamples/InBaseModelWeb.png';
+      //return 'assets/images/modelExamples/InBaseModelWeb.png';
+      if(model == 0 && (style + noiseLevel + blurLevel + upscaleLevel) == 0){
+        return 'assets/images/modelExamples/InBaseModelWeb.png';
+      }
+      else if(model == 1 ){
+        return 'assets/images/modelExamples/esrganIN.png';
+      }
+      else if(noiseLevel == 1 && (style + blurLevel + upscaleLevel) == 0 ){
+        return 'assets/images/modelExamples/denoise1IN.png';
+      }
+      else if(noiseLevel == 2 && (style + blurLevel + upscaleLevel) == 0 ){
+        return 'assets/images/modelExamples/denoise2IN.png';
+      }
+      else if(noiseLevel == 3 && (style + blurLevel + upscaleLevel) == 0 ){
+        return 'assets/images/modelExamples/denoise3IN.png';
+      }
+      else if(blurLevel == 1 && (style + noiseLevel + upscaleLevel) == 0 ){
+        return 'assets/images/modelExamples/deblur1IN.png';
+      }
+      else if(blurLevel == 2 && (style + noiseLevel + upscaleLevel) == 0 ){
+        return 'assets/images/modelExamples/deblur2IN.png';
+      }
+      else if(blurLevel == 3 && (style + noiseLevel + upscaleLevel) == 0 ){
+        return 'assets/images/modelExamples/deblur3IN.png';
+      }
+      else if(style == 1 && (noiseLevel + blurLevel + upscaleLevel) == 0 ){
+        return 'assets/images/modelExamples/srwnnPhotoLite1IN.png';
+      }
+      else return 'assets/images/modelExamples/InBaseModelWeb.png';
     }
   }
 }
