@@ -50,6 +50,7 @@ android {
         targetSdkVersion 28
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+        multiDexEnabled true
     }
 
     signingConfigs {
@@ -77,6 +78,7 @@ flutter {
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.google.firebase:firebase-analytics:17.5.0'
+    compile 'com.android.support:multidex:1.0.1'
 }
 //apply plugin: 'com.google.gms.google-services'
 
