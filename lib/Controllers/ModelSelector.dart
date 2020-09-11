@@ -121,6 +121,7 @@ class SRModelSelector{
       else if(style == 1 && (noiseLevel + blurLevel + upscaleLevel) == 0 ){
         return 'assets/images/modelExamples/srwnnPhotoOUT.png';
       }
+<<<<<<< HEAD
       else return 'assets/images/modelExamples/OutBaseModelWeb.png';
     }
     else {
@@ -150,6 +151,13 @@ class SRModelSelector{
         return 'assets/images/modelExamples/srwnnPhotoLite1OUT.png';
       }
       else return 'assets/images/modelExamples/OutBaseModelWeb.png';
+=======
+       
+
+    }
+    else {
+      return 'assets/images/modelExamples/OutBaseModelLite.png';
+>>>>>>> parent of dfbf1a4... update
     }
   }
 
@@ -186,6 +194,7 @@ class SRModelSelector{
       else return 'assets/images/modelExamples/InBaseModelWeb.png';
     }
     else {
+<<<<<<< HEAD
       //return 'assets/images/modelExamples/InBaseModelWeb.png';
       if(model == 0 && (style + noiseLevel + blurLevel + upscaleLevel) == 0){
         return 'assets/images/modelExamples/InBaseModelWeb.png';
@@ -215,6 +224,9 @@ class SRModelSelector{
         return 'assets/images/modelExamples/srwnnPhotoLite1IN.png';
       }
       else return 'assets/images/modelExamples/InBaseModelWeb.png';
+=======
+      return 'assets/images/modelExamples/InBaseModelWeb.png';
+>>>>>>> parent of dfbf1a4... update
     }
   }
 }
