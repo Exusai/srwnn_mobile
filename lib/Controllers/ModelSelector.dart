@@ -67,7 +67,7 @@ class SRModelSelector{
     String modelConfig = getModelConfig();
 
     if(modelConfig == '0000') return 'models/srwnn.tflite';
-    if(modelConfig == '0100') return 'models/ .tflite'; //change later
+    if(modelConfig == '0100') return 'models/SRWNNdeNoise1.tflite'; //change later
     if(modelConfig == '0010') return 'models/SRWNNdeNoise1.tflite';
     if(modelConfig == '0020') return 'models/SRWNNdeNoise2.tflite';
     if(modelConfig == '0030') return 'models/SRWNNdeNoise3.tflite';

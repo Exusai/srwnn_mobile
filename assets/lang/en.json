@@ -18,7 +18,7 @@
     "msg_none": "",
     "msg_invalid_config": "Invalid configuration.",
     "msg_esergan_not_av": "ESRGAN model not available for local processing. ESRGAN works better on photos.",
-    "msg_photo_not_av": "SRWNN model for photos is still a work in progress.",
+    "msg_photo_not_av": "SRWNN model for photos is not compleately trainerd.",
     "heavy_op_warning": "This is a heavy operation.",
     "msg_experimental_feature": "This is an experimental feature. It may produce nightmare fuel content.",
     "msg_local_warning": "Local results are inferior due to the compressed model, app may crash if your image is too big and/or if you don't have enough computing resources on your device.",
