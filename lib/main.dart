@@ -53,6 +53,7 @@ class _MyAppState extends State<MyApp> {
         //canvasColor: Color(CE0452),
       ),
       debugShowCheckedModeBanner: false,
+
       // List all of the app's supported locales here
       supportedLocales: [
         Locale('en', ''),
@@ -70,8 +71,7 @@ class _MyAppState extends State<MyApp> {
       localeResolutionCallback: (locale, supportedLocales) {
         // Check if the current device locale is supported
         for (var supportedLocale in supportedLocales) {
-          if (supportedLocale.languageCode == locale.languageCode &&
-              supportedLocale.countryCode == locale.countryCode) {
+          if (supportedLocale.languageCode == locale.languageCode) {
             return supportedLocale;
           }
         }

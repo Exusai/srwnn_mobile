@@ -31,13 +31,13 @@
     "confirmation_title": "Confirmación",
     "msg_image_saved": "Guardado",
     "pre_process_warning": "Si la app falla después de oprimir el botón de inicio, significa que tu imagen es demasiado grande como para ser procesada en tu sipositivo. Intenta de nuevo con una imagen más pequeña o intenta procesar en web en lugar de local",
-    "pre_process_warning2": "Tu imagen esta por ser procesada en un servidor, porfavor ve un anuncio (y considera hacer click) mientras esperas para ayudarme a mantener el servidor.",
+    "pre_process_warning2": "Tu imagen esta por ser procesada en un servidor, los anuncios solo aparecen cuando elijas la opción de procesar en servidor para ayudarme a mantener el servicio.",
     "loading_dialog": "La app esta trabajando... esto puede tomar un rato pero esta bien mientras no se cierre.",
     "about": "Acerca de",
     "tip": "Dona",
     "mail": "Correo",
 
-    "about_text1": "Super Resolution Waifu Neural Network es una red neuronal convolucional. Escencialmente una implementación de waifu2x (por nagadomi) en tensorflow pero usando mis propio dataset de imagenes de monas chinas (8k+) y haciendo algunos cambios en la arquitectura del modelo el cual esta basado en VGG11.",
+    "about_text1": "Super Resolution Waifu Neural Network es una red neuronal convolucional. Escencialmente una implementación de waifu2x (por nagadomi) en tensorflow pero usando mi propio dataset de imágenes de monas chinas (8k+) y haciendo algunos cambios en la arquitectura del modelo el cual esta basado en VGG11.",
     "about_text2": "Una versión reducida del modelo (tflite) es usada para ejecutarse en el dispositivo mientras que la versión completa se ejecuta en web.",
     "about_text3": "Más detalles de modelo en mi github",
 
