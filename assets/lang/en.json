@@ -50,6 +50,6 @@
     "posible_error4":"- Keeping the server has become to expensive so I decided to stop the service and it may never return. I hope that this last one never happens, but in case it does you may still be able to process your images on your device.",
 
     "server_image_error":"Error ocurred while processing your image.",
-    "large_errors":"Your image may be too big."
+    "large_errors":"Your image may be too big. Or the server is too busy."
     
 }

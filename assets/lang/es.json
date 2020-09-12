@@ -50,5 +50,5 @@
     "posible_error4":"- Mantener el servidor se ha vuelto muy caro, decidí detener el servicio y puede que nunca regrese. Espero que esta última no pase, pero en caso de que suceda, aún podrás procesar tus imágenes en tu dispositivo.",
 
     "server_image_error":"Ocurrió un error mientras se procesaba tu imágen.",
-    "large_errors":"Puede que tu imagen sea muy grande."
+    "large_errors":"Puede que tu imagen sea muy grande. O el servidor esta muy ocupado."
 }

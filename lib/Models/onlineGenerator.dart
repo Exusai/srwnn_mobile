@@ -15,7 +15,7 @@ class SRWGeneratorOnline {
   SRWGeneratorOnline({this.image, this.modelConfig});
 
   Future generate2xImage() async {
-    String url = 'http://45.79.59.144/generate';
+    String url = 'http://li1158-144.members.linode.com/generate';
 
     FormData formData = new FormData.fromMap({
       "model": modelConfig.toString(),
