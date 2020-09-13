@@ -18,6 +18,6 @@ Setings             |  Result
 :-------------------------:|:-------------------------:
 ![](https://github.com/Exusai/srwnn_mobile/blob/master/srwnnScrenShots/Screenshot_1599929327.png?raw=true)  |  ![](https://github.com/Exusai/srwnn_mobile/blob/master/srwnnScrenShots/Screenshot_1599929500.png?raw=true)
  
-Setings             |  Confitmation   | Result  | Result | Result 
+Settings             |  Confitmation   | Result  | Result | Result 
 :-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:
 ![](https://github.com/Exusai/srwnn_mobile/blob/master/srwnnScrenShots/Screenshot_1599929623.png?raw=true)  |  ![](https://github.com/Exusai/srwnn_mobile/blob/master/srwnnScrenShots/Screenshot_1599929639.png?raw=true)  |  ![](https://github.com/Exusai/srwnn_mobile/blob/master/srwnnScrenShots/Screenshot_1599929660.png?raw=true)  |  ![](https://github.com/Exusai/srwnn_mobile/blob/master/srwnnScrenShots/Screenshot_1599929666.png?raw=true)  |  ![](https://github.com/Exusai/srwnn_mobile/blob/master/srwnnScrenShots/Screenshot_1599929670.png?raw=true)
