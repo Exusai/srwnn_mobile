@@ -23,7 +23,7 @@ class SRWGeneratorOnline {
     });
       
     Dio dio = new Dio();
-    dio.options.connectTimeout = 120000;
+    //dio.options.connectTimeout = 120000;
     dio.options.receiveTimeout = 120000;
 
     //Response response =  await dio.post(url, data: formData);

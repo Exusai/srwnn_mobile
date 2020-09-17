@@ -22,7 +22,7 @@
     "heavy_op_warning": "Esta es una operación pesada.",
     "msg_experimental_feature": "Característica experimental. Podria producir combustible de pesadilla.",
     "msg_local_warning": "Los resultados producidos localmente son inferiores a los producidos en web debido a la compresión  del modelo, la aplicación podría fallar si tu imagen es muy grande y/o no hay suficiente poder de procesamiento en tu dispositivo.",
-    "msg_web_wanrning": "Necesita internet.",
+    "msg_web_wanrning": " ",
 
     "inp_height": "Altura de entrada:",
     "inp_widht": "Ancho de entrada:",

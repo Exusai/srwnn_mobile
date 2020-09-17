@@ -51,7 +51,9 @@ class _LoadingState extends State<Loading> {
   @override
   void dispose(){
     super.dispose();
-    _interstitialAd.dispose();
+    if (widget.dispMesage == false){
+      _interstitialAd.dispose();
+    }
     
   }  
 

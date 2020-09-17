@@ -1,7 +1,7 @@
 name: srwnn_mobile
 description: A new Flutter project.
 
-version: 1.0.0+1
+version: 1.0.0+2
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
@@ -24,6 +24,8 @@ dependencies:
   dio: ^3.0.10
   firebase_admob: ^0.9.3
   flutter_launcher_icons: ^0.7.5
+  #admob_flutter: "^0.3.4"
+
 
 dev_dependencies:
   flutter_launcher_icons: "^0.7.3"

@@ -22,7 +22,7 @@
     "heavy_op_warning": "This is a heavy operation.",
     "msg_experimental_feature": "This is an experimental feature. It may produce nightmare fuel content.",
     "msg_local_warning": "Local results are inferior due to the compressed model, app may crash if your image is too big and/or if you don't have enough computing resources on your device.",
-    "msg_web_wanrning": "Requieres internet connection",
+    "msg_web_wanrning": " ",
 
     "inp_height": "Input height:",
     "inp_widht": "Input width:",
