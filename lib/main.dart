@@ -23,10 +23,12 @@ String message = 'msg_none';
 File image;
 enum Options {about, github, mail, tip}
 
-pickerGallery() async {
-  File img = await ImagePicker.pickImage(source: ImageSource.gallery);
+/*Future pickerGallery() async {
+  final picker = ImagePicker();
+  final pickedFile = await ImagePicker.getImage(source: ImageSource.gallery);
+  File img = File(pickedFile.path);
   image = img;
-}
+}*/
 
 class MyApp extends StatefulWidget {
   @override
@@ -34,7 +36,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  
   @override
   void initState(){
     super.initState();
@@ -93,6 +94,15 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final picker = ImagePicker();
+
+  Future getImage() async {
+    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+
+    setState(() {
+      image = File(pickedFile.path);
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -339,7 +349,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
             RaisedButton(
               onPressed: () async {
-                await pickerGallery();
+                await getImage();
                 //go to next wea and pass image and info
                 if (image != null ) {
                   Navigator.push(

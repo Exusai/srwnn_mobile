@@ -5,7 +5,7 @@ import 'package:srwnn_mobile/imageView.dart';
 import 'package:srwnn_mobile/main.dart';
 import 'package:tflite_flutter_helper/tflite_flutter_helper.dart';
 
-//import 'Controllers/adds.dart';
+import 'Controllers/adds.dart';
 import 'Controllers/app_localizations.dart';
 import 'Models/generator.dart';
 import 'Models/onlineGenerator.dart';
@@ -39,22 +39,21 @@ class _InferenceViewState extends State<InferenceView> {
   @override
   void initState(){
     super.initState();
-    /*
+    
     if (selector.executionOnline == true){
-      Admob.initialize(Adds.appID);
-      //_bannerAd = BannerAd(adUnitId: Adds.banner, size: AdSize.banner);
+      //Admob.initialize(Adds.appID);
+      _bannerAd = BannerAd(adUnitId: Adds.banner, size: AdSize.banner);
       //Widget banner = AdmobBanner(adUnitId: Adds.banner, adSize: AdmobBannerSize.BANNER);
-    //_loadBanner();
+      _loadBanner();
     }
-    else {
-      //banner = Text(' ');
-    }*/
   }
 
   @override
   void dispose(){
     super.dispose();
-    //_bannerAd.dispose();
+    if (selector.executionOnline == true){
+      _bannerAd.dispose();
+    }
   }  
   
   @override
@@ -68,8 +67,8 @@ class _InferenceViewState extends State<InferenceView> {
           if (selector.executionOnline == true) {
             setState(() => loading = true);
             setState(() => dispMSG = false);
-            //await _bannerAd.dispose();
-            //_bannerAd = null;
+            await _bannerAd.dispose();
+            _bannerAd = null;
             imageCache.clear();
             SRWGeneratorOnline genOnline = SRWGeneratorOnline(image: image, modelConfig: selector.getModelConfig());
             try{
@@ -169,9 +168,9 @@ class _InferenceViewState extends State<InferenceView> {
       ),
     );
   }
-  /*
+  
   _loadBanner(){
     //_bannerAd..load()..show(anchorType: AnchorType.bottom, anchorOffset: 80.0);
-    _bannerAd..load()..show(anchorType: AnchorType.top, anchorOffset: 20.0);
-  }*/
+    _bannerAd..load()..show(anchorType: AnchorType.top, anchorOffset: 80.0);
+  }
 }

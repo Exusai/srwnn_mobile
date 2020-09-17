@@ -25,6 +25,7 @@ class _LoadingState extends State<Loading> {
     super.initState();
 
     if (widget.dispMesage == false){
+      //FirebaseAdMob.instance.initialize(appId: Adds.appID);
       _interstitialAd = InterstitialAd(
         adUnitId: Adds.loading,
         listener: (MobileAdEvent event){
