@@ -5,14 +5,14 @@
     "photo_tr": "Foto",
     "noise_lvl": "Nivel de ruido:",
     "noise_none": "Ninguno",
-    "blur_lvl": "Nivel de desenfoque.",
+    "blur_lvl": "Nivel de desenfoque:",
     "blur_none": "Ninguno",
     "expand_tr": "Expandir",
     "expand_yes": "Si",
     "expand_no": "No",
     "upscale_tr": "Aumento",
     "select_image_tr": "Seleccionar imagen",
-    "execution_tr": "Ejecución",
+    "execution_tr": "Ejecución:",
     "please_select_img": "Seleccione una imagen",
     
     "msg_none": "",
@@ -39,16 +39,20 @@
 
     "about_text1": "Super Resolution Waifu Neural Network es una red neuronal convolucional. Escencialmente una implementación de waifu2x (por nagadomi) en tensorflow pero usando mi propio dataset de imágenes de monas chinas (8k+) y haciendo algunos cambios en la arquitectura del modelo el cual esta basado en VGG11.",
     "about_text2": "Una versión reducida del modelo (tflite) es usada para ejecutarse en el dispositivo mientras que la versión completa se ejecuta en web.",
-    "about_text3": "Más detalles de modelo en mi github",
+    "about_text3": "Más detalles del modelo SRWNN en mi github. Y más información acerca de la implementación de ESRGAN puede ser encontrada también en mi guthub.",
 
     "server_error": "Error de servidor.",
     "common_errors":"Errores comúnes",
-    "posible_error0":"Tu archivo es muy grande, intenta con uno más pequeño.",
+    "posible_error0":"- Tu archivo es muy grande, intenta con uno más pequeño.",
     "posible_error1":"- El servidor ha decidido morir y lo tendré que arreglar, intenta de nuevo más tarde.",
     "posible_error2":"- Puede que tu aplicación este desactualizada, recomiendo que la actualices para poder procesar tu imágen en el servidor.",
     "posible_error3":"- Se esta llevando a cabo mantenimiento o se estan implementando actualizaciones, intenta más tarde.",
     "posible_error4":"- Mantener el servidor se ha vuelto muy caro, decidí detener el servicio y puede que nunca regrese. Espero que esta última no pase, pero en caso de que suceda, aún podrás procesar tus imágenes en tu dispositivo.",
 
     "server_image_error":"Ocurrió un error mientras se procesaba tu imágen.",
-    "large_errors":"Puede que tu imagen sea muy grande. O el servidor esta muy ocupado."
+    "large_errors":"Puede que tu imagen sea muy grande. O el servidor esta muy ocupado.",
+
+    "example":"Ejemplo",
+    "img_in_ex":"Imágen de entrada",
+    "img_out_ex":"Imágen de salida"
 }

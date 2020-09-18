@@ -148,7 +148,7 @@ class _InferenceViewState extends State<InferenceView> {
                   Spacer()
                 ],
               ),
-              //SizedBox(height: 15,),
+              SizedBox(height: 5,),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20),
                 child: Text(
@@ -159,9 +159,7 @@ class _InferenceViewState extends State<InferenceView> {
                   ),
                 ),
               ),
-              //AdmobBanner(adUnitId: Adds.banner, adSize: AdmobBannerSize.BANNER),
-              //AdmobBanner(adUnitId: Adds.banner, adSize: AdmobBannerSize.FULL_BANNER),
-              //Spacer(),
+              SizedBox(height: 10,),
             ],
           ),
         ),

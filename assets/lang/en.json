@@ -5,14 +5,14 @@
     "photo_tr": "Photo",
     "noise_lvl": "Noise level:",
     "noise_none": "None",
-    "blur_lvl": "Blur level.",
+    "blur_lvl": "Blur level:",
     "blur_none": "None",
     "expand_tr": "Expand",
     "expand_yes": "Yes",
     "expand_no": "No",
     "upscale_tr": "Upscale level",
     "select_image_tr": "Select image",
-    "execution_tr": "Execution",
+    "execution_tr": "Execution:",
     "please_select_img": "Please select image",
 
     "msg_none": "",
@@ -39,7 +39,7 @@
 
     "about_text1": "Super Resolution Waifu Neural Network is a convolutional neural network. Escentially an implementation of waifu2x (by nagadomi) on tensorflow but using my own anime gurl pics dataset (8k+ images) and making some tweaks to the model architecture which is based on VGG11.",
     "about_text2": "A reduced version of the model (tflite) is used to run on-device whereas the full model runs on web.",
-    "about_text3": "More info about the model on my github.",
+    "about_text3": "More info about SRWNN model on my github. And more information about the ESRGAN implementation can also be found on my github repo.",
     
     "server_error": "Server error.",
     "common_errors":"Common errors:",
@@ -50,6 +50,10 @@
     "posible_error4":"- Keeping the server has become to expensive so I decided to stop the service and it may never return. I hope that this last one never happens, but in case it does you may still be able to process your images on your device.",
 
     "server_image_error":"Error ocurred while processing your image.",
-    "large_errors":"Your image may be too big. Or the server is too busy."
+    "large_errors":"Your image may be too big. Or the server is too busy.",
+
+    "example":"Example",
+    "img_in_ex":"Input image",
+    "img_out_ex":"Output image"
     
 }

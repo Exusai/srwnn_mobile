@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 final Map<int, Widget> models = <int, Widget>{
   0: Text('SRWNN'),
-  1: Text('ESRGAN'),
+  1: Text('ESRGAN (photo)'),
 };
 
 final Map<int, Widget> styles = <int, Widget>{

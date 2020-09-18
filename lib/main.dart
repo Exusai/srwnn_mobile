@@ -8,7 +8,6 @@ import 'package:srwnn_mobile/dialogs.dart';
 import 'package:srwnn_mobile/workingView.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-
 import 'Controllers/ModelConfigs.dart';
 import 'Controllers/ModelSelector.dart';
 import 'Controllers/adds.dart';
@@ -98,7 +97,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Future getImage() async {
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
-
+    imageCache.clear();
     setState(() {
       image = File(pickedFile.path);
     });
@@ -166,12 +165,46 @@ class _MyHomePageState extends State<MyHomePage> {
           //mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             SizedBox(height: 20,),
+
             Container(
-              //height: 180,
-              //width: 500,
+              decoration: BoxDecoration(color: Colors.black.withOpacity(0.60)),
+              child: Column(
+                children: [
+                  SizedBox(height: 5,),
+                  Text(
+                    'Example',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  SizedBox(height: 5,),
+                  Row(
+                    children: [
+                      Spacer(),
+                      Text(
+                        'Image input',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      Spacer(),
+                      Text(
+                        'Image Output',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      Spacer(),
+                    ],
+                  ),
+                  SizedBox(height: 5,),
+                ],
+              ),
+            ),
+
+            
+            Container(
               child: Row(
                 children: [
                   //Spacer(),
+
                   Expanded(
                     child: Image(
                       image: AssetImage(selector.getImageInExample()),
