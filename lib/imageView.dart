@@ -28,9 +28,9 @@ class _ImageViewState extends State<ImageView> {
         title: Text('Result'),
         actions: [
           IconButton(
-            icon: Icon(Icons.save_alt),
+            icon: Icon(Icons.save),
             onPressed: () {
-              GallerySaver.saveImage(widget.image.path);
+              GallerySaver.saveImage(widget.image.path, albumName: '2x img');
               showDialog(context: context, builder: (_) => imageSaved(context));
             },
           ),
