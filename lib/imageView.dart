@@ -30,7 +30,7 @@ class _ImageViewState extends State<ImageView> {
           IconButton(
             icon: Icon(Icons.save),
             onPressed: () {
-              GallerySaver.saveImage(widget.image.path, albumName: '2x img');
+              GallerySaver.saveImage(widget.image.path, albumName: '2xImg');
               showDialog(context: context, builder: (_) => imageSaved(context));
             },
           ),
@@ -53,7 +53,6 @@ class _ImageViewState extends State<ImageView> {
                       child: Image.file(
                         widget.orgImage,
                         height: imgProp.height.toDouble(),
-                        //width: imgProp.width.toDouble(),
                         alignment: Alignment.topLeft,
                         fit: BoxFit.fitHeight,
                       ),
