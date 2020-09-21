@@ -71,3 +71,49 @@ AlertDialog imageErrorDialog(context) {
   );
 }
 
+AlertDialog alocationErrorDialog(context) {
+  return AlertDialog(
+    title: Text(AppLocalizations.of(context).translate('alloc_error')),
+    content: SingleChildScrollView(
+      child: ListBody(
+        children: [
+          Text(AppLocalizations.of(context).translate('alloc_error_desc'), textAlign: TextAlign.left),
+        ],
+      ),
+    ),
+    actions: [
+      FlatButton(
+        onPressed: () {
+          Navigator.pop(context);
+        },
+        child: Text('Ok'),
+      ),
+    ],
+  );
+}
+
+
+
+
+AlertDialog unknownErrorDialog(context) {
+  return AlertDialog(
+    title: Text(AppLocalizations.of(context).translate('unknown_error')),
+    content: SingleChildScrollView(
+      child: ListBody(
+        children: [
+          Text(AppLocalizations.of(context).translate('unknown_error'), textAlign: TextAlign.left),
+        ],
+      ),
+    ),
+    actions: [
+      FlatButton(
+        onPressed: () {
+          Navigator.pop(context);
+        },
+        child: Text('Ok'),
+      ),
+    ],
+  );
+}
+
+

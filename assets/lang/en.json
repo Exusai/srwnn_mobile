@@ -54,6 +54,11 @@
 
     "example":"Example",
     "img_in_ex":"Input image",
-    "img_out_ex":"Output image"
+    "img_out_ex":"Output image",
+
+    "alloc_error":"Tensor allocation error.",
+    "alloc_error_desc":"The image dimentions are too big to be allocated and processed on device. Try on web.",
+
+    "unknown_error":"Unknown error."
     
 }

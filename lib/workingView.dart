@@ -31,6 +31,7 @@ class _InferenceViewState extends State<InferenceView> {
   bool dispMSG = false;
   bool error = false;
   bool imageError = false;
+  bool alocationError = false;
   //String warning = ;
   
   BannerAd _bannerAd;
@@ -70,6 +71,7 @@ class _InferenceViewState extends State<InferenceView> {
             await _bannerAd.dispose();
             _bannerAd = null;
             imageCache.clear();
+            newImage = null;
             SRWGeneratorOnline genOnline = SRWGeneratorOnline(image: image, modelConfig: selector.getModelConfig());
             try{
               newImage = await genOnline.generate2xImage();
@@ -85,22 +87,32 @@ class _InferenceViewState extends State<InferenceView> {
             setState(() => loading = true);
             setState(() => dispMSG = true);
             imageCache.clear();
+            newImage = null;
             SRWGenerator gen = SRWGenerator(image: image, modelPath: selector.getModelPath());
-            newImage = await gen.generate2xImage();
+            
+            try{
+              newImage = await gen.generate2xImage();
+            } on Exception {
+              setState(() => alocationError = true);
+            } on Error {
+              setState(() => alocationError = true);
+            }
           }
           
           setState(() => loading = false);
-          if (error == false){
-            if (imageError == true) {
+          if (error == false && alocationError == false && imageError == false){
+            Navigator.push(context,MaterialPageRoute(builder: (context) => ImageView(image: newImage, orgImage: image,)),);
+
+            /*if (imageError == true) {
               showDialog(context: context, builder: (_) => imageErrorDialog(context));
             } else {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => ImageView(image: newImage, orgImage: image,)),  
-              );
-            }
-          } else if (error == true) {
-            showDialog(context: context, builder: (_) => serverErrorDialog(context));
+              Navigator.push(context,MaterialPageRoute(builder: (context) => ImageView(image: newImage, orgImage: image,)),);
+            }*/
+          } else {
+            if (error == true) { showDialog(context: context, builder: (_) => serverErrorDialog(context)); }
+            else if (imageError == true) { showDialog(context: context, builder: (_) => imageErrorDialog(context)); }
+            else if ( alocationError == true ) { showDialog(context: context, builder: (_) => alocationErrorDialog(context)); }
+            else { showDialog(context: context, builder: (_) => unknownErrorDialog(context)); }
           }
         },
         child: Text(AppLocalizations.of(context).translate('start_btn')),
