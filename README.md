@@ -9,6 +9,8 @@
  
  About [ESRGAN](https://github.com/xinntao/ESRGAN). Implemetation used [TF 2.0 Implementation of ESRGAN](https://github.com/captain-pool/GSOC/tree/master/E2_ESRGAN).
  
+ [App](https://play.google.com/store/apps/details?id=com.exus.srwnn_mobile)
+ 
 # App screen shots
 Setings             |  Result
 :-------------------------:|:-------------------------:
