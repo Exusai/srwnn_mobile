@@ -59,6 +59,9 @@
     "alloc_error":"Tensor allocation error.",
     "alloc_error_desc":"The image dimentions are too big to be allocated and processed on device. Try on web.",
 
-    "unknown_error":"Unknown error."
-    
+    "unknown_error":"Unknown error.",
+
+    "website": "Website",
+    "file_size": "Filesize:",
+    "login_or_register":"Login or register"
 }

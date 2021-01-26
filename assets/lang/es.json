@@ -59,5 +59,9 @@
     "alloc_error":"Error en la asignación de tensores.",
     "alloc_error_desc":"Las dimensiones de la imágen son muy grandes como para ser asignadas y procesadas en el dispositivo. Intenta procesar en web.",
 
-    "unknown_error":"Error desconocido."
+    "unknown_error":"Error desconocido.",
+
+    "website": "Sitio web",
+    "file_size": "Tamaño del archivo:",
+    "login_or_register":"Iniciar sesión o registrarse"
 }

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:gallery_saver/gallery_saver.dart';
 import 'package:tflite_flutter_helper/tflite_flutter_helper.dart';
-
 import 'Controllers/app_localizations.dart';
 
 
@@ -17,8 +16,22 @@ class ImageView extends StatefulWidget {
   _ImageViewState createState() => _ImageViewState();
 }
 
-class _ImageViewState extends State<ImageView> {
-  double controller = 0.5;
+class _ImageViewState extends State<ImageView> with SingleTickerProviderStateMixin {
+  AnimationController controller;
+  @override
+  void initState() {
+    super.initState();
+    controller = AnimationController(
+      vsync: this,
+      value: 0.5
+    );
+  }
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     TensorImage imgProp = TensorImage.fromFile(widget.orgImage);
@@ -57,28 +70,31 @@ class _ImageViewState extends State<ImageView> {
                         fit: BoxFit.fitHeight,
                       ),
                     ),
-
-                    AnimatedContainer(
-                      duration: Duration(microseconds: 1),
-                      height: imgProp.height.toDouble(),
-                      width: imgProp.width.toDouble() * controller,
-                      decoration: BoxDecoration(
-                        border: Border(
-                          right: BorderSide(
-                            width: 3.0,
-                            color: Colors.black
+                    AnimatedBuilder(
+                      animation: controller, 
+                      builder: (_, child) {
+                        return AnimatedContainer(
+                          duration: Duration(microseconds: 1),
+                          height: imgProp.height.toDouble(),
+                          width: imgProp.width.toDouble() * controller.value,
+                          decoration: BoxDecoration(
+                            border: Border(
+                              right: BorderSide(
+                                width: 3.0,
+                                color: Colors.black
+                                
+                              ),
+                            ),
                             
                           ),
-                        ),
-                        
-                      ),
-                      child: Image.file(
-                        widget.image, 
-                        alignment: Alignment.topLeft,
-                        fit: BoxFit.cover,
-                      ),
+                          child: Image.file(
+                            widget.image, 
+                            alignment: Alignment.topLeft,
+                            fit: BoxFit.cover,
+                          ),
+                        );
+                      }
                     ),
-                    
                   ],
                 ),
               ),
@@ -88,12 +104,17 @@ class _ImageViewState extends State<ImageView> {
             left: 10,
             right: 10,
             bottom: 10,
-            child: Slider(
-              value: controller,
-              min: 0.0,
-              max: 1.0,
-              onChanged: (newVal){
-                setState(() {controller = newVal;});
+            child: AnimatedBuilder(
+              animation: controller,
+              builder: (_, child) {
+                return Slider(
+                  value: controller.value,
+                  min: 0.0,
+                  max: 1.0,
+                  onChanged: (newVal){
+                    controller.value = newVal;
+                  },
+                );
               },
             ),
           ),

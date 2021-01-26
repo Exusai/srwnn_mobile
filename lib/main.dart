@@ -20,7 +20,7 @@ void main() {
 SRModelSelector selector = SRModelSelector();
 String message = 'msg_none';
 File image;
-enum Options {about, github, mail, tip}
+enum Options {web, webApp, about, github, mail, login,}
 
 /*Future pickerGallery() async {
   final picker = ImagePicker();
@@ -60,12 +60,8 @@ class _MyAppState extends State<MyApp> {
         Locale('es', ''),  
       ],
       localizationsDelegates: [
-        // THIS CLASS WILL BE ADDED LATER
-        // A class which loads the translations from JSON files
         AppLocalizations.delegate,
-        // Built-in localization of basic text for Material widgets
         GlobalMaterialLocalizations.delegate,
-        // Built-in localization for text direction LTR/RTL
         GlobalWidgetsLocalizations.delegate,
       ],
       localeResolutionCallback: (locale, supportedLocales) {
@@ -120,12 +116,34 @@ class _MyHomePageState extends State<MyHomePage> {
               if (result == Options.mail){
                 await launchMail();
               } 
-
               if (result == Options.about){
                 showDialog(context: context, builder: (_) => aboutDialog(context));
+              }
+              if (result == Options.webApp){
+                await launchURL('https://app.exusai.com/');
+              } 
+              if (result == Options.web){
+                await launchURL('https://www.exusai.com');
+              }
+              if (result == Options.login){
+                //push to auht
               } 
             },
             itemBuilder: (BuildContext context) => <PopupMenuEntry<Options>>[
+              PopupMenuItem<Options>(
+                value: Options.about,
+                child: ListTile(
+                  title: Text(AppLocalizations.of(context).translate('website')),
+                  leading: Icon(Icons.web),
+                ),
+              ),
+              PopupMenuItem<Options>(
+                value: Options.about,
+                child: ListTile(
+                  title: Text('Web App'),
+                  leading: Icon(Icons.apps),
+                ),
+              ),
               PopupMenuItem<Options>(
                 value: Options.about,
                 child: ListTile(
@@ -145,6 +163,13 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: ListTile(
                   title: Text(AppLocalizations.of(context).translate('mail')),
                   leading: Icon(Icons.mail),
+                ),
+              ),
+              PopupMenuItem<Options>(
+                value: Options.login,
+                child: ListTile(
+                  title: Text(AppLocalizations.of(context).translate('login_or_register')),
+                  leading: Icon(Icons.login)
                 ),
               ),
               /*PopupMenuItem<Options>(
@@ -385,6 +410,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 await getImage();
                 //go to next wea and pass image and info
                 if (image != null ) {
+                  
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => InferenceView(image: image, modelPath: selector.getModelPath())),

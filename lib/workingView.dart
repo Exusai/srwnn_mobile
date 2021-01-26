@@ -119,6 +119,7 @@ class _InferenceViewState extends State<InferenceView> {
       ),
       body: Center(
         child: Container(
+          //padding: EdgeInsets.symmetric(horizontal: 20),
           child: ListView(
             children: [
               //Spacer(),
@@ -128,37 +129,45 @@ class _InferenceViewState extends State<InferenceView> {
               ),
 
               SizedBox(height: 10),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                child: Column(
+                  children: [
+                    Row(
+                      //mainAxisSize: MainAxisSize.max,
+                      children: [
+                        //Spacer(),
+                        Text(AppLocalizations.of(context).translate('inp_height')),
+                        //SizedBox(width: 10,),
+                        Spacer(),
+                        Text(tensorImage.height.toString()),
+                        //Spacer()
+                      ],
+                    ),
 
-              Row(
-                children: [
-                  Spacer(),
-                  Text(AppLocalizations.of(context).translate('inp_height')),
-                  SizedBox(width: 10,),
-                  Text(tensorImage.height.toString()),
-                  Spacer()
-                ],
-              ),
+                    Row(
+                      children: [
+                        //Spacer(),
+                        Text(AppLocalizations.of(context).translate('inp_widht')),
+                        Spacer(),
+                        Text(tensorImage.width.toString()),
+                        //Spacer()
+                      ],
+                    ),
 
-              Row(
-                children: [
-                  Spacer(),
-                  Text(AppLocalizations.of(context).translate('inp_widht')),
-                  SizedBox(width: 10,),
-                  Text(tensorImage.width.toString()),
-                  Spacer()
-                ],
-              ),
-
-              Row(
-                children: [
-                  Spacer(),
-                  Text(AppLocalizations.of(context).translate('expected_out')),
-                  SizedBox(width: 10,),
-                  Text((tensorImage.height*2).toString()),
-                  Text('x'),
-                  Text((tensorImage.width*2).toString()),
-                  Spacer()
-                ],
+                    Row(
+                      children: [
+                        //Spacer(),
+                        Text(AppLocalizations.of(context).translate('expected_out')),
+                        Spacer(),
+                        Text((tensorImage.height*2).toString()),
+                        Text('x'),
+                        Text((tensorImage.width*2).toString()),
+                        //Spacer()
+                      ],
+                    ),
+                  ],
+                ),
               ),
               SizedBox(height: 5,),
               Padding(
