@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:srwnn_mobile/authViews/auth.dart';
 import 'Controllers/app_localizations.dart';
+import 'Controllers/urlLauncher.dart';
 
 AlertDialog aboutDialog(context) {
   return AlertDialog(
@@ -11,6 +12,27 @@ AlertDialog aboutDialog(context) {
           Text(AppLocalizations.of(context).translate('about_text1'), textAlign: TextAlign.left),
           Text(AppLocalizations.of(context).translate('about_text2'), textAlign: TextAlign.left),
           Text(AppLocalizations.of(context).translate('about_text3'), textAlign: TextAlign.left),
+        ],
+      ),
+    ),
+    actions: [
+      FlatButton(
+        onPressed: () {
+          Navigator.pop(context);
+        },
+        child: Text('Ok'),
+      ),
+    ],
+  );
+}
+
+AlertDialog faqDialog(context) {
+  return AlertDialog(
+    title: Text(AppLocalizations.of(context).translate('help')),
+    content: SingleChildScrollView(
+      child: ListBody(
+        children: [
+          Text(AppLocalizations.of(context).translate('faq1'), textAlign: TextAlign.left),
         ],
       ),
     ),
@@ -153,6 +175,7 @@ AlertDialog logToDownload(context) {
         child: Text('Register/Login'),
         padding: EdgeInsets.symmetric(horizontal: 40),
         onPressed: () {
+          Navigator.pop(context);
           Navigator.push(context, MaterialPageRoute(builder: (context) {return Auth();}));
         }
       ),
@@ -160,3 +183,32 @@ AlertDialog logToDownload(context) {
   );
 }
 
+AlertDialog upgradeDialog(context) {
+  return AlertDialog(
+    title: Text(AppLocalizations.of(context).translate('limit_reached')),
+    content: SingleChildScrollView(
+      child: ListBody(
+        children: [
+         Text(AppLocalizations.of(context).translate('upgrade_pls'))
+        ],
+      ),
+    ),
+    actions: [
+      FlatButton(
+        onPressed: () {
+          Navigator.pop(context);
+        },
+        child: Text(AppLocalizations.of(context).translate('return')),
+      ),
+
+      RaisedButton(
+        onPressed: () async {
+          //Navigator.push(context, MaterialPageRoute(builder: (context) => SubscriptionPage()),);
+          await launchURL('https://app.exusai.com/');
+        },
+        padding: EdgeInsets.symmetric(horizontal: 40),
+        child: Text(AppLocalizations.of(context).translate('admin_sub')),
+      )
+    ],
+  );
+}

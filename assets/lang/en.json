@@ -31,7 +31,7 @@
     "confirmation_title": "Confirmation",
     "msg_image_saved": "Saved",
     "pre_process_warning": "If app crashes after touching the start button, you image may be to large to be processed in your device. Try again with a smaller image or try processing on web inestead of local",
-    "pre_process_warning2": "Your image is about to be processed online, ads are only shown when you chose to process your image online, in order to help me keep the server running.",
+    "pre_process_warning2": "Your image is about to be processed online, ads are only shown when you chose to process your image online, in order to help me keep the server running. You can remove the ads by upgrading yout account from the web app.",
     "loading_dialog": "The app is working... this may take a while but it's ok as long as it doesn't crashes and closes.",
     "about": "About",
     "tip": "Tip",
@@ -91,5 +91,14 @@
     "forgot_ps": "Forgot password",
 
     "log_to_dl": "Login or register to download",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "log_out": "Log out",
+
+    "limit_reached": "You have reached your mothly limit for processing/downloading images",
+    "upgrade_pls": "Upgrade your account to process and download unlimited images. You can upgrade your account from the web app.",
+    "return": "Return",
+    "admin_sub": "Manage subscription",
+
+    "help": "Help",
+    "faq1": "You can downoad and process up to 15 images per moth for free. If you would like to be able to process more images, you have to upgrade your account trough the web app (login in the web app and navigate to subscription), for 69.00MNX (3.44USD) per month you can process and download unlimited images, you also gain acces to other services within the web app."
 }

@@ -31,7 +31,7 @@
     "confirmation_title": "Confirmación",
     "msg_image_saved": "Guardado",
     "pre_process_warning": "Si la app falla después de oprimir el botón de inicio, significa que tu imagen es demasiado grande como para ser procesada en tu sipositivo. Intenta de nuevo con una imagen más pequeña o intenta procesar en web en lugar de local",
-    "pre_process_warning2": "Tu imagen esta por ser procesada en un servidor, los anuncios solo aparecen cuando elijas la opción de procesar en servidor para ayudarme a mantener el servicio.",
+    "pre_process_warning2": "Tu imagen esta por ser procesada en un servidor, los anuncios solo aparecen cuando elijas la opción de procesar en servidor para ayudarme a mantener el servicio. Puedes remover los anuncios mejorando tu cuenta desde la web app.",
     "loading_dialog": "La app esta trabajando... esto puede tomar un rato pero esta bien mientras no se cierre.",
     "about": "Acerca de",
     "tip": "Dona",
@@ -90,7 +90,16 @@
     "forgot_ps": "Olvidé mi contraseña",
 
     "log_to_dl": "Inicia sesión o registrate para descargar tu imagen",
-    "cancel": "Cancelar"
+    "cancel": "Cancelar",
+    "log_out": "Cerrar sesión",
+
+    "limit_reached": "Haz alcanzado tu limite mensual de procesamiento/descarga de imágenes",
+    "upgrade_pls": "Actualiza tu cuenta para poder seguir procesando y descargando imágenes ilimitadamente. Puedes actualizar tu subscripción desde la web app.",
+    "return": "Regresar",
+    "admin_sub": "Administrar subscripción",
+
+    "help": "Ayuda",
+    "faq1": "Mensualmente puedes procesar y descargar hazta 15 imágenes. Si quisiera procesar más imágenes, tienes que actualizar tu cuenta atravez de la web app (inicia sesión y navega a subscripción), por 69.00MNX al mes podrás procesar imágenes ilimitadas y tendras acceso a los servicios de la web app."
 
 
 }

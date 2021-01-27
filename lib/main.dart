@@ -39,7 +39,7 @@ void main() async {
 SRModelSelector selector = SRModelSelector();
 String message = 'msg_none';
 File image;
-enum Options {web, webApp, about, github, mail, login,}
+enum Options {web, webApp, about, github, mail, login, faq}
 
 /*Future pickerGallery() async {
   final picker = ImagePicker();
@@ -78,6 +78,20 @@ class _MyAppState extends State<MyApp> {
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24),),
           padding: EdgeInsets.symmetric(horizontal: 40),  
           //textTheme: ButtonTextTheme.accent,
+        ),
+        sliderTheme: SliderThemeData(          
+          activeTrackColor: Colors.blue[700],
+          trackHeight: 20.0,
+          thumbShape: RoundSliderThumbShape(enabledThumbRadius: 12.0),
+          thumbColor: Colors.grey[200],
+          overlayColor: Colors.grey[700].withAlpha(32),
+          overlayShape: RoundSliderOverlayShape(overlayRadius: 28.0),
+          tickMarkShape: RoundSliderTickMarkShape(),
+          valueIndicatorShape: PaddleSliderValueIndicatorShape(),
+          valueIndicatorColor: Colors.grey[600],
+          valueIndicatorTextStyle: TextStyle(
+            color: Colors.white,
+          ),
         ),
         dividerTheme: DividerThemeData(
           indent: 20,
@@ -160,6 +174,9 @@ class _MyHomePageState extends State<MyHomePage> {
               if (result == Options.web){
                 await launchURL('https://www.exusai.com');
               }
+              if (result == Options.faq){
+                showDialog(context: context, builder: (_) => faqDialog(context));
+              }
               if (result == Options.login){
                 //push to auht
                 if(user.isAnon){
@@ -171,14 +188,14 @@ class _MyHomePageState extends State<MyHomePage> {
             },
             itemBuilder: (BuildContext context) => <PopupMenuEntry<Options>>[
               PopupMenuItem<Options>(
-                value: Options.about,
+                value: Options.web,
                 child: ListTile(
                   title: Text(AppLocalizations.of(context).translate('website')),
                   leading: Icon(Icons.web),
                 ),
               ),
               PopupMenuItem<Options>(
-                value: Options.about,
+                value: Options.webApp,
                 child: ListTile(
                   title: Text('Web App'),
                   leading: Icon(Icons.apps),
@@ -206,9 +223,16 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
               PopupMenuItem<Options>(
+                value: Options.faq,
+                child: ListTile(
+                  title: Text(AppLocalizations.of(context).translate('help')),
+                  leading: Icon(Icons.help)
+                ),
+              ),
+              PopupMenuItem<Options>(
                 value: Options.login,
                 child: ListTile(
-                  title: Text(AppLocalizations.of(context).translate('login_or_register')),
+                  title: user.isAnon ? Text(AppLocalizations.of(context).translate('login_or_register')) : Text(AppLocalizations.of(context).translate('log_out')),
                   leading: user.isAnon ? Icon(Icons.login) : Icon(Icons.logout),
                 ),
               ),

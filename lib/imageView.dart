@@ -70,7 +70,7 @@ class _ImageViewState extends State<ImageView> with SingleTickerProviderStateMix
           Container(
             child: PhotoView.customChild(
               minScale: PhotoViewComputedScale.contained * 0.8,
-              initialScale: PhotoViewComputedScale.contained,
+              initialScale: PhotoViewComputedScale.covered,
               enableRotation: true,
               childSize:  Size(imgProp.width.toDouble(),imgProp.height.toDouble()),
               child: Container(
@@ -96,7 +96,7 @@ class _ImageViewState extends State<ImageView> with SingleTickerProviderStateMix
                           decoration: BoxDecoration(
                             border: Border(
                               right: BorderSide(
-                                width: 3.0,
+                                width: imgProp.width.toDouble()*0.005,
                                 color: Colors.black
                                 
                               ),
