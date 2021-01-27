@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:srwnn_mobile/authViews/auth.dart';
 import 'Controllers/app_localizations.dart';
 
 AlertDialog aboutDialog(context) {
@@ -92,9 +93,6 @@ AlertDialog alocationErrorDialog(context) {
   );
 }
 
-
-
-
 AlertDialog unknownErrorDialog(context) {
   return AlertDialog(
     title: Text(AppLocalizations.of(context).translate('unknown_error')),
@@ -116,4 +114,49 @@ AlertDialog unknownErrorDialog(context) {
   );
 }
 
+AlertDialog resetPasswordDialog(context, correo) {
+  return AlertDialog(
+    title: Text(AppLocalizations.of(context).translate('reset_ps')),
+    content: SingleChildScrollView(
+      child: ListBody(
+        children: [
+         Text(AppLocalizations.of(context).translate('reset_ps_mail1') + correo + AppLocalizations.of(context).translate('reset_ps_mail2'))
+        ],
+      ),
+    ),
+    actions: [
+      FlatButton(
+        onPressed: () {
+          Navigator.pop(context);
+        },
+        child: Text('Ok'),
+      ),
+    ],
+  );
+}
+
+AlertDialog logToDownload(context) {
+  return AlertDialog(
+    title: Text(AppLocalizations.of(context).translate('log_to_dl')),
+    actions: [
+      FlatButton(
+        onPressed: () {
+          Navigator.pop(context);
+          //Navigator.pop(context);
+        },
+        child: Text(
+          AppLocalizations.of(context).translate('cancel')
+        ),
+      ),
+
+      RaisedButton(
+        child: Text('Register/Login'),
+        padding: EdgeInsets.symmetric(horizontal: 40),
+        onPressed: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) {return Auth();}));
+        }
+      ),
+    ],
+  );
+}
 

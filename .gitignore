@@ -44,3 +44,11 @@ app.*.map.json
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
 android/app/google-services.json
 lib/Controllers/adds.dart
+lib/Models/onlineGenerator.dart
+lib/Controllers/authService.dart
+lib/Controllers/databaseService.dart
+lib/Controllers/storageService.dart
+lib/Models/subscriptionData.dart
+lib/Models/user.dart
+lib/authViews/register.dart
+lib/authViews/enter.dart

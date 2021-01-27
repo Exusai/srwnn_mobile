@@ -128,7 +128,7 @@ class _InferenceViewState extends State<InferenceView> {
                 child: Image.file(image, fit: BoxFit.contain,),
               ),
 
-              SizedBox(height: 10),
+              Divider(),
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 20),
                 child: Column(

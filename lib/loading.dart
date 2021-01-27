@@ -92,3 +92,23 @@ class _LoadingState extends State<Loading> {
     _interstitialAd..load()..show();
   }
 }
+
+class LoadingNoAd extends StatefulWidget {
+  @override
+  _LoadingNoAdState createState() => _LoadingNoAdState();
+}
+
+class _LoadingNoAdState extends State<LoadingNoAd> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Color(0xffF2F2F2),
+      child: Center(
+        child: SpinKitCubeGrid(
+          color: Colors.blue,
+          size: 80.0,
+        ),
+      ),
+    );
+  }
+}

@@ -15,7 +15,7 @@ class SRWGeneratorOnline {
   SRWGeneratorOnline({this.image, this.modelConfig});
 
   Future generate2xImage() async {
-    String url = 'http://li1158-144.members.linode.com/generate';
+    String url = 'http://10.0.2.2:5000/srwnn';
 
     FormData formData = new FormData.fromMap({
       "model": modelConfig.toString(),
@@ -34,14 +34,15 @@ class SRWGeneratorOnline {
       //print('error');
       throw Error();
     }
-    
-
+    //print('Response Recived');
     //Response response= await dio.post(url, data: formData);
     String message = await response.data['msg'];
+    //print(message);
     if (message != '1'){
       throw Exception();
     }
     String strImage = await response.data['img'];
+    //print(strImage);
 
     //Codec<String, String> stringToBase64 = utf8.fuse(base64);
     //var decodedImage = base64.decode(strImage);

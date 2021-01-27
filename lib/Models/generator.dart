@@ -54,7 +54,7 @@ class SRWGenerator {
     //print(interpreter.getInputTensor(0).shape);
 
     //run model
-    print('running model...');
+    //print('running model...');
     interpreter.run(reShapeImgBuffer.buffer, probabilityBuffer.buffer);
     //interpreter.
     interpreter.close();

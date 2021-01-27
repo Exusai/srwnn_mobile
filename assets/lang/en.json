@@ -63,5 +63,33 @@
 
     "website": "Website",
     "file_size": "Filesize:",
-    "login_or_register":"Login or register"
+    "login_or_register":"Login or register",
+
+    "register": "Register",
+    "enter": "Enter",
+    "incorrect_email_or_ps": "Incorrect email or password",
+    "enter_emal": "Enter email",
+    "email": "Email",
+    "ps": "Password",
+    "mail_not_recognized": "Mail not recognized",
+    "enter_mail_to_reset_ps": "Enter an email to reset password",
+    "6chr_or_more_ps_plz": "Password must be at least 6 charaters",
+    "reset_ps": "Reset password",
+    "reset_ps_mail1": "A mail has been send to ",
+    "reset_ps_mail2": " in order to reset your password.",
+
+    "enter_w_mi_account": "Enter with my account",
+    "enter_a_name": "Enter a name",
+    "name": "Name",
+    "last_name": "Last name",
+    "username": "Username",
+    "enter_email": "Enter an email.",
+    "password": "Password",
+    "confirm_ps": "Confirm password",
+    "error_has_occured": "An error has occurred, try again.",
+    "ps_do_not_match": "Repeated password do not match",
+    "forgot_ps": "Forgot password",
+
+    "log_to_dl": "Login or register to download",
+    "cancel": "Cancel"
 }

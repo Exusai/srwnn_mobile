@@ -1,8 +1,10 @@
 import 'package:firebase_admob/firebase_admob.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 import 'package:srwnn_mobile/Controllers/urlLauncher.dart';
 import 'package:srwnn_mobile/dialogs.dart';
 import 'package:srwnn_mobile/workingView.dart';
@@ -12,9 +14,26 @@ import 'Controllers/ModelConfigs.dart';
 import 'Controllers/ModelSelector.dart';
 import 'Controllers/adds.dart';
 import 'Controllers/app_localizations.dart';
+import 'Controllers/authService.dart';
+import 'Models/user.dart';
+import 'authViews/auth.dart';
 
-void main() {
-  runApp(MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(
+    MultiProvider(
+      providers: [
+        Provider(
+          create: (_) => AuthService(),
+        ),
+        StreamProvider(
+          create: (context) => context.read<AuthService>().user,
+        ),
+      ],
+      child: MyApp(),
+    )
+  );
 }
 
 SRModelSelector selector = SRModelSelector();
@@ -46,12 +65,26 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       title: 'Super Resulution W.N.N.',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        //primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
-        backgroundColor: Color(0xff303030),
-        primaryColor: Color(0xff303030),
+        //backgroundColor: Color(0xff303030),
+        //primaryColor: Colors.red[700],
         //canvasColor: Color(CE0452),
+        brightness: Brightness.dark,
+        primaryColor: Colors.blue[900],
+        accentColor: Colors.pinkAccent,
+        buttonTheme: ButtonThemeData(
+          buttonColor: Colors.pinkAccent,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24),),
+          padding: EdgeInsets.symmetric(horizontal: 40),  
+          //textTheme: ButtonTextTheme.accent,
+        ),
+        dividerTheme: DividerThemeData(
+          indent: 20,
+          endIndent: 20,
+        ),
       ),
+      
       debugShowCheckedModeBanner: false,
 
       // List all of the app's supported locales here
@@ -90,6 +123,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final picker = ImagePicker();
+  final AuthService _authService = AuthService();
 
   Future getImage() async {
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
@@ -100,6 +134,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<Usuario>(context) ?? Usuario(uid: '', isAnon: true);
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -127,6 +162,11 @@ class _MyHomePageState extends State<MyHomePage> {
               }
               if (result == Options.login){
                 //push to auht
+                if(user.isAnon){
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {return Auth();}));
+                } else {
+                 _authService.singOut(); 
+                }
               } 
             },
             itemBuilder: (BuildContext context) => <PopupMenuEntry<Options>>[
@@ -169,7 +209,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 value: Options.login,
                 child: ListTile(
                   title: Text(AppLocalizations.of(context).translate('login_or_register')),
-                  leading: Icon(Icons.login)
+                  leading: user.isAnon ? Icon(Icons.login) : Icon(Icons.logout),
                 ),
               ),
               /*PopupMenuItem<Options>(

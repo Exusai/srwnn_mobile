@@ -63,5 +63,34 @@
 
     "website": "Sitio web",
     "file_size": "Tamaño del archivo:",
-    "login_or_register":"Iniciar sesión o registrarse"
+    "login_or_register":"Iniciar sesión o registrarse",
+
+    "register": "Registrarse",
+    "enter": "Entrar",
+    "incorrect_email_or_ps": "El correo o contraseña es incorrecto",
+    "enter_emal": "Ingresar un correo",
+    "email": "Correo",
+    "ps": "Contraseña",
+    "mail_not_recognized": "Correo no identificado",
+    "enter_mail_to_reset_ps": "Ingrese un correo para poder recuperar contraseña",
+    "6chr_or_more_ps_plz": "Ingresar contraseña de 6 o más carácteres",
+    "reset_ps": "Reestablecer contraseña",
+    "reset_ps_mail1": "Se le ha enviado un correo a ",
+    "reset_ps_mail2": " para reestablecer su contraseña.",
+    "enter_w_mi_account": "Entrar con mi cuenta",
+    "enter_a_name": "Ingresar un nombre",
+    "name": "Nombre",
+    "last_name": "Apellido",
+    "username": "Nombre de usuario",
+    "enter_email": "Ingresar un correo",
+    "password": "Contraseña",
+    "confirm_ps": "Confirmar contraseña",
+    "error_has_occured": "Ha ocurrido un error, intente nuevamente.",
+    "ps_do_not_match": "Contraseña repetida no coincide",
+    "forgot_ps": "Olvidé mi contraseña",
+
+    "log_to_dl": "Inicia sesión o registrate para descargar tu imagen",
+    "cancel": "Cancelar"
+
+
 }

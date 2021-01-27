@@ -53,6 +53,7 @@ flutter:
   uses-material-design: true
   assets:
     #- assets/images/test.jpg
+    - assets/
     - assets/models/srwnn.tflite
     - assets/models/
     - assets/images/test.png

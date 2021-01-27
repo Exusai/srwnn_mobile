@@ -2,8 +2,13 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:gallery_saver/gallery_saver.dart';
+import 'package:provider/provider.dart';
+import 'package:srwnn_mobile/Models/user.dart';
+import 'package:srwnn_mobile/dialogs.dart';
+import 'package:srwnn_mobile/main.dart';
 import 'package:tflite_flutter_helper/tflite_flutter_helper.dart';
 import 'Controllers/app_localizations.dart';
+import 'Controllers/databaseService.dart';
 
 
 class ImageView extends StatefulWidget {
@@ -35,16 +40,27 @@ class _ImageViewState extends State<ImageView> with SingleTickerProviderStateMix
   @override
   Widget build(BuildContext context) {
     TensorImage imgProp = TensorImage.fromFile(widget.orgImage);
-    
+    final user = Provider.of<Usuario>(context) ?? Usuario(uid: '', isAnon: true);
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Result'),
         actions: [
           IconButton(
             icon: Icon(Icons.save),
-            onPressed: () {
-              GallerySaver.saveImage(widget.image.path, albumName: '2xImg');
-              showDialog(context: context, builder: (_) => imageSaved(context));
+            onPressed: () async {
+              if (selector.executionOnline == false){
+                GallerySaver.saveImage(widget.image.path, albumName: '2xImg');
+                showDialog(context: context, builder: (_) => imageSaved(context));
+              } else {
+                if (user.isAnon == true){
+                  showDialog(context: context, builder: (_) => logToDownload(context));
+                } else {
+                  GallerySaver.saveImage(widget.image.path, albumName: '2xImg');
+                  await DatabaseService(uid: user.uid).processedImageCount();
+                  showDialog(context: context, builder: (_) => imageSaved(context));
+                }
+              }
             },
           ),
         ],
