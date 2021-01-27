@@ -147,8 +147,8 @@ AlertDialog imageSaved(context) {
       FlatButton(
         onPressed: () {
           Navigator.pop(context);
-          Navigator.pop(context);
-          Navigator.pop(context);
+          //Navigator.pop(context);
+          //Navigator.pop(context);
         },
         child: Text('Ok'),
       ),

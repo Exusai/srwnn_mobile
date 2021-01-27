@@ -27,9 +27,10 @@ class InferenceView extends StatefulWidget {
   _InferenceViewState createState() => _InferenceViewState();
 }
 
-File newImage;
+
 
 class _InferenceViewState extends State<InferenceView> {
+  File newImage;
   TensorImage tensorImage = TensorImage.fromFile(image);
   bool loading = false;
   bool dispMSG = false;
@@ -59,6 +60,8 @@ class _InferenceViewState extends State<InferenceView> {
     if (selector.executionOnline == true && widget.showAds == true){
       _bannerAd.dispose();
     }
+    image = null;
+    newImage = null;
   } 
   
   @override
@@ -91,7 +94,7 @@ class _InferenceViewState extends State<InferenceView> {
           setState(() => dispMSG = true);
           imageCache.clear();
           newImage = null;
-          SRWGenerator gen = SRWGenerator(image: image, modelPath: selector.getModelPath());
+          SRWGenerator gen = new SRWGenerator(image: image, modelPath: selector.getModelPath());
           
           try{
             newImage = await gen.generate2xImage();
@@ -104,7 +107,7 @@ class _InferenceViewState extends State<InferenceView> {
         
         setState(() => loading = false);
         if (error == false && alocationError == false && imageError == false){
-          Navigator.push(context,MaterialPageRoute(builder: (context) => ImageView(image: newImage, orgImage: image,)),);
+          Navigator.push(context,MaterialPageRoute(builder: (context) => new ImageView(image: newImage, orgImage: image,)),);
 
           /*if (imageError == true) {
             showDialog(context: context, builder: (_) => imageErrorDialog(context));
