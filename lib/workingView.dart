@@ -75,7 +75,7 @@ class _InferenceViewState extends State<InferenceView> {
         if (selector.executionOnline == true) {
           setState(() => loading = true);
           setState(() => dispMSG = false);
-          await _bannerAd.dispose();
+          if (widget.showAds) await _bannerAd.dispose();
           _bannerAd = null;
           imageCache.clear();
           newImage = null;
@@ -126,7 +126,7 @@ class _InferenceViewState extends State<InferenceView> {
     ///
     /// Floating button end
     ///
-    return loading ? Loading(dispMesage: dispMSG,): Scaffold(
+    return loading && widget.showAds == false ? LoadingNoAd() : loading ? Loading(dispMesage: dispMSG,): Scaffold(
       appBar: AppBar(
         title: Text(AppLocalizations.of(context).translate('confirmation_title')),
       ),
@@ -234,7 +234,7 @@ class _InferenceViewState extends State<InferenceView> {
                   ),
                 ),
               ),
-              SizedBox(height: 10,),
+              SizedBox(height: 60,),
             ],
           ),
         ),
