@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
+import 'package:srwnn_mobile/Controllers/databaseService.dart';
 import 'package:srwnn_mobile/Controllers/urlLauncher.dart';
 import 'package:srwnn_mobile/dialogs.dart';
 import 'package:srwnn_mobile/workingView.dart';
@@ -15,6 +16,7 @@ import 'Controllers/ModelSelector.dart';
 import 'Controllers/adds.dart';
 import 'Controllers/app_localizations.dart';
 import 'Controllers/authService.dart';
+import 'Models/subscriptionData.dart';
 import 'Models/user.dart';
 import 'authViews/auth.dart';
 
@@ -149,6 +151,46 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<Usuario>(context) ?? Usuario(uid: '', isAnon: true);
+
+    Widget selectImageButton(bool showAds) {
+      return RaisedButton(
+        onPressed: () async {
+          await getImage();
+          //go to next wea and pass image and info
+          if (image != null ) {
+            
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => InferenceView(image: image, modelPath: selector.getModelPath(), showAds: showAds,)),
+            );
+          } else {
+            setState(() {
+              message = 'please_select_img';
+            });
+          }
+        },
+        child: Text(AppLocalizations.of(context).translate('select_image_tr'),),
+      );
+    }
+    /* Widget selectImageButton = RaisedButton(
+      onPressed: () async {
+        await getImage();
+        //go to next wea and pass image and info
+        if (image != null ) {
+          
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => InferenceView(image: image, modelPath: selector.getModelPath())),
+          );
+        } else {
+          setState(() {
+            message = 'please_select_img';
+          });
+        }
+      },
+      child: Text(AppLocalizations.of(context).translate('select_image_tr'),),
+    ); */
+
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -469,25 +511,18 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             SizedBox(height: 5,),
 
-            RaisedButton(
-              onPressed: () async {
-                await getImage();
-                //go to next wea and pass image and info
-                if (image != null ) {
-                  
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => InferenceView(image: image, modelPath: selector.getModelPath())),
-                  );
+            selector.executionOnline == false ? selectImageButton(false) : !user.isAnon ? StreamBuilder<SubscriptionData>(
+              stream: CheckOutService(uid: user.uid).subscriptionData,
+              builder: (context, snapshot1){
+                SubscriptionData subscriptionData = snapshot1.data ?? SubscriptionData(isPremium: false);
+                if (subscriptionData.isPremium == false) {
+                  return selectImageButton(true);
                 } else {
-                  setState(() {
-                    message = 'please_select_img';
-                  });
+                  // puede procesar btn
+                  return selectImageButton(false);
                 }
-
               },
-              child: Text(AppLocalizations.of(context).translate('select_image_tr'),),
-            ),
+            ) : selectImageButton(true),
 
             /*FlatButton(
               onPressed: () async {
@@ -516,4 +551,5 @@ class _MyHomePageState extends State<MyHomePage> {
 
     );
   }
+  
 }

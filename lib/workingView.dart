@@ -5,7 +5,6 @@ import 'package:provider/provider.dart';
 import 'package:srwnn_mobile/imageView.dart';
 import 'package:srwnn_mobile/main.dart';
 import 'package:tflite_flutter_helper/tflite_flutter_helper.dart';
-
 import 'Controllers/adds.dart';
 import 'Controllers/app_localizations.dart';
 import 'Controllers/databaseService.dart';
@@ -21,8 +20,9 @@ import 'loading.dart';
 class InferenceView extends StatefulWidget {
   final File image;
   final String modelPath;
+  final bool showAds;
 
-  InferenceView({this.image, this.modelPath});
+  InferenceView({this.image, this.modelPath, this.showAds});
   @override
   _InferenceViewState createState() => _InferenceViewState();
 }
@@ -45,7 +45,7 @@ class _InferenceViewState extends State<InferenceView> {
   void initState(){
     super.initState();
     
-    if (selector.executionOnline == true){
+    if (selector.executionOnline == true && widget.showAds == true){
       //Admob.initialize(Adds.appID);
       _bannerAd = BannerAd(adUnitId: Adds.banner, size: AdSize.banner);
       //Widget banner = AdmobBanner(adUnitId: Adds.banner, adSize: AdmobBannerSize.BANNER);
@@ -56,7 +56,7 @@ class _InferenceViewState extends State<InferenceView> {
   @override
   void dispose(){
     super.dispose();
-    if (selector.executionOnline == true){
+    if (selector.executionOnline == true && widget.showAds == true){
       _bannerAd.dispose();
     }
   } 
@@ -64,6 +64,9 @@ class _InferenceViewState extends State<InferenceView> {
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<Usuario>(context) ?? Usuario(uid: '', isAnon: true);
+    ///
+    /// Floating button
+    ///
     Widget floatProcessButton = FloatingActionButton(
       onPressed: ()async{
         if (selector.executionOnline == true) {
@@ -83,7 +86,6 @@ class _InferenceViewState extends State<InferenceView> {
             setState(() => imageError = true);
           }
         }
-
         else if (selector.executionOnline == false){
           setState(() => loading = true);
           setState(() => dispMSG = true);
@@ -118,10 +120,16 @@ class _InferenceViewState extends State<InferenceView> {
       },
       child: Text(AppLocalizations.of(context).translate('start_btn')),
     );
+    ///
+    /// Floating button end
+    ///
     return loading ? Loading(dispMesage: dispMSG,): Scaffold(
       appBar: AppBar(
         title: Text(AppLocalizations.of(context).translate('confirmation_title')),
       ),
+      ///
+      /// Check for subs
+      ///
       floatingActionButton: selector.executionOnline == false ? floatProcessButton : !user.isAnon ? StreamBuilder<SubscriptionData>(
         stream: CheckOutService(uid: user.uid).subscriptionData,
         builder: (context, snapshot1){
@@ -156,9 +164,10 @@ class _InferenceViewState extends State<InferenceView> {
             return floatProcessButton;
           }
         },
-        
-
       ) : floatProcessButton,
+      ///
+      /// Check for subs
+      ///
       body: Center(
         child: Container(
           //padding: EdgeInsets.symmetric(horizontal: 20),
@@ -215,7 +224,7 @@ class _InferenceViewState extends State<InferenceView> {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20),
                 child: Text(
-                  AppLocalizations.of(context).translate(selector.executionOnline ? 'pre_process_warning2' : 'pre_process_warning'),
+                  widget.showAds == false && selector.executionOnline == true ? '' : AppLocalizations.of(context).translate(selector.executionOnline ? 'pre_process_warning2' : 'pre_process_warning'),
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Colors.orange[900],
