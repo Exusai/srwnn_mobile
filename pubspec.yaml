@@ -24,7 +24,7 @@ dependencies:
   dio: ^3.0.10
   firebase_admob: ^0.11.0+1
   flutter_launcher_icons: ^0.7.5
-  blobs: ^1.2.0
+  #blobs: ^1.2.0
   carousel_slider: ^2.3.1
   provider: ^4.3.2+2
   firebase_auth: ^0.20.0+1
