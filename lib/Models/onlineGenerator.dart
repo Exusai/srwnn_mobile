@@ -24,8 +24,10 @@ class SRWGeneratorOnline {
     });
       
     Dio dio = new Dio();
-    dio.options.connectTimeout = 60000;
-    dio.options.receiveTimeout = 350000;
+    dio.options.connectTimeout = 400000;
+    dio.options.receiveTimeout = 400000;
+    dio.options.sendTimeout = 400000;
+
     print('starting requ');
     //Response response =  await dio.post(url, data: formData);
     Response response;
@@ -45,7 +47,7 @@ class SRWGeneratorOnline {
       throw Exception();
     }
     String strImage = await response.data['img'];
-    //print(strImage);
+    print(strImage);
 
     //Codec<String, String> stringToBase64 = utf8.fuse(base64);
     //var decodedImage = base64.decode(strImage);

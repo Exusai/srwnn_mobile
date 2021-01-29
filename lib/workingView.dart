@@ -82,6 +82,8 @@ class _InferenceViewState extends State<InferenceView> {
           SRWGeneratorOnline genOnline = SRWGeneratorOnline(image: image, modelConfig: selector.getModelConfig());
           try{
             newImage = await genOnline.generate2xImage();
+            setState(() => error = false);
+            setState(() => imageError = false);
           } on Error {
             //setState(() => loading = false);
             setState(() => error = true);
