@@ -6,6 +6,7 @@ import 'dart:io';
 import 'dart:async';
 import 'package:image/image.dart' as image2;
 import 'package:path_provider/path_provider.dart';
+import 'package:srwnn_mobile/Qliphort.dart';
 //import 'dart:convert';
 
 
@@ -15,7 +16,7 @@ class SRWGeneratorOnline {
   SRWGeneratorOnline({this.image, this.modelConfig});
 
   Future generate2xImage() async {
-    String url = 'http://10.0.2.2:5000/srwnn';
+    String url = QLIPHORT;
 
     FormData formData = new FormData.fromMap({
       "model": modelConfig.toString(),
@@ -23,15 +24,17 @@ class SRWGeneratorOnline {
     });
       
     Dio dio = new Dio();
-    //dio.options.connectTimeout = 120000;
-    dio.options.receiveTimeout = 120000;
-
+    dio.options.connectTimeout = 60000;
+    dio.options.receiveTimeout = 350000;
+    print('starting requ');
     //Response response =  await dio.post(url, data: formData);
     Response response;
     try{
       response = await dio.post(url, data: formData);
-    } on DioError {
-      //print('error');
+      print(response.data['msg']);
+    } on DioError catch (e) {
+      print('ERROR');
+      print(e.error);
       throw Error();
     }
     //print('Response Recived');

@@ -52,3 +52,4 @@ lib/Models/subscriptionData.dart
 lib/Models/user.dart
 lib/authViews/register.dart
 lib/authViews/enter.dart
+lib/Qliphort.dart
