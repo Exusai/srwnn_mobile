@@ -65,7 +65,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Super Resulution W.N.N.',
+      title: 'ExusAI Super Resulution',
       theme: ThemeData(
         //primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
@@ -148,6 +148,7 @@ class _MyHomePageState extends State<MyHomePage> {
       image = File(pickedFile.path);
     });
   }
+
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<Usuario>(context) ?? Usuario(uid: '', isAnon: true);
@@ -158,7 +159,6 @@ class _MyHomePageState extends State<MyHomePage> {
           await getImage();
           //go to next wea and pass image and info
           if (image != null ) {
-            
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => InferenceView(image: image, modelPath: selector.getModelPath(), showAds: showAds,)),
