@@ -140,13 +140,34 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   final picker = ImagePicker();
   final AuthService _authService = AuthService();
+  
 
   Future getImage() async {
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
-    imageCache.clear();
+    //imageCache.clear();
     setState(() {
-      image = File(pickedFile.path);
+      if (pickedFile != null){
+        image = File(pickedFile.path);
+      } else {
+        setState(() {
+          message = 'please_select_img';
+        });
+      }
     });
+  }
+
+  Future<void> retrieveLostData() async {
+    final LostData response = await picker.getLostData();
+    if (response.isEmpty) {
+      throw Exception();
+    }
+    if (response.file != null) {
+      setState(() {
+        image = File(response.file.path);
+      });
+    } else {
+      throw Exception();
+    }
   }
 
   @override
@@ -159,14 +180,15 @@ class _MyHomePageState extends State<MyHomePage> {
           await getImage();
           //go to next wea and pass image and info
           if (image != null ) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => InferenceView(image: image, modelPath: selector.getModelPath(), showAds: showAds,)),
-            );
+            Navigator.push(context,MaterialPageRoute(builder: (context) => new InferenceView(image: image, modelPath: selector.getModelPath(), showAds: showAds,)),);
           } else {
-            setState(() {
-              message = 'please_select_img';
-            });
+            try {
+              await retrieveLostData();
+            } on Exception {
+              setState(() {
+                message = 'please_select_img';
+              });
+            }
           }
         },
         child: Text(AppLocalizations.of(context).translate('select_image_tr'),),
