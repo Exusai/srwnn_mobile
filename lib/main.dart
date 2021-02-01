@@ -125,7 +125,7 @@ class _MyAppState extends State<MyApp> {
         return supportedLocales.first;
       },
 
-      home: MyHomePage(title: 'Super Resolution W.N.N'),
+      home: MyHomePage(title: 'ExusAI Super Resolution'),
     );
   }
 }
@@ -143,7 +143,7 @@ class _MyHomePageState extends State<MyHomePage> {
   
 
   Future getImage() async {
-    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+    PickedFile pickedFile = await picker.getImage(source: ImageSource.gallery);
     //imageCache.clear();
     setState(() {
       if (pickedFile != null){
@@ -157,41 +157,62 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Future<void> retrieveLostData() async {
-    final LostData response = await picker.getLostData();
-    if (response.isEmpty) {
-      throw Exception();
-    }
-    if (response.file != null) {
-      setState(() {
-        image = File(response.file.path);
-      });
-    } else {
-      throw Exception();
+    print('Called Lost DATa');
+    if (image == null){
+      final LostData response = await picker.getLostData();
+      if (response.isEmpty) {
+        /* setState(() {
+          image = null;       
+        }); */
+        return;
+        //throw Exception();
+      }
+      if (response.file != null) {
+        setState(() {
+          image = File(response.file.path);
+        });
+      } else {
+        return;
+      }
     }
   }
+  /* @override
+  void dispose() { 
+    //image == null;
+    super.dispose();
+  }
+  @override
+  void initState() { 
+    //retrieveLostData();
+    super.initState();
+  } */
 
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<Usuario>(context) ?? Usuario(uid: '', isAnon: true);
-
+    
     Widget selectImageButton(bool showAds) {
       return RaisedButton(
         onPressed: () async {
-          await getImage();
+          //print("getting image");
+          
           //go to next wea and pass image and info
+          //print("got image");
           if (image != null ) {
             Navigator.push(context,MaterialPageRoute(builder: (context) => new InferenceView(image: image, modelPath: selector.getModelPath(), showAds: showAds,)),);
           } else {
-            try {
+            /* try {
               await retrieveLostData();
+              //Navigator.push(context,MaterialPageRoute(builder: (context) => new InferenceView(image: image, modelPath: selector.getModelPath(), showAds: showAds,)),);
             } on Exception {
               setState(() {
                 message = 'please_select_img';
               });
-            }
+            } */
+            await getImage();
           }
         },
-        child: Text(AppLocalizations.of(context).translate('select_image_tr'),),
+        child: image == null ? Text(AppLocalizations.of(context).translate('select_image_tr'),) : Text(AppLocalizations.of(context).translate('next')),
       );
     }
     /* Widget selectImageButton = RaisedButton(
@@ -212,10 +233,10 @@ class _MyHomePageState extends State<MyHomePage> {
       },
       child: Text(AppLocalizations.of(context).translate('select_image_tr'),),
     ); */
-
+    retrieveLostData();
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text('ExusAI Super Resolution'),
         centerTitle: false,
         actions: [
           new PopupMenuButton<Options>(
@@ -318,8 +339,7 @@ class _MyHomePageState extends State<MyHomePage> {
           //mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             SizedBox(height: 20,),
-
-            Container(
+            image == null ? Container(
               decoration: BoxDecoration(color: Colors.black.withOpacity(0.60)),
               child: Column(
                 children: [
@@ -350,31 +370,108 @@ class _MyHomePageState extends State<MyHomePage> {
                   SizedBox(height: 5,),
                 ],
               ),
-            ),
-
-            
-            Container(
-              child: Row(
+            ) : Container(
+              decoration: BoxDecoration(color: Colors.black.withOpacity(0.60)),
+              child: Column(
                 children: [
-                  //Spacer(),
-
-                  Expanded(
-                    child: Image(
-                      image: AssetImage(selector.getImageInExample()),
-                      fit: BoxFit.fitWidth,
-                      //height: 160,
-                    ),
+                  SizedBox(height: 5,),
+                  Text(
+                    'Image',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(color: Colors.white),
                   ),
-                  Expanded(
-                    child: Image(
-                      image: AssetImage(selector.getImageOutExmaple()),
-                      fit: BoxFit.fitWidth,
-                      //height: 160,
-                    ),
-                  ),
-                  //Spacer(),
+                  SizedBox(height: 5,),
                 ],
               ),
+            ),
+
+            FutureBuilder(
+              future: retrieveLostData(),
+              initialData: null,
+              builder: (BuildContext context, AsyncSnapshot snapshot){
+                //retrieveLostData();
+                if (image != null){
+                  return Container(
+                    child: Row(
+                      children: [
+                        //Spacer(),
+                        Expanded(
+                          child: Image(
+                            image: FileImage(image),
+                            fit: BoxFit.fitWidth,
+                            height: 160,
+                          ),
+                        ),
+                        //Text('Loaded')
+                      ],
+                    )
+                  );
+                } else {
+                  return Container(
+                    child: Row(
+                      children: [
+                        //Spacer(),
+                        Expanded(
+                          child: Image(
+                            image: AssetImage(selector.getImageInExample()),
+                            fit: BoxFit.fitWidth,
+                            //height: 160,
+                          ),
+                        ),
+                        Expanded(
+                          child: Image(
+                            image: AssetImage(selector.getImageOutExmaple()),
+                            fit: BoxFit.fitWidth,
+                            //height: 160,
+                          ),
+                        ),
+                        //Spacer(),
+                      ],
+                    ),
+                  );
+                }
+                /* if (snapshot.connectionState == ConnectionState.done) {
+                  //setState(() {image = snapshot.data;});
+                  return Container(
+                    child: Row(
+                      children: [
+                        //Spacer(),
+                        Expanded(
+                          child: Image(
+                            image: FileImage(image),
+                            fit: BoxFit.fitWidth,
+                            height: 160,
+                          ),
+                        ),
+                        //Text('Loaded')
+                      ],
+                    )
+                  );
+                } else {
+                  return Container(
+                      child: Row(
+                        children: [
+                          //Spacer(),
+                          Expanded(
+                            child: Image(
+                              image: AssetImage(selector.getImageInExample()),
+                              fit: BoxFit.fitWidth,
+                              //height: 160,
+                            ),
+                          ),
+                          Expanded(
+                            child: Image(
+                              image: AssetImage(selector.getImageOutExmaple()),
+                              fit: BoxFit.fitWidth,
+                              //height: 160,
+                            ),
+                          ),
+                          //Spacer(),
+                        ],
+                      ),
+                    );
+                } */
+              },
             ),
 
             SizedBox(height: 10,),
@@ -545,6 +642,16 @@ class _MyHomePageState extends State<MyHomePage> {
                 }
               },
             ) : selectImageButton(true),
+
+            SizedBox(height: 5,),
+            FlatButton(
+              onPressed: image == null ? null : () {
+                setState(() {
+                  image = null;
+                });
+              },
+              child: Text('Clear image'),
+            )
 
             /*FlatButton(
               onPressed: () async {
