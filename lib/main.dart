@@ -3,7 +3,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
-import 'package:image_picker/image_picker.dart';
+//import 'package:image_picker/image_picker.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:srwnn_mobile/Controllers/databaseService.dart';
 import 'package:srwnn_mobile/Controllers/urlLauncher.dart';
@@ -138,11 +139,11 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final picker = ImagePicker();
+  //final picker = ImagePicker();
   final AuthService _authService = AuthService();
   
 
-  Future getImage() async {
+  /* Future getImage() async {
     PickedFile pickedFile = await picker.getImage(source: ImageSource.gallery);
     //imageCache.clear();
     setState(() {
@@ -154,9 +155,27 @@ class _MyHomePageState extends State<MyHomePage> {
         });
       }
     });
+  } */
+  Future  getImage() async {
+    FilePickerResult result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['jpg', 'JPG', 'jpeg', 'JPEG', 'png', 'PNG',],
+    );
+    if(result != null) {
+                  
+      setState(() {image = File(result.files.single.path);});
+      //setState(() {filename = result.files.single.name;});
+      //setState(() {fileSize = result.files.single.size;});
+      //imgProp = image2.decodeImage(uploadedImage);
+      
+    } else {
+      setState(() {
+        message = 'please_select_img';
+      });
+    }
   }
 
-  Future<void> retrieveLostData() async {
+  /* Future<void> retrieveLostData() async {
     print('Called Lost DATa');
     if (image == null){
       final LostData response = await picker.getLostData();
@@ -175,7 +194,7 @@ class _MyHomePageState extends State<MyHomePage> {
         return;
       }
     }
-  }
+  } */
   /* @override
   void dispose() { 
     //image == null;
@@ -195,7 +214,7 @@ class _MyHomePageState extends State<MyHomePage> {
       return RaisedButton(
         onPressed: () async {
           //print("getting image");
-          
+          await getImage();
           //go to next wea and pass image and info
           //print("got image");
           if (image != null ) {
@@ -209,7 +228,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 message = 'please_select_img';
               });
             } */
-            await getImage();
+            //await getImage();
+            setState(() {
+              message = 'please_select_img';
+            });
           }
         },
         child: image == null ? Text(AppLocalizations.of(context).translate('select_image_tr'),) : Text(AppLocalizations.of(context).translate('next')),
@@ -233,7 +255,7 @@ class _MyHomePageState extends State<MyHomePage> {
       },
       child: Text(AppLocalizations.of(context).translate('select_image_tr'),),
     ); */
-    retrieveLostData();
+    //retrieveLostData();
     return Scaffold(
       appBar: AppBar(
         title: Text('ExusAI Super Resolution'),
@@ -339,7 +361,7 @@ class _MyHomePageState extends State<MyHomePage> {
           //mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             SizedBox(height: 20,),
-            image == null ? Container(
+            Container(
               decoration: BoxDecoration(color: Colors.black.withOpacity(0.60)),
               child: Column(
                 children: [
@@ -370,22 +392,9 @@ class _MyHomePageState extends State<MyHomePage> {
                   SizedBox(height: 5,),
                 ],
               ),
-            ) : Container(
-              decoration: BoxDecoration(color: Colors.black.withOpacity(0.60)),
-              child: Column(
-                children: [
-                  SizedBox(height: 5,),
-                  Text(
-                    'Image',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  SizedBox(height: 5,),
-                ],
-              ),
             ),
 
-            FutureBuilder(
+            /* FutureBuilder(
               future: retrieveLostData(),
               initialData: null,
               builder: (BuildContext context, AsyncSnapshot snapshot){
@@ -472,8 +481,29 @@ class _MyHomePageState extends State<MyHomePage> {
                     );
                 } */
               },
+            ), */
+            Container(
+              child: Row(
+                children: [
+                  //Spacer(),
+                  Expanded(
+                    child: Image(
+                      image: AssetImage(selector.getImageInExample()),
+                      fit: BoxFit.fitWidth,
+                      //height: 160,
+                    ),
+                  ),
+                  Expanded(
+                    child: Image(
+                      image: AssetImage(selector.getImageOutExmaple()),
+                      fit: BoxFit.fitWidth,
+                      //height: 160,
+                    ),
+                  ),
+                  //Spacer(),
+                ],
+              ),
             ),
-
             SizedBox(height: 10,),
             Text(
               AppLocalizations.of(context).translate('model_tr'),
