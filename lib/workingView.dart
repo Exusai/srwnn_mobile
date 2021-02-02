@@ -36,7 +36,6 @@ class _InferenceViewState extends State<InferenceView> {
   bool dispMSG = false;
   bool error = false;
   bool imageError = false;
-  bool alocationError = false;
   //String warning = ;
   
   BannerAd _bannerAd;
@@ -66,6 +65,7 @@ class _InferenceViewState extends State<InferenceView> {
   
   @override
   Widget build(BuildContext context) {
+<<<<<<< HEAD
     final user = Provider.of<Usuario>(context) ?? Usuario(uid: '', isAnon: true);
     ///
     /// Floating button
@@ -89,6 +89,37 @@ class _InferenceViewState extends State<InferenceView> {
             setState(() => error = true);
           } on Exception{
             setState(() => imageError = true);
+=======
+    return loading ? Loading(dispMesage: dispMSG,): Scaffold(
+      appBar: AppBar(
+        title: Text(AppLocalizations.of(context).translate('confirmation_title')),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: ()async{
+          if (selector.executionOnline == true) {
+            setState(() => loading = true);
+            setState(() => dispMSG = false);
+            await _bannerAd.dispose();
+            _bannerAd = null;
+            imageCache.clear();
+            SRWGeneratorOnline genOnline = SRWGeneratorOnline(image: image, modelConfig: selector.getModelConfig());
+            try{
+              newImage = await genOnline.generate2xImage();
+            } on Error {
+              //setState(() => loading = false);
+              setState(() => error = true);
+            } on Exception{
+              setState(() => imageError = true);
+            }
+          }
+
+          else if (selector.executionOnline == false){
+            setState(() => loading = true);
+            setState(() => dispMSG = true);
+            imageCache.clear();
+            SRWGenerator gen = SRWGenerator(image: image, modelPath: selector.getModelPath());
+            newImage = await gen.generate2xImage();
+>>>>>>> parent of bbaf316... I think that the bug is fixed
           }
         }
         else if (selector.executionOnline == false){
@@ -98,6 +129,7 @@ class _InferenceViewState extends State<InferenceView> {
           newImage = null;
           SRWGenerator gen = new SRWGenerator(image: image, modelPath: selector.getModelPath());
           
+<<<<<<< HEAD
           try{
             newImage = await gen.generate2xImage();
           } on Exception {
@@ -167,6 +199,20 @@ class _InferenceViewState extends State<InferenceView> {
           } else {
             // puede procesar btn
             return floatProcessButton;
+=======
+          setState(() => loading = false);
+          if (error == false){
+            if (imageError == true) {
+              showDialog(context: context, builder: (_) => imageErrorDialog(context));
+            } else {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ImageView(image: newImage, orgImage: image,)),  
+              );
+            }
+          } else if (error == true) {
+            showDialog(context: context, builder: (_) => serverErrorDialog(context));
+>>>>>>> parent of bbaf316... I think that the bug is fixed
           }
         },
       ) : floatProcessButton,

@@ -43,10 +43,7 @@ class SRWGenerator {
     //Creates outputTensor as [1,m*2,n*2,3]
     TensorBuffer probabilityBuffer = TensorBuffer.createFixedSize([1, tensorImage.height.toInt() * 2, tensorImage.width.toInt() * 2, 3], TfLiteType.float32);
     //var interpreterOptions = InterpreterOptions()..useNnApiForAndroid = true;
-    
     //creates model interpreter
-    //var interpreterOptions = InterpreterOptions()..addDelegate(NnApiDelegate());
-    
     Interpreter interpreter = await Interpreter.fromAsset(modelPath);
     //resize interpreter input to match [1,m*2,n*2,3]
     interpreter.resizeInputTensor(0, [1, tensorImage.height.toInt(), tensorImage.width.toInt(), 3]);

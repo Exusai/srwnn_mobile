@@ -1,7 +1,11 @@
 name: srwnn_mobile
 description: A new Flutter project.
 
+<<<<<<< HEAD
 version: 2.0.3+9
+=======
+version: 1.0.0+3
+>>>>>>> parent of bbaf316... I think that the bug is fixed
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
@@ -12,7 +16,11 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   image_picker: ^0.6.7+7
+<<<<<<< HEAD
   image: ^2.1.19
+=======
+  image:
+>>>>>>> parent of bbaf316... I think that the bug is fixed
   tflite_flutter: ^0.5.0
   tflite_flutter_helper: ^0.1.2
   photo_view: ^0.10.3
