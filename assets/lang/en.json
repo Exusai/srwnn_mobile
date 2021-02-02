@@ -54,7 +54,6 @@
 
     "example":"Example",
     "img_in_ex":"Input image",
-<<<<<<< HEAD
     "img_out_ex":"Output image",
 
     "alloc_error":"Tensor allocation error.",
@@ -103,8 +102,4 @@
     "help": "Help",
     "faq1": "You can downoad and process up to 15 images per moth for free. If you would like to be able to process more images, you have to upgrade your account trough the web app (login in the web app and navigate to subscription), for 69.00MNX (3.44USD) per month you can process and download unlimited images without ads, and you also gain acces to other services within the web app.",
     "next": "Next"
-=======
-    "img_out_ex":"Output image"
-    
->>>>>>> parent of bbaf316... I think that the bug is fixed
 }

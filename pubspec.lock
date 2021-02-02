@@ -307,11 +307,7 @@ packages:
       name: image
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "2.1.19"
-=======
-    version: "2.1.14"
->>>>>>> parent of bbaf316... I think that the bug is fixed
   image_picker:
     dependency: "direct main"
     description:

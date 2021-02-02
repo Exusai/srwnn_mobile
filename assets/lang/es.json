@@ -54,7 +54,6 @@
 
     "example":"Ejemplo",
     "img_in_ex":"Imágen de entrada",
-<<<<<<< HEAD
     "img_out_ex":"Imágen de salida",
 
     "alloc_error":"Error en la asignación de tensores.",
@@ -104,7 +103,4 @@
     "next": "Siguiente"
 
 
-=======
-    "img_out_ex":"Imágen de salida"
->>>>>>> parent of bbaf316... I think that the bug is fixed
 }

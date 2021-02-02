@@ -94,7 +94,6 @@ AlertDialog imageErrorDialog(context) {
   );
 }
 
-<<<<<<< HEAD
 AlertDialog alocationErrorDialog(context) {
   return AlertDialog(
     title: Text(AppLocalizations.of(context).translate('alloc_error')),
@@ -213,5 +212,3 @@ AlertDialog upgradeDialog(context) {
     ],
   );
 }
-=======
->>>>>>> parent of bbaf316... I think that the bug is fixed
