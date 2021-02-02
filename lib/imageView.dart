@@ -10,7 +10,6 @@ import 'package:tflite_flutter_helper/tflite_flutter_helper.dart';
 import 'Controllers/app_localizations.dart';
 import 'Controllers/databaseService.dart';
 
-
 class ImageView extends StatefulWidget {
   final File image;
   final File orgImage;

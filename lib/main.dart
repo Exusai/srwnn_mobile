@@ -162,7 +162,6 @@ class _MyHomePageState extends State<MyHomePage> {
       allowedExtensions: ['jpg', 'JPG', 'jpeg', 'JPEG', 'png', 'PNG',],
     );
     if(result != null) {
-                  
       setState(() {image = File(result.files.single.path);});
       //setState(() {filename = result.files.single.name;});
       //setState(() {fileSize = result.files.single.size;});
@@ -174,37 +173,6 @@ class _MyHomePageState extends State<MyHomePage> {
       });
     }
   }
-
-  /* Future<void> retrieveLostData() async {
-    print('Called Lost DATa');
-    if (image == null){
-      final LostData response = await picker.getLostData();
-      if (response.isEmpty) {
-        /* setState(() {
-          image = null;       
-        }); */
-        return;
-        //throw Exception();
-      }
-      if (response.file != null) {
-        setState(() {
-          image = File(response.file.path);
-        });
-      } else {
-        return;
-      }
-    }
-  } */
-  /* @override
-  void dispose() { 
-    //image == null;
-    super.dispose();
-  }
-  @override
-  void initState() { 
-    //retrieveLostData();
-    super.initState();
-  } */
 
   @override
   Widget build(BuildContext context) {
@@ -234,28 +202,9 @@ class _MyHomePageState extends State<MyHomePage> {
             });
           }
         },
-        child: image == null ? Text(AppLocalizations.of(context).translate('select_image_tr'),) : Text(AppLocalizations.of(context).translate('next')),
+        child: Text(AppLocalizations.of(context).translate('select_image_tr'),)
       );
     }
-    /* Widget selectImageButton = RaisedButton(
-      onPressed: () async {
-        await getImage();
-        //go to next wea and pass image and info
-        if (image != null ) {
-          
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => InferenceView(image: image, modelPath: selector.getModelPath())),
-          );
-        } else {
-          setState(() {
-            message = 'please_select_img';
-          });
-        }
-      },
-      child: Text(AppLocalizations.of(context).translate('select_image_tr'),),
-    ); */
-    //retrieveLostData();
     return Scaffold(
       appBar: AppBar(
         title: Text('ExusAI Super Resolution'),
@@ -394,94 +343,6 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
 
-            /* FutureBuilder(
-              future: retrieveLostData(),
-              initialData: null,
-              builder: (BuildContext context, AsyncSnapshot snapshot){
-                //retrieveLostData();
-                if (image != null){
-                  return Container(
-                    child: Row(
-                      children: [
-                        //Spacer(),
-                        Expanded(
-                          child: Image(
-                            image: FileImage(image),
-                            fit: BoxFit.fitWidth,
-                            height: 160,
-                          ),
-                        ),
-                        //Text('Loaded')
-                      ],
-                    )
-                  );
-                } else {
-                  return Container(
-                    child: Row(
-                      children: [
-                        //Spacer(),
-                        Expanded(
-                          child: Image(
-                            image: AssetImage(selector.getImageInExample()),
-                            fit: BoxFit.fitWidth,
-                            //height: 160,
-                          ),
-                        ),
-                        Expanded(
-                          child: Image(
-                            image: AssetImage(selector.getImageOutExmaple()),
-                            fit: BoxFit.fitWidth,
-                            //height: 160,
-                          ),
-                        ),
-                        //Spacer(),
-                      ],
-                    ),
-                  );
-                }
-                /* if (snapshot.connectionState == ConnectionState.done) {
-                  //setState(() {image = snapshot.data;});
-                  return Container(
-                    child: Row(
-                      children: [
-                        //Spacer(),
-                        Expanded(
-                          child: Image(
-                            image: FileImage(image),
-                            fit: BoxFit.fitWidth,
-                            height: 160,
-                          ),
-                        ),
-                        //Text('Loaded')
-                      ],
-                    )
-                  );
-                } else {
-                  return Container(
-                      child: Row(
-                        children: [
-                          //Spacer(),
-                          Expanded(
-                            child: Image(
-                              image: AssetImage(selector.getImageInExample()),
-                              fit: BoxFit.fitWidth,
-                              //height: 160,
-                            ),
-                          ),
-                          Expanded(
-                            child: Image(
-                              image: AssetImage(selector.getImageOutExmaple()),
-                              fit: BoxFit.fitWidth,
-                              //height: 160,
-                            ),
-                          ),
-                          //Spacer(),
-                        ],
-                      ),
-                    );
-                } */
-              },
-            ), */
             Container(
               child: Row(
                 children: [
@@ -576,52 +437,6 @@ class _MyHomePageState extends State<MyHomePage> {
             Row(
               children: [
                 Spacer(),
-                /*Column(
-                  children: [
-                    Text(
-                      AppLocalizations.of(context).translate('expand_tr'),
-                      textAlign: TextAlign.center,
-                    ),
-                    SizedBox(height: 5,),
-                    CupertinoSlidingSegmentedControl(
-                      children: expand, 
-                      onValueChanged: (int val) {
-                        setState(() {
-                          selector.expansion = val;
-                          message = selector.updateParameters();
-                        });
-                      },
-                      groupValue: selector.expansion,
-                    ),
-                    SizedBox(height: 10,),
-                  ],
-                ),
-
-                SizedBox(width: 15,),
-
-                Column(
-                  children: [
-                    Text(
-                      AppLocalizations.of(context).translate('upscale_tr'),
-                      textAlign: TextAlign.center,
-                    ),
-                    SizedBox(height: 5,),
-                    CupertinoSlidingSegmentedControl(
-                      children: upscale, 
-                      onValueChanged: (int val) {
-                        setState(() {
-                          selector.upscaleLevel = val;
-                          message = selector.updateParameters();
-                        });
-                      },
-                      groupValue: selector.upscaleLevel,
-                    ),
-                    SizedBox(height: 10,),
-                  ],
-                ),
-
-                SizedBox(width: 15,),*/
-
                 Column(
                   children: [
                     Text(
@@ -674,36 +489,6 @@ class _MyHomePageState extends State<MyHomePage> {
             ) : selectImageButton(true),
 
             SizedBox(height: 5,),
-            FlatButton(
-              onPressed: image == null ? null : () {
-                setState(() {
-                  image = null;
-                });
-              },
-              child: Text('Clear image'),
-            )
-
-            /*FlatButton(
-              onPressed: () async {
-                await pickerGallery();
-                //go to next wea and pass image and info
-                if (image != null ) {
-                  Navigator.push(
-                    context,
-                    //Image.asset('')
-                    File.fromUri(uri)
-                    MaterialPageRoute(builder: (context) => InferenceView(image: image, modelPath: selector.getModelPath())),
-                  );
-                } else {
-                  setState(() {
-                    message = 'Error';
-                  });
-                }
-
-              },
-              child: Text('Sample image'),
-            ),*/
-            
           ],
         ),
       ),
