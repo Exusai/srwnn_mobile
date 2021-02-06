@@ -45,7 +45,6 @@ class _InferenceViewState extends State<InferenceView> {
   @override
   void initState(){
     super.initState();
-    
     if (selector.executionOnline == true && widget.showAds == true){
       //Admob.initialize(Adds.appID);
       _bannerAd = BannerAd(adUnitId: Adds.banner, size: AdSize.banner);
@@ -135,7 +134,8 @@ class _InferenceViewState extends State<InferenceView> {
       ///
       /// Check for subs
       ///
-      floatingActionButton: selector.executionOnline == false ? floatProcessButton : !user.isAnon ? StreamBuilder<SubscriptionData>(
+      floatingActionButton: floatProcessButton,
+      /* floatingActionButton: selector.executionOnline == false ? floatProcessButton : !user.isAnon ? StreamBuilder<SubscriptionData>(
         stream: CheckOutService(uid: user.uid).subscriptionData,
         builder: (context, snapshot1){
           SubscriptionData subscriptionData = snapshot1.data ?? SubscriptionData(isPremium: false);
@@ -169,7 +169,7 @@ class _InferenceViewState extends State<InferenceView> {
             return floatProcessButton;
           }
         },
-      ) : floatProcessButton,
+      ) : floatProcessButton, */
       ///
       /// Check for subs
       ///

@@ -278,13 +278,13 @@ class _MyHomePageState extends State<MyHomePage> {
                   leading: Icon(Icons.mail),
                 ),
               ),
-              PopupMenuItem<Options>(
+              /* PopupMenuItem<Options>(
                 value: Options.faq,
                 child: ListTile(
                   title: Text(AppLocalizations.of(context).translate('help')),
                   leading: Icon(Icons.help)
                 ),
-              ),
+              ), */
               PopupMenuItem<Options>(
                 value: Options.login,
                 child: ListTile(
