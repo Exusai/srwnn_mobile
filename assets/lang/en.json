@@ -95,11 +95,14 @@
     "log_out": "Log out",
 
     "limit_reached": "You have reached your mothly limit for processing/downloading images",
-    "upgrade_pls": "Upgrade your account to process and download unlimited images. You can upgrade your account from the web app.",
+    "upgrade_pls": "Buy credits to process more images.",
     "return": "Return",
-    "admin_sub": "Manage subscription",
+    "admin_sub": "Buy CR",
 
     "help": "Help",
-    "faq1": "You can downoad and process up to 15 images per moth for free. If you would like to be able to process more images, you have to upgrade your account trough the web app (login in the web app and navigate to subscription), for 69.00MNX (3.44USD) per month you can process and download unlimited images without ads, and you also gain acces to other services within the web app.",
-    "next": "Next"
+    "faq1": "You can downoad and process up to 10 images per month for free. If you would like to be able to process more images, you have to buy credits (CR) trough the web app (login in the web app and navigate to Credits), one credit will allow you to proces and download 1 image (you can process many times but the credit is used when you download the image), and you can also use your CR for other services within the web app.",
+    "next": "Next",
+    "free_images_downloaded": "Free images downloaded this month:",
+
+    "sell_text":"CR allows you to process and download more images once you have reached the monthly limit. While you have CR, you wont see any ads. Buy CR through the Web App (app.exusai.com)"
 }

@@ -131,25 +131,25 @@ class _InferenceViewState extends State<InferenceView> {
       appBar: AppBar(
         title: Text(AppLocalizations.of(context).translate('confirmation_title')),
       ),
-      ///
-      /// Check for subs
-      ///
-      floatingActionButton: floatProcessButton,
-      /* floatingActionButton: selector.executionOnline == false ? floatProcessButton : !user.isAnon ? StreamBuilder<SubscriptionData>(
-        stream: CheckOutService(uid: user.uid).subscriptionData,
+      //////////////////////////////////////////////////////////////////////////////////////
+      /// Check for subs ///////////////////////////////////////////////////////////////////
+      //////////////////////////////////////////////////////////////////////////////////////
+      //floatingActionButton: floatProcessButton,
+      floatingActionButton: selector.executionOnline == false ? floatProcessButton : !user.isAnon ? StreamBuilder<UserCredits>(
+        stream: CheckOutService(uid: user.uid).userCR,
+        initialData: UserCredits(credits: 0),
         builder: (context, snapshot1){
-          SubscriptionData subscriptionData = snapshot1.data ?? SubscriptionData(isPremium: false);
-          if (subscriptionData.isPremium == false) {
+          UserCredits userCredits = snapshot1.data ?? UserCredits(credits: 0);
+          if (userCredits.credits == 0) {
             // si aún no descarga 20 puede procesar
             return StreamBuilder<int>(
               stream: DatabaseService(uid: user.uid).userDownloads ?? 0,
               builder: (context, snapshot2) {
-                // do some stuff with both streams here
                 int downloads = snapshot2.data;
                 ///
                 /// Cambiar a 20 downloads
                 ///
-                if (downloads >= 15) {
+                if (downloads >= 10) {
                   //no puede procesar btn
                   return RaisedButton(
                     onPressed: () {
@@ -169,10 +169,10 @@ class _InferenceViewState extends State<InferenceView> {
             return floatProcessButton;
           }
         },
-      ) : floatProcessButton, */
-      ///
-      /// Check for subs
-      ///
+      ) : floatProcessButton,
+      //////////////////////////////////////////////////////////////////////////////////////
+      /// Check for subs ///////////////////////////////////////////////////////////////////
+      //////////////////////////////////////////////////////////////////////////////////////
       body: Center(
         child: Container(
           //padding: EdgeInsets.symmetric(horizontal: 20),
@@ -236,6 +236,70 @@ class _InferenceViewState extends State<InferenceView> {
                   ),
                 ),
               ),
+              !user.isAnon ? StreamBuilder<UserCredits>(
+                stream: CheckOutService(uid: user.uid).userCR,
+                initialData: UserCredits(credits: 0),
+                builder: (context, snapshot){
+                  UserCredits userCredits = snapshot.data ?? UserCredits(credits: 0);
+                  return StreamBuilder<int>(
+                    stream: DatabaseService(uid: user.uid).userDownloads ?? 0,
+                    initialData: 0,
+                    builder: (context, snapshot2) {
+                      int downloads = snapshot2.data ?? 0;
+                      if (downloads >10){
+                        downloads = 10;
+                      }
+                      return Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 20),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'CR:',
+                                  style: TextStyle(fontSize: 25),
+                                ),
+                                SizedBox(width: 10,),
+                                Text(
+                                  userCredits.credits.toString() ?? '0',
+                                  style: TextStyle(fontSize: 25),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  AppLocalizations.of(context).translate('free_images_downloaded'),
+                                  style: TextStyle(fontSize: 15),
+                                ),
+                                SizedBox(width: 10,),
+                                Text(
+                                  downloads.toString() ?? '0',
+                                  style: TextStyle(fontSize: 15),
+                                ),
+                                Text(
+                                  '/10',
+                                  style: TextStyle(fontSize: 15),
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: 5,),
+                            Text(
+                              AppLocalizations.of(context).translate('sell_text'),
+                              textAlign: TextAlign.justify,
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  );
+                },
+              ) : Text(''),
+
+
               SizedBox(height: 60,),
             ],
           ),

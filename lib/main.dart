@@ -3,7 +3,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
-//import 'package:image_picker/image_picker.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:srwnn_mobile/Controllers/databaseService.dart';
@@ -278,13 +277,13 @@ class _MyHomePageState extends State<MyHomePage> {
                   leading: Icon(Icons.mail),
                 ),
               ),
-              /* PopupMenuItem<Options>(
+              PopupMenuItem<Options>(
                 value: Options.faq,
                 child: ListTile(
                   title: Text(AppLocalizations.of(context).translate('help')),
                   leading: Icon(Icons.help)
                 ),
-              ), */
+              ),
               PopupMenuItem<Options>(
                 value: Options.login,
                 child: ListTile(
@@ -453,7 +452,6 @@ class _MyHomePageState extends State<MyHomePage> {
                           } else {
                             selector.executionOnline = true;
                           }
-                          
                           message = selector.updateParameters();
                         });
                       },
@@ -475,14 +473,14 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             SizedBox(height: 5,),
 
-            selector.executionOnline == false ? selectImageButton(false) : !user.isAnon ? StreamBuilder<SubscriptionData>(
-              stream: CheckOutService(uid: user.uid).subscriptionData,
+            selector.executionOnline == false ? selectImageButton(false) : !user.isAnon ? StreamBuilder<UserCredits>(
+              stream: CheckOutService(uid: user.uid).userCR,
+              initialData: UserCredits(credits: 0),
               builder: (context, snapshot1){
-                SubscriptionData subscriptionData = snapshot1.data ?? SubscriptionData(isPremium: false);
-                if (subscriptionData.isPremium == false) {
+                UserCredits userCredits = snapshot1.data ?? UserCredits(credits: 0);
+                if (userCredits.credits == 0) {
                   return selectImageButton(true);
                 } else {
-                  // puede procesar btn
                   return selectImageButton(false);
                 }
               },

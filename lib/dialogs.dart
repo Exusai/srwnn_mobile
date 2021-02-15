@@ -43,6 +43,12 @@ AlertDialog faqDialog(context) {
         },
         child: Text('Ok'),
       ),
+      RaisedButton(
+        child: Text('Web App'),
+        onPressed: () async {
+          await launchURL('https://app.exusai.com/');
+        },
+      )
     ],
   );
 }
@@ -204,7 +210,7 @@ AlertDialog upgradeDialog(context) {
       RaisedButton(
         onPressed: () async {
           //Navigator.push(context, MaterialPageRoute(builder: (context) => SubscriptionPage()),);
-          await launchURL('https://app.exusai.com/');
+          await launchURL('https://app.exusai.com/#/auth');
         },
         padding: EdgeInsets.symmetric(horizontal: 40),
         child: Text(AppLocalizations.of(context).translate('admin_sub')),
