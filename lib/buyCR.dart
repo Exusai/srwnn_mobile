@@ -20,6 +20,7 @@ class _BuyCRState extends State<BuyCR> {
   StreamSubscription _subscription;
 
   int _credits = 0;
+  String itemSelected = cr5;
 
   @override
   void initState() { 
@@ -107,6 +108,9 @@ class _BuyCRState extends State<BuyCR> {
                     child: Text(prod.price),
                     color: Colors.blue,
                     onPressed: () {
+                      setState(() {
+                        itemSelected = prod.id;
+                      });
                       _buyProduct(prod);
                     },
                   ),
@@ -123,7 +127,6 @@ class _BuyCRState extends State<BuyCR> {
     Set<String> ids = Set.from([cr5, cr15]);
     ProductDetailsResponse response = await _iap.queryProductDetails(ids);
     setState(() {
-      
       _products = response.productDetails;
       //print(_products);      
     });
@@ -132,6 +135,7 @@ class _BuyCRState extends State<BuyCR> {
   Future<void> _getPastPurchases() async {
     QueryPurchaseDetailsResponse response = await _iap.queryPastPurchases();
     // TODO: query your database for state of consumable products
+
     setState(() {
       _purchases = response.pastPurchases;
     });
@@ -142,11 +146,12 @@ class _BuyCRState extends State<BuyCR> {
   }
 
   void _verifyPurchase() {
-    PurchaseDetails purchase = _hasPurchased(cr5); 
+    PurchaseDetails purchase = _hasPurchased(itemSelected); 
     //server side verification & record consumable to database
-
     if (purchase != null && purchase.status == PurchaseStatus.purchased){
       _credits = 5;
+      print('CR COMPRADO');
+      // TODO: WRITE TO DB
     }
   }
 

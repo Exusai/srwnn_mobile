@@ -290,13 +290,13 @@ class _MyHomePageState extends State<MyHomePage> {
                   leading: Icon(Icons.help)
                 ),
               ),
-              PopupMenuItem<Options>(
+              !user.isAnon ? PopupMenuItem<Options>(
                 value: Options.cr,
                 child: ListTile(
                   title: Text('CR'),
                   leading: Icon(Icons.add_circle)
                 ),
-              ),
+              ) : null,
               PopupMenuItem<Options>(
                 value: Options.login,
                 child: ListTile(
