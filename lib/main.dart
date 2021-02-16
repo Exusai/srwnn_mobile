@@ -7,6 +7,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:srwnn_mobile/Controllers/databaseService.dart';
 import 'package:srwnn_mobile/Controllers/urlLauncher.dart';
+import 'package:srwnn_mobile/buyCR.dart';
 import 'package:srwnn_mobile/dialogs.dart';
 import 'package:srwnn_mobile/workingView.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -19,10 +20,12 @@ import 'Controllers/authService.dart';
 import 'Models/subscriptionData.dart';
 import 'Models/user.dart';
 import 'authViews/auth.dart';
+import 'package:in_app_purchase/in_app_purchase.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  InAppPurchaseConnection.enablePendingPurchases();
   runApp(
     MultiProvider(
       providers: [
@@ -41,7 +44,7 @@ void main() async {
 SRModelSelector selector = SRModelSelector();
 String message = 'msg_none';
 File image;
-enum Options {web, webApp, about, github, mail, login, faq}
+enum Options {web, webApp, about, github, mail, login, faq, cr}
 
 /*Future pickerGallery() async {
   final picker = ImagePicker();
@@ -232,6 +235,9 @@ class _MyHomePageState extends State<MyHomePage> {
               if (result == Options.faq){
                 showDialog(context: context, builder: (_) => faqDialog(context));
               }
+              if (result == Options.cr){
+                Navigator.push(context, MaterialPageRoute(builder: (context) {return BuyCR();}));
+              }
               if (result == Options.login){
                 //push to auht
                 if(user.isAnon){
@@ -282,6 +288,13 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: ListTile(
                   title: Text(AppLocalizations.of(context).translate('help')),
                   leading: Icon(Icons.help)
+                ),
+              ),
+              PopupMenuItem<Options>(
+                value: Options.cr,
+                child: ListTile(
+                  title: Text('CR'),
+                  leading: Icon(Icons.add_circle)
                 ),
               ),
               PopupMenuItem<Options>(

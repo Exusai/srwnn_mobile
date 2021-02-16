@@ -1,7 +1,7 @@
 name: srwnn_mobile
 description: A new Flutter project.
 
-version: 2.0.5+11
+version: 2.0.7+13
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
@@ -34,6 +34,7 @@ dependencies:
   firebase_storage: ^7.0.0
   flutter_signin_button: ^1.1.0
   google_sign_in: ^4.5.9
+  in_app_purchase: ^0.3.5+1
 
 dev_dependencies:
   #flutter_launcher_icons: "^0.7.3"
@@ -63,3 +64,4 @@ flutter:
     - assets/images/modelExamples/
     - assets/lang/en.json
     - assets/lang/es.json
+    - assets/launcher/icon.png
