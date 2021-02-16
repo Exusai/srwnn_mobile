@@ -237,6 +237,7 @@ class _InferenceViewState extends State<InferenceView> {
                   ),
                 ),
               ),
+              Divider(),
               !user.isAnon ? StreamBuilder<UserCredits>(
                 stream: CheckOutService(uid: user.uid).userCR,
                 initialData: UserCredits(credits: 0),
