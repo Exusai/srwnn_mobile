@@ -236,7 +236,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 showDialog(context: context, builder: (_) => faqDialog(context));
               }
               if (result == Options.cr){
-                Navigator.push(context, MaterialPageRoute(builder: (context) {return BuyCR();}));
+                Navigator.push(context, MaterialPageRoute(builder: (context) {return BuyCR(userUID: user.uid,);}));
               }
               if (result == Options.login){
                 //push to auht
@@ -293,7 +293,7 @@ class _MyHomePageState extends State<MyHomePage> {
               !user.isAnon ? PopupMenuItem<Options>(
                 value: Options.cr,
                 child: ListTile(
-                  title: Text('CR'),
+                  title: Text('Buy CR'), //TODO: tl
                   leading: Icon(Icons.add_circle)
                 ),
               ) : null,
