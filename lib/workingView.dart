@@ -12,6 +12,7 @@ import 'Models/generator.dart';
 import 'Models/onlineGenerator.dart';
 import 'Models/subscriptionData.dart';
 import 'Models/user.dart';
+import 'buyCR.dart';
 import 'dialogs.dart';
 import 'loading.dart';
 
@@ -154,7 +155,7 @@ class _InferenceViewState extends State<InferenceView> {
                   return RaisedButton(
                     onPressed: () {
                       //mejorar cuenta
-                      showDialog(context: context, builder: (_) => upgradeDialog(context));
+                      showDialog(context: context, builder: (_) => upgradeDialog(context, user.uid));
                     },
                     child: Text(AppLocalizations.of(context).translate('start_btn')),
                   );
@@ -290,6 +291,16 @@ class _InferenceViewState extends State<InferenceView> {
                             Text(
                               AppLocalizations.of(context).translate('sell_text'),
                               textAlign: TextAlign.justify,
+                            ),
+                            FlatButton(
+                              onPressed: () {
+                                Navigator.push(context, MaterialPageRoute(builder: (context) {return BuyCR(userUID: user.uid,);}));
+                              },
+                              child: Text(
+                                AppLocalizations.of(context).translate('buy_CR'),
+                                style: TextStyle(color: Colors.blueAccent),
+                                textAlign: TextAlign.justify,
+                              ),
                             ),
                           ],
                         ),

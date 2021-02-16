@@ -31,7 +31,7 @@
     "confirmation_title": "Confirmación",
     "msg_image_saved": "Guardado",
     "pre_process_warning": "Si la app falla después de oprimir el botón de inicio, significa que tu imagen es demasiado grande como para ser procesada en tu sipositivo. Intenta de nuevo con una imagen más pequeña o intenta procesar en web en lugar de local",
-    "pre_process_warning2": "Tu imagen esta por ser procesada en un servidor, los anuncios solo aparecen cuando elijas la opción de procesar en servidor para ayudarme a mantener el servicio. Puedes remover los anuncios mejorando tu cuenta desde la web app.",
+    "pre_process_warning2": "Tu imagen esta por ser procesada en un servidor, los anuncios solo aparecen cuando elijas la opción de procesar en servidor para ayudarme a mantener el servicio. Puedes remover los anuncios comprando CR.",
     "loading_dialog": "La app esta trabajando... esto puede tomar un rato pero esta bien mientras no se cierre.",
     "about": "Acerca de",
     "tip": "Dona",
@@ -103,6 +103,13 @@
     "next": "Siguiente",
     "free_images_downloaded": "Imágenes gratis descargadas este mes:",
 
-    "sell_text":"El CR te permite procesar y descargar imágenes una vez alcances el límite mensual. Mientras tengas CR, no verás anuncios. Compra CR mediante la Web App (app.exusai.com)"
+    "sell_text":"El CR te permite procesar y descargar imágenes una vez alcances el límite mensual. Mientras tengas CR, no verás anuncios.",
+    "buy_CR": "Compra CR",
+
+    "purchase_cr": "Compra CR",
+    "not_available": "No Disponible",
+    "you_have": "Tienes ",
+    "success":"Éxito",
+    "cr_added": "CR añadido a tu cuenta. También puedes usar el CR con otros servicios como Remover Fondos de imágenes en la Web App."
 
 }

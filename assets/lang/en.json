@@ -31,7 +31,7 @@
     "confirmation_title": "Confirmation",
     "msg_image_saved": "Saved",
     "pre_process_warning": "If app crashes after touching the start button, you image may be to large to be processed in your device. Try again with a smaller image or try processing on web inestead of local",
-    "pre_process_warning2": "Your image is about to be processed online, ads are only shown when you chose to process your image online, in order to help me keep the server running. You can remove the ads by upgrading yout account from the web app.",
+    "pre_process_warning2": "Your image is about to be processed online, ads are only shown when you chose to process your image online, in order to help me keep the server running. You can remove the ads by buying processing credits (CR).",
     "loading_dialog": "The app is working... this may take a while but it's ok as long as it doesn't crashes and closes.",
     "about": "About",
     "tip": "Tip",
@@ -104,5 +104,13 @@
     "next": "Next",
     "free_images_downloaded": "Free images downloaded this month:",
 
-    "sell_text":"CR allows you to process and download more images once you have reached the monthly limit. While you have CR, you wont see any ads. Buy CR through the Web App (app.exusai.com)"
+    "sell_text":"CR allows you to process and download more images once you have reached the monthly limit. While you have CR, you wont see any ads.",
+    
+    "buy_CR": "Buy CR",
+
+    "purchase_cr": "Purchase CR",
+    "not_available": "Not Available",
+    "you_have": "You have ",
+    "success":"Success",
+    "cr_added": "CR added to your account. You can also use CR with other services like Image Background Remover through the Web APP."
 }

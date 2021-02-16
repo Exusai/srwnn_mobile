@@ -293,7 +293,7 @@ class _MyHomePageState extends State<MyHomePage> {
               !user.isAnon ? PopupMenuItem<Options>(
                 value: Options.cr,
                 child: ListTile(
-                  title: Text('Buy CR'), //TODO: tl
+                  title: Text(AppLocalizations.of(context).translate('buy_CR')),
                   leading: Icon(Icons.add_circle)
                 ),
               ) : null,

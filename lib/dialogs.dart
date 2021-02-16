@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:srwnn_mobile/authViews/auth.dart';
+import 'package:srwnn_mobile/buyCR.dart';
 import 'Controllers/app_localizations.dart';
 import 'Controllers/urlLauncher.dart';
 
@@ -189,7 +190,7 @@ AlertDialog logToDownload(context) {
   );
 }
 
-AlertDialog upgradeDialog(context) {
+AlertDialog upgradeDialog(context, String uid) {
   return AlertDialog(
     title: Text(AppLocalizations.of(context).translate('limit_reached')),
     content: SingleChildScrollView(
@@ -209,8 +210,7 @@ AlertDialog upgradeDialog(context) {
 
       RaisedButton(
         onPressed: () async {
-          //Navigator.push(context, MaterialPageRoute(builder: (context) => SubscriptionPage()),);
-          await launchURL('https://app.exusai.com/#/auth');
+          Navigator.push(context, MaterialPageRoute(builder: (context) {return BuyCR(userUID: uid,);}));
         },
         padding: EdgeInsets.symmetric(horizontal: 40),
         child: Text(AppLocalizations.of(context).translate('admin_sub')),
