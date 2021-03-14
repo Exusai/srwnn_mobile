@@ -79,11 +79,24 @@ class _MyAppState extends State<MyApp> {
         brightness: Brightness.dark,
         primaryColor: Colors.blue[900],
         accentColor: Colors.pinkAccent,
-        buttonTheme: ButtonThemeData(
-          buttonColor: Colors.pinkAccent,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24),),
-          padding: EdgeInsets.symmetric(horizontal: 40),  
-          //textTheme: ButtonTextTheme.accent,
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            primary: Colors.pinkAccent,
+            enableFeedback: true,
+            textStyle: TextStyle(
+              fontFamily: 'Roboto',
+              fontWeight: FontWeight.w300,
+            )
+          ),  
+        ),
+        textButtonTheme: TextButtonThemeData(
+          style: TextButton.styleFrom(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            textStyle: TextStyle(
+              fontFamily: 'Roboto',
+              fontWeight: FontWeight.w300,
+            )
+          )
         ),
         sliderTheme: SliderThemeData(          
           activeTrackColor: Colors.blue[700],
