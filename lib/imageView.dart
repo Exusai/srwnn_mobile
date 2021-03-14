@@ -143,7 +143,7 @@ AlertDialog imageSaved(context) {
   return AlertDialog(
     title: Text(AppLocalizations.of(context).translate('msg_image_saved')),
     actions: [
-      FlatButton(
+      TextButton(
         onPressed: () {
           Navigator.pop(context);
           //Navigator.pop(context);

@@ -37,6 +37,7 @@ class SRWGenerator {
     TensorBuffer reShapeImgBuffer = TensorBuffer.createFrom(tensorImage.getTensorBuffer(), TfLiteType.float32);
     //print(reShapeImgBuffer.shape); 
     //reshapes img buffer to [1,m,n,3]
+    // ignore: invalid_use_of_protected_member
     reShapeImgBuffer.resize([1, tensorImage.height.toInt(), tensorImage.width.toInt(), 3]);
     //print(reShapeImgBuffer.shape);
 
@@ -63,6 +64,7 @@ class SRWGenerator {
     //print(probabilityBuffer.buffer.asFloat32List());
 
     //prepares image from tensor
+    // ignore: invalid_use_of_protected_member
     probabilityBuffer.resize([tensorImage.height.toInt()*2, tensorImage.width.toInt()*2, 3]);
     //print('out after re');
     //print(probabilityBuffer.shape);
