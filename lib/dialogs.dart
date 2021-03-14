@@ -17,7 +17,7 @@ AlertDialog aboutDialog(context) {
       ),
     ),
     actions: [
-      FlatButton(
+      TextButton(
         onPressed: () {
           Navigator.pop(context);
         },
@@ -38,13 +38,13 @@ AlertDialog faqDialog(context) {
       ),
     ),
     actions: [
-      FlatButton(
+      TextButton(
         onPressed: () {
           Navigator.pop(context);
         },
         child: Text('Ok'),
       ),
-      RaisedButton(
+      ElevatedButton(
         child: Text('Web App'),
         onPressed: () async {
           await launchURL('https://app.exusai.com/');
@@ -70,7 +70,7 @@ AlertDialog serverErrorDialog(context) {
       ),
     ),
     actions: [
-      FlatButton(
+      TextButton(
         onPressed: () {
           Navigator.pop(context);
         },
@@ -91,7 +91,7 @@ AlertDialog imageErrorDialog(context) {
       ),
     ),
     actions: [
-      FlatButton(
+      TextButton(
         onPressed: () {
           Navigator.pop(context);
         },
@@ -112,7 +112,7 @@ AlertDialog alocationErrorDialog(context) {
       ),
     ),
     actions: [
-      FlatButton(
+      TextButton(
         onPressed: () {
           Navigator.pop(context);
         },
@@ -133,7 +133,7 @@ AlertDialog unknownErrorDialog(context) {
       ),
     ),
     actions: [
-      FlatButton(
+      TextButton(
         onPressed: () {
           Navigator.pop(context);
         },
@@ -154,7 +154,7 @@ AlertDialog resetPasswordDialog(context, correo) {
       ),
     ),
     actions: [
-      FlatButton(
+      TextButton(
         onPressed: () {
           Navigator.pop(context);
         },
@@ -168,7 +168,7 @@ AlertDialog logToDownload(context) {
   return AlertDialog(
     title: Text(AppLocalizations.of(context).translate('log_to_dl')),
     actions: [
-      FlatButton(
+      TextButton(
         onPressed: () {
           Navigator.pop(context);
           //Navigator.pop(context);
@@ -178,9 +178,9 @@ AlertDialog logToDownload(context) {
         ),
       ),
 
-      RaisedButton(
+      ElevatedButton(
         child: Text('Register/Login'),
-        padding: EdgeInsets.symmetric(horizontal: 40),
+        //padding: EdgeInsets.symmetric(horizontal: 40),
         onPressed: () {
           Navigator.pop(context);
           Navigator.push(context, MaterialPageRoute(builder: (context) {return Auth();}));
@@ -201,18 +201,18 @@ AlertDialog upgradeDialog(context, String uid) {
       ),
     ),
     actions: [
-      FlatButton(
+      TextButton(
         onPressed: () {
           Navigator.pop(context);
         },
         child: Text(AppLocalizations.of(context).translate('return')),
       ),
 
-      RaisedButton(
+      ElevatedButton(
         onPressed: () async {
           Navigator.push(context, MaterialPageRoute(builder: (context) {return BuyCR(userUID: uid,);}));
         },
-        padding: EdgeInsets.symmetric(horizontal: 40),
+        //padding: EdgeInsets.symmetric(horizontal: 40),
         child: Text(AppLocalizations.of(context).translate('admin_sub')),
       )
     ],

@@ -33,6 +33,7 @@ void main() async {
           create: (_) => AuthService(),
         ),
         StreamProvider(
+          initialData: null,
           create: (context) => context.read<AuthService>().user,
         ),
       ],
@@ -181,7 +182,7 @@ class _MyHomePageState extends State<MyHomePage> {
     final user = Provider.of<Usuario>(context) ?? Usuario(uid: '', isAnon: true);
     
     Widget selectImageButton(bool showAds) {
-      return RaisedButton(
+      return ElevatedButton(
         onPressed: () async {
           //print("getting image");
           await getImage();

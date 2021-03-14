@@ -27,7 +27,7 @@ dependencies:
   flutter_launcher_icons: ^0.7.5
   #blobs: ^1.2.0
   carousel_slider: ^2.3.1
-  provider: ^4.3.2+2
+  provider: ^5.0.0
   firebase_auth: ^0.20.0+1
   cloud_firestore: ^0.16.0
   firebase_core: ^0.7.0
@@ -42,8 +42,8 @@ dev_dependencies:
     sdk: flutter
 
 # Será necesario quitar esta wea cuando flutter localization y firebase auth sean compatibles
-#dependency_overrides:
-  #intl: ^0.17.0-nullsafety.2
+dependency_overrides:
+  intl: ^0.17.0-nullsafety.2
 
 flutter_icons:
   ios: true

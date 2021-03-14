@@ -123,9 +123,9 @@ class _BuyCRState extends State<BuyCR> {
                   Text(prod.title.split('(ExusAI Super Resolution').first, style: TextStyle(fontWeight: FontWeight.w600, fontSize: 25)),
                   Text(prod.description, textAlign: TextAlign.center,),
                   //Text(prod.price, style: TextStyle(color: Colors.blueAccent, /* fontSize: 60 */)),
-                  RaisedButton(
+                  ElevatedButton(
                     child: Text(prod.price),
-                    color: Colors.blue,
+                    //color: Colors.blue,
                     onPressed: () {
                       setState(() {
                         itemSelected = prod.id;
@@ -204,7 +204,7 @@ class _BuyCRState extends State<BuyCR> {
         },
       ),
       actions: [
-        RaisedButton(
+        ElevatedButton(
           onPressed: () async {
             //await DatabaseService(uid: widget.userUID).addCR(_credits);
             //print('CR pressed');

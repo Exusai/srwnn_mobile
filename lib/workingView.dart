@@ -152,7 +152,7 @@ class _InferenceViewState extends State<InferenceView> {
                 ///
                 if (downloads >= 10) {
                   //no puede procesar btn
-                  return RaisedButton(
+                  return ElevatedButton(
                     onPressed: () {
                       //mejorar cuenta
                       showDialog(context: context, builder: (_) => upgradeDialog(context, user.uid));
@@ -293,7 +293,7 @@ class _InferenceViewState extends State<InferenceView> {
                               AppLocalizations.of(context).translate('sell_text'),
                               textAlign: TextAlign.justify,
                             ),
-                            FlatButton(
+                            TextButton(
                               onPressed: () {
                                 Navigator.push(context, MaterialPageRoute(builder: (context) {return BuyCR(userUID: user.uid,);}));
                               },
