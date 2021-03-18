@@ -1,7 +1,7 @@
 name: srwnn_mobile
 description: A new Flutter project.
 
-version: 2.1.0+14
+version: 2.1.0+15
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
