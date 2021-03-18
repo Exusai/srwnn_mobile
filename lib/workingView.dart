@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:firebase_admob/firebase_admob.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:srwnn_mobile/MAXDLS.dart';
 import 'package:srwnn_mobile/imageView.dart';
 import 'package:srwnn_mobile/main.dart';
 import 'package:tflite_flutter_helper/tflite_flutter_helper.dart';
@@ -150,7 +151,7 @@ class _InferenceViewState extends State<InferenceView> {
                 ///
                 /// Cambiar a 20 downloads
                 ///
-                if (downloads >= 10) {
+                if (downloads >= MAXDLS) {
                   //no puede procesar btn
                   return ElevatedButton(
                     onPressed: () {
@@ -248,8 +249,8 @@ class _InferenceViewState extends State<InferenceView> {
                     initialData: 0,
                     builder: (context, snapshot2) {
                       int downloads = snapshot2.data ?? 0;
-                      if (downloads >10){
-                        downloads = 10;
+                      if (downloads > MAXDLS){
+                        downloads = MAXDLS;
                       }
                       return Padding(
                         padding: EdgeInsets.symmetric(horizontal: 20),
@@ -283,7 +284,7 @@ class _InferenceViewState extends State<InferenceView> {
                                   style: TextStyle(fontSize: 15),
                                 ),
                                 Text(
-                                  '/10',
+                                  '/' + MAXDLS.toString(),
                                   style: TextStyle(fontSize: 15),
                                 ),
                               ],
