@@ -6,9 +6,11 @@ import 'package:provider/provider.dart';
 import 'package:srwnn_mobile/Models/user.dart';
 import 'package:srwnn_mobile/dialogs.dart';
 import 'package:srwnn_mobile/main.dart';
-import 'package:tflite_flutter_helper/tflite_flutter_helper.dart';
+//import 'package:tflite_flutter_helper/tflite_flutter_helper.dart';
 import 'Controllers/app_localizations.dart';
 import 'Controllers/databaseService.dart';
+import 'package:image_size_getter/image_size_getter.dart' as GetImgSize;
+import 'package:image_size_getter/file_input.dart';
 
 class ImageView extends StatefulWidget {
   final File image;
@@ -38,7 +40,10 @@ class _ImageViewState extends State<ImageView> with SingleTickerProviderStateMix
 
   @override
   Widget build(BuildContext context) {
-    TensorImage imgProp = TensorImage.fromFile(widget.orgImage);
+    //TensorImage imgProp = TensorImage.fromFile(widget.orgImage);
+    final imageSize = GetImgSize.ImageSizeGetter.getSize(FileInput(widget.orgImage));
+    final double width = imageSize.width.toDouble();
+    final double height = imageSize.height.toDouble();
     final user = Provider.of<Usuario>(context) ?? Usuario(uid: '', isAnon: true);
 
     return Scaffold(
@@ -71,16 +76,16 @@ class _ImageViewState extends State<ImageView> with SingleTickerProviderStateMix
               minScale: PhotoViewComputedScale.contained * 0.8,
               initialScale: PhotoViewComputedScale.covered,
               enableRotation: true,
-              childSize:  Size(imgProp.width.toDouble(),imgProp.height.toDouble()),
+              childSize:  Size(width, height),
               child: Container(
                 child: Stack(
                   children: [
                     Container(
-                      height: imgProp.height.toDouble(),
-                      width: imgProp.width.toDouble(),
+                      height: imageSize.height.toDouble(),
+                      width: imageSize.width.toDouble(),
                       child: Image.file(
                         widget.orgImage,
-                        height: imgProp.height.toDouble(),
+                        height: imageSize.height.toDouble(),
                         alignment: Alignment.topLeft,
                         fit: BoxFit.fitHeight,
                       ),
@@ -90,12 +95,12 @@ class _ImageViewState extends State<ImageView> with SingleTickerProviderStateMix
                       builder: (_, child) {
                         return AnimatedContainer(
                           duration: Duration(microseconds: 1),
-                          height: imgProp.height.toDouble(),
-                          width: imgProp.width.toDouble() * controller.value,
+                          height: imageSize.height.toDouble(),
+                          width: imageSize.width.toDouble() * controller.value,
                           decoration: BoxDecoration(
                             border: Border(
                               right: BorderSide(
-                                width: imgProp.width.toDouble()*0.005,
+                                width: imageSize.width.toDouble()*0.005,
                                 color: Colors.black
                                 
                               ),

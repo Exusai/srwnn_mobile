@@ -1,9 +1,6 @@
-//import 'dart:html';
-
-import 'package:firebase_admob/firebase_admob.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-
 import 'Controllers/adds.dart';
 import 'Controllers/app_localizations.dart';
 
@@ -16,32 +13,33 @@ class Loading extends StatefulWidget {
 }
 
 class _LoadingState extends State<Loading> {
-
   InterstitialAd _interstitialAd;
   bool isInstertitialReady = false;
 
   @override
   void initState(){
     super.initState();
-
     if (widget.dispMesage == false){
       //FirebaseAdMob.instance.initialize(appId: Adds.appID);
       _interstitialAd = InterstitialAd(
-        adUnitId: Adds.loading,
-        listener: (MobileAdEvent event){
-          switch (event) {
-            case MobileAdEvent.loaded:
-              isInstertitialReady = true;
-              break;
-            case MobileAdEvent.failedToLoad:
-              isInstertitialReady = false;
-              break;
-            case MobileAdEvent.closed:
-              break;
-            default: 
-              break;
-          }
-        }
+        //adUnitId: Adds.loading,
+        adUnitId: InterstitialAd.testAdUnitId,
+        request: AdRequest(),
+        listener: AdListener(
+          onAdLoaded: (Ad ad){
+            // Ad is now ready to show at any time.
+            print("intersticial cargado");
+            isInstertitialReady = true;
+          },
+          onAdFailedToLoad: (Ad ad, LoadAdError error) {
+            print(error);
+            ad.dispose();
+            isInstertitialReady = false;
+          },
+          onAdClosed: (Ad ad) {
+            ad.dispose();
+          },
+        ),
       );
       if (isInstertitialReady = true){
         _loadInterstitial();
@@ -53,7 +51,7 @@ class _LoadingState extends State<Loading> {
   void dispose(){
     super.dispose();
     if (widget.dispMesage == false){
-      _interstitialAd.dispose();
+      _interstitialAd?.dispose();
     }
     
   }  
@@ -88,8 +86,10 @@ class _LoadingState extends State<Loading> {
       ),
     );
   }
-  _loadInterstitial(){
-    _interstitialAd..load()..show();
+  _loadInterstitial() async {
+    //_interstitialAd..load()..show();
+    await _interstitialAd.load();
+    _interstitialAd.show();
   }
 }
 

@@ -1,4 +1,4 @@
-import 'package:firebase_admob/firebase_admob.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +11,6 @@ import 'package:srwnn_mobile/buyCR.dart';
 import 'package:srwnn_mobile/dialogs.dart';
 import 'package:srwnn_mobile/workingView.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-
 import 'Controllers/ModelConfigs.dart';
 import 'Controllers/ModelSelector.dart';
 import 'Controllers/adds.dart';
@@ -26,6 +25,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   InAppPurchaseConnection.enablePendingPurchases();
+  MobileAds.instance.initialize();
+
   runApp(
     MultiProvider(
       providers: [
@@ -63,7 +64,8 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState(){
     super.initState();
-    FirebaseAdMob.instance.initialize(appId: Adds.appID);
+    //FirebaseAdMob.instance.initialize(appId: Adds.appID);
+    
   }
   
   @override
@@ -460,7 +462,8 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             SizedBox(height: 10,),
 
-            Row(
+            // Disable execution on local
+            /* Row(
               children: [
                 Spacer(),
                 Column(
@@ -489,7 +492,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 Spacer(), 
               ],
-            ),
+            ), */
 
             Text(
               AppLocalizations.of(context).translate(message),

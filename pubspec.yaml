@@ -1,7 +1,7 @@
 name: srwnn_mobile
 description: A new Flutter project.
 
-version: 2.1.0+15
+version: 2.1.0+16
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
@@ -12,38 +12,40 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   #image_picker: ^0.6.7+7
-  file_picker: ^2.1.5
-  image: ^2.1.19
-  tflite_flutter: ^0.5.0
-  tflite_flutter_helper: ^0.1.2
-  photo_view: ^0.10.3
-  path_provider: ^1.6.27
-  cupertino_icons: ^0.1.3
-  gallery_saver: ^2.0.3
-  flutter_spinkit: ^4.1.2
-  url_launcher: ^5.7.10
-  dio: ^3.0.10
-  firebase_admob: ^0.11.0+1
-  flutter_launcher_icons: ^0.7.5
+  file_picker: ^3.0.1
+  image: ^3.0.2
+  #tflite_flutter: ^0.5.0 # No ha actualizado a null-safety 
+  #tflite_flutter_helper: ^0.1.2 # No ha actualizado a null-safety 
+  photo_view: ^0.11.1
+  path_provider: ^2.0.1
+  cupertino_icons: ^1.0.2
+  gallery_saver: ^2.1.0
+  flutter_spinkit: ^5.0.0
+  url_launcher: ^6.0.3
+  dio: ^4.0.0
+  #firebase_admob: ^0.11.0+1 #Ya esta deprecated
+  google_mobile_ads: ^0.12.1+1
+  flutter_launcher_icons: ^0.9.0
   #blobs: ^1.2.0
-  carousel_slider: ^2.3.1
+  #carousel_slider: ^2.3.1
   provider: ^5.0.0
-  firebase_auth: ^0.20.0+1
-  cloud_firestore: ^0.16.0
-  firebase_core: ^0.7.0
-  firebase_storage: ^7.0.0
-  flutter_signin_button: ^1.1.0
-  google_sign_in: ^4.5.9
-  in_app_purchase: ^0.3.5+1
+  firebase_auth: ^1.1.1
+  cloud_firestore: ^1.0.6
+  firebase_core: ^1.0.4
+  firebase_storage: ^8.0.4
+  flutter_signin_button: ^2.0.0
+  google_sign_in: ^5.0.2
+  in_app_purchase: ^0.5.2
+  image_size_getter: ^1.0.0
 
 dev_dependencies:
-  #flutter_launcher_icons: "^0.7.3"
+  #flutter_launcher_icons: "^0.9.3"
   flutter_test:
     sdk: flutter
 
 # Será necesario quitar esta wea cuando flutter localization y firebase auth sean compatibles
-dependency_overrides:
-  intl: ^0.17.0-nullsafety.2
+#dependency_overrides:
+  #intl: ^0.17.0-nullsafety.2
 
 flutter_icons:
   ios: true
@@ -59,7 +61,7 @@ flutter:
     #- assets/images/test.jpg
     - assets/
     - assets/models/srwnn.tflite
-    - assets/models/
+    #- assets/models/
     - assets/images/test.png
     - assets/images/modelExamples/
     - assets/lang/en.json
