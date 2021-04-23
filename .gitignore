@@ -54,3 +54,4 @@ lib/authViews/register.dart
 lib/authViews/enter.dart
 lib/Qliphort.dart
 lib/MAXDLS.dart
+lib/Models/bgRemove.dart

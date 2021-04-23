@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:typed_data';
 import 'package:dio/dio.dart';
-
 import 'dart:io';
 import 'dart:async';
 import 'package:image/image.dart' as image2;
@@ -66,7 +65,7 @@ class SRWGeneratorOnline {
     var imgPath = await getTemporaryDirectory();
 
     //print(image.path);
-    File twoXimage = new File('${imgPath.path}/resizedImg.png')..writeAsBytesSync(image2.encodePng(output)); 
+    File twoXimage = new File('${imgPath.path}/2xImage.png')..writeAsBytesSync(image2.encodePng(output)); 
     //print(twoXimage.path);
     
     return twoXimage;

@@ -9,6 +9,7 @@ import 'package:srwnn_mobile/Controllers/databaseService.dart';
 import 'package:srwnn_mobile/Controllers/urlLauncher.dart';
 import 'package:srwnn_mobile/buyCR.dart';
 import 'package:srwnn_mobile/dialogs.dart';
+import 'package:srwnn_mobile/removeBG.dart';
 import 'package:srwnn_mobile/workingView.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'Controllers/ModelConfigs.dart';
@@ -20,6 +21,7 @@ import 'Models/subscriptionData.dart';
 import 'Models/user.dart';
 import 'authViews/auth.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -192,6 +194,9 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
+  int _page = 0;
+  GlobalKey _bottomNavigationKey = GlobalKey();
+
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<Usuario>(context) ?? Usuario(uid: '', isAnon: true);
@@ -224,6 +229,8 @@ class _MyHomePageState extends State<MyHomePage> {
       );
     }
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      extendBody: true,
       appBar: AppBar(
         title: Text('ExusAI Super Resolution'),
         centerTitle: false,
@@ -332,12 +339,30 @@ class _MyHomePageState extends State<MyHomePage> {
 
         ],
       ),
-      body: Container(
+      
+      
+      bottomNavigationBar: CurvedNavigationBar(
+        backgroundColor: Colors.transparent,
+        color: Color.fromARGB(255, 32, 32, 32),
+        height: 50,
+        items: <Widget>[
+          Icon(Icons.select_all_outlined, size: 30),
+          Icon(Icons.image_outlined, size: 30),
+          Icon(Icons.image_aspect_ratio, size: 30),
+        ],
+        onTap: (index) {
+          setState(() {
+            _page = index;
+          });
+        },
+      ),
+
+      body: _page == 0 ? Container(
         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 0),
         child: ListView(
           //mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            SizedBox(height: 20,),
+            SizedBox(height: 10,),
             Container(
               decoration: BoxDecoration(color: Colors.black.withOpacity(0.60)),
               child: Column(
@@ -519,9 +544,20 @@ class _MyHomePageState extends State<MyHomePage> {
             SizedBox(height: 5,),
           ],
         ),
-      ),
+      ) : _page == 1 ? Container(
+        child: Center(
+          //child: Text("REMOVEBG"),
+          child: ListView(
+            children: [
+              BackgroundRemover(),
+            ],
+          ),
+        ),
+      ) : Center(child: Text("Soon/Pronto"),),
 
     );
   }
+  
+
   
 }

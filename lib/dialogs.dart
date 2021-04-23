@@ -218,3 +218,19 @@ AlertDialog upgradeDialog(context, String uid) {
     ],
   );
 }
+
+AlertDialog imageSaved(context) {
+  return AlertDialog(
+    title: Text(AppLocalizations.of(context).translate('msg_image_saved')),
+    actions: [
+      TextButton(
+        onPressed: () {
+          Navigator.pop(context);
+          //Navigator.pop(context);
+          //Navigator.pop(context);
+        },
+        child: Text('Ok'),
+      ),
+    ],
+  );
+}
