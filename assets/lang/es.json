@@ -110,6 +110,33 @@
     "not_available": "No Disponible",
     "you_have": "Tienes ",
     "success":"Éxito",
-    "cr_added": "CR añadido a tu cuenta. También puedes usar el CR con otros servicios como Remover Fondos de imágenes en la Web App."
+    "cr_added": "CR añadido a tu cuenta. También puedes usar el CR con otros servicios como Remover Fondos de imágenes en la Web App.",
+
+    "settings": "Ajustes",
+    "fast_processing": "Procesamiento rápido (Para imágenes grandes)",
+    "adjust_parameters_to_get_desired_result": "Ajusta los parametros y obten un mejor resultado. No disponible con procesamiento rápido.",
+
+    "not_image_yet": "Aún no hay imagen",
+    "remove_imageBG": "Remover fondos de imágenes",
+    "original_image" : "Imagen Original",
+    "processed_image": "Imagen Procesada",
+    "select_image": "Seleccionar imagen",
+    "process": "Procesar",
+    "download_image": "Descargar imagen",
+    "threshold": "Límite",
+    "blur": "Desefoque del filtro",
+    "model": "Modelo",
+    "noise_level": "Nivel de ruido",
+    "style": "Estilo",
+    "blur_level": "Nivel de desenfoque",
+    "input_image": "Imagen de entrada",
+    "output_image": "Imagen de salida",
+    "configuration": "Configuración",
+    "select_image_msg": "Elija una imagen",
+    "filename": "Nombre del archivo",
+    "size": "Tamaño:",
+    "dimentions": "Dimensiones:",
+    "out_dim": "Dimensión de salida estimada:",
+    "big_image_warning": "Imágenes grandes tardarán más en ser procesadas y podrían fallar. El servidor intetará reducir el tamaño de esta primero para evitar errores."
 
 }

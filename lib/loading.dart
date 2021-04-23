@@ -22,14 +22,15 @@ class _LoadingState extends State<Loading> {
     if (widget.dispMesage == false){
       //FirebaseAdMob.instance.initialize(appId: Adds.appID);
       _interstitialAd = InterstitialAd(
-        //adUnitId: Adds.loading,
-        adUnitId: InterstitialAd.testAdUnitId,
+        adUnitId: Adds.loading,
+        //adUnitId: InterstitialAd.testAdUnitId,
         request: AdRequest(),
         listener: AdListener(
           onAdLoaded: (Ad ad){
             // Ad is now ready to show at any time.
             print("intersticial cargado");
             isInstertitialReady = true;
+            _interstitialAd.show();
           },
           onAdFailedToLoad: (Ad ad, LoadAdError error) {
             print(error);
@@ -58,6 +59,7 @@ class _LoadingState extends State<Loading> {
 
   @override
   Widget build(BuildContext context) {
+    
     return Container(
       color: Color(0xffF2F2F2),
       child: Center(
@@ -86,10 +88,10 @@ class _LoadingState extends State<Loading> {
       ),
     );
   }
-  _loadInterstitial() async {
+  _loadInterstitial() {
     //_interstitialAd..load()..show();
-    await _interstitialAd.load();
-    _interstitialAd.show();
+    _interstitialAd.load();
+    //_interstitialAd.show();
   }
 }
 

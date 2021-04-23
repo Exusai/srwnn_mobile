@@ -14,6 +14,9 @@ import 'MAXDLS.dart';
 import 'package:srwnn_mobile/dialogs.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
+import 'Controllers/app_localizations.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'Controllers/adds.dart';
 
 class BackgroundRemover extends StatefulWidget {
   @override
@@ -21,21 +24,56 @@ class BackgroundRemover extends StatefulWidget {
 }
 
 class _BackgroundRemoverState extends State<BackgroundRemover> {
-
   double threshold = 0.5;
   int blur = 0;
-
   bool loading = false;
-
   File uploadedImage;
   Uint8List newImage;
   Uint8List postProcessed;
 
   String filename;
-
   String error = '';
 
+  bool showADS = false;
   bool fastProcess = true;
+
+  InterstitialAd _interstitialAd;
+  bool isInstertitialReady = false;
+  @override
+  void initState(){
+    super.initState();
+    //FirebaseAdMob.instance.initialize(appId: Adds.appID);
+    _interstitialAd = InterstitialAd(
+      adUnitId: Adds.loading,
+      //adUnitId: InterstitialAd.testAdUnitId,
+      request: AdRequest(),
+      listener: AdListener(
+        onAdLoaded: (Ad ad){
+          // Ad is now ready to show at any time.
+          print("intersticial cargado");
+          isInstertitialReady = true;
+          
+        },
+        onAdFailedToLoad: (Ad ad, LoadAdError error) {
+          print(error);
+          ad.dispose();
+          isInstertitialReady = false;
+        },
+        onAdClosed: (Ad ad) {
+          ad.dispose();
+          isInstertitialReady = false;
+        },
+      ),
+    );
+    _interstitialAd.load();
+    
+  }
+
+  @override
+  void dispose(){
+    super.dispose();
+    _interstitialAd?.dispose();
+  }
   
   @override
   Widget build(BuildContext context) {
@@ -48,11 +86,10 @@ class _BackgroundRemoverState extends State<BackgroundRemover> {
 
     Widget processButton = ElevatedButton(
       onPressed: uploadedImage == null ? null :  () async {
-        /* setState(() => loading = true);
-        newImage = await BGRemoverOnline.removeBG('0000', uploadedImage);
-        postProcessed = await BGRemoverOnline.postProcess([uploadedImage, newImage, blur, threshold]);
-        setState(() => loading = false); */
         setState(() => loading = true);
+        if (showADS || user.isAnon && isInstertitialReady){
+          _interstitialAd.show();
+        }
         if (fastProcess) {
           try {
             postProcessed = await BGRemoverOnline.removeBGFast('0000', uploadedImage.readAsBytesSync());
@@ -62,6 +99,7 @@ class _BackgroundRemoverState extends State<BackgroundRemover> {
           } on Error {
             setState(() => error = 'Server Error, try again later.'); 
           }
+          setState(() => loading = false);
         } else {
           try {
             newImage = await BGRemoverOnline.removeBG('0000', uploadedImage.readAsBytesSync());
@@ -73,9 +111,9 @@ class _BackgroundRemoverState extends State<BackgroundRemover> {
           }
           _postProcess();
         }
-        setState(() => loading = false);
+        
       },
-      child: Text("process")
+      child: Text(AppLocalizations.of(context).translate("process"))
     );
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -89,8 +127,7 @@ class _BackgroundRemoverState extends State<BackgroundRemover> {
             children: [
               Spacer(),
               Text(
-                'remove_imageBG',
-                //style: DefaultTextStyle.of(context).style.apply(fontSizeFactor: 1.5),
+                AppLocalizations.of(context).translate('remove_imageBG'),
                 style: TextStyle(fontWeight: FontWeight.w300, fontSize: 20)
               ),
               Spacer(),
@@ -105,51 +142,36 @@ class _BackgroundRemoverState extends State<BackgroundRemover> {
           child: Column(
             children: [
               Expanded(
-                //width: width/2,
-                //height: height3*.70-37,
                 child: loading ? Loading() : postProcessed != null? Image.memory(postProcessed) : uploadedImage != null? Image.file(uploadedImage) : CustomContainer(),
               ),
               SizedBox(height: 10,),
-              //Divider(),
-              Text('original_image'),
+              Text(
+                loading ? 'Loading' : postProcessed == null? AppLocalizations.of(context).translate('original_image') : AppLocalizations.of(context).translate('processed_image')
+              ),
               SizedBox(height: 10,),
             ],
           ),
         ),
         //---Botones, siliders y etc---//
         Container(
-          //height: height3/2,
           child: Column(
-            //mainAxisAlignment: MainAxisAlignment.center,
-            //crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               /////////SLiders
               Container(
-                //width: width/2,
                 child: IgnorePointer(
                   ignoring: fastProcess,
                   child: ExpansionTile(
-                    subtitle: Text('adjust_parameters_to_get_desired_result', style: TextStyle(color: fastProcess ? Colors.white.withAlpha(30) : Colors.white),),
-                    title: Text('settings', style: TextStyle(color: fastProcess ? Colors.white.withAlpha(30) : Colors.white)),
-                    //mainAxisAlignment: MainAxisAlignment.start,
-                    //expandedAlignment: MainAxisAlignment.start,
-                    initiallyExpanded: !fastProcess,
+                    subtitle: Text(AppLocalizations.of(context).translate('adjust_parameters_to_get_desired_result'), style: TextStyle(color: fastProcess ? Colors.white.withAlpha(30) : Colors.white),),
+                    title: Text(AppLocalizations.of(context).translate('settings'), style: TextStyle(color: fastProcess ? Colors.white.withAlpha(30) : Colors.white)),
+                    initiallyExpanded: false,
                     
                     children: [
-                      /* SizedBox(height: 5,),
-                      Text('Imagen Procesada'),
-                      Divider(),
-                      Text('Límite'), */
-                      //SizedBox(height: 5,),
-                      Text('threshold', style: TextStyle(color: fastProcess ? Colors.white.withAlpha(30) : Colors.white)),
+                      Text(AppLocalizations.of(context).translate('threshold'), style: TextStyle(color: fastProcess ? Colors.white.withAlpha(30) : Colors.white)),
                       Slider(
                         value: threshold,
                         onChanged: fastProcess ? null : (postProcessed == null  || newImage  == null) ? null : (double value){
                           setState(() => threshold = value);
                         },
-                        /* onChangeStart: (_) {
-                          setState(() => loading = true);
-                        }, */
                         onChangeEnd: (double value){
                           setState(() => loading = true);
                           _postProcess();
@@ -159,9 +181,7 @@ class _BackgroundRemoverState extends State<BackgroundRemover> {
                         divisions: 18,
                         label: threshold.toStringAsFixed(2),
                       ),
-                      //Divider(),
-                      Text('blur', style: TextStyle(color: fastProcess ? Colors.white.withAlpha(30) : Colors.white)),
-                      //SizedBox(height: 5,),
+                      Text(AppLocalizations.of(context).translate('blur'), style: TextStyle(color: fastProcess ? Colors.white.withAlpha(30) : Colors.white)),
                       Slider(
                         value: blur.toDouble(),
                         divisions: 20,
@@ -169,9 +189,6 @@ class _BackgroundRemoverState extends State<BackgroundRemover> {
                         onChanged: fastProcess ? null : (postProcessed == null  || newImage  == null) ? null : (double value){
                           setState(() => blur = value.toInt());
                         },
-                        /* onChangeStart: (_) {
-                          setState(() => loading = true);
-                        }, */
                         onChangeEnd: (_) async {
                           setState(() => loading = true);
                           _postProcess();
@@ -187,11 +204,8 @@ class _BackgroundRemoverState extends State<BackgroundRemover> {
               
               //BOTONEs
               Column(
-                //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                //crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Container(
-                    //width: width/2,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
@@ -203,18 +217,16 @@ class _BackgroundRemoverState extends State<BackgroundRemover> {
                             );
                             if(result != null) {
                               setState(() => error = '');
-                              setState(() {uploadedImage = File(result.files.single.path);});
+                              setState(() {uploadedImage = null; uploadedImage = File(result.files.single.path);});
                               
                               setState(() {postProcessed = null;});
                               setState(() {newImage = null;});
                               setState(() {filename = result.files.single.name;});
                             } else {
-                              // User canceled the picker
+
                             }
-                            //print('magen cargada');
-                            //print('magen cargada');
                           },
-                          child: Text('select_image'),
+                          child: Text(AppLocalizations.of(context).translate('select_image')),
                         ),
                         
                         ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -238,10 +250,11 @@ class _BackgroundRemoverState extends State<BackgroundRemover> {
                                       onPressed: uploadedImage == null ? null : () {
                                         showDialog(context: context, builder: (_) => upgradeDialog(context, user.uid));
                                       },
-                                      child: Text("process")
+                                      child: Text(AppLocalizations.of(context).translate("process"))
                                     );
                                   } else {
                                     //aún puede procesar btn
+                                    showADS = true;
                                     return processButton;
                                   }
                                 },
@@ -263,19 +276,14 @@ class _BackgroundRemoverState extends State<BackgroundRemover> {
                             if (user.isAnon == true) {
                               showDialog(context: context, builder: (_) => logToDownload(context));
                             } else {
-                              //ImageSaver.saveImage(postProcessed, 'noBG_' + filename.split('.').first + '.png');
                               var imgPath = await getTemporaryDirectory();
-
-                              //print(image.path);
                               File imageNoBG = new File('${imgPath.path}/noBGIMG.png')..writeAsBytesSync(postProcessed); 
-                              
                               GallerySaver.saveImage(imageNoBG.path, albumName: '2xImg');
-                              
                               await DatabaseService(uid: user.uid).processedImageCount();
                               showDialog(context: context, builder: (_) => imageSaved(context));
                             } 
                           },
-                          child: Text("download_image")
+                          child: Text(AppLocalizations.of(context).translate("download_image"))
                         ),
 
                         Text(error, style: TextStyle(color: Colors.orange[800]),)
@@ -288,7 +296,7 @@ class _BackgroundRemoverState extends State<BackgroundRemover> {
                       mainAxisSize: MainAxisSize.max, 
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Text('fast_processing'),
+                        Text(AppLocalizations.of(context).translate('fast_processing')),
                         FlutterSwitch(
                           value: fastProcess, 
                           height: 20.0,
@@ -310,14 +318,11 @@ class _BackgroundRemoverState extends State<BackgroundRemover> {
             ],
           ),
         ),
-
-        //Spacer(),
       ],
     );
   }
 
   void _postProcess() async {
-    //setState(() => postProcessed = null);
     postProcessed = await compute(postProcess, [uploadedImage.readAsBytesSync(), newImage, blur, threshold]);
     setState(() => loading = false);
   }
@@ -332,7 +337,7 @@ class CustomContainer extends StatelessWidget {
         decoration: BoxDecoration(
           border: Border.all(color: Colors.white, width: 3)
         ),
-        child: Center(child: Text('not_image_yet')),
+        child: Center(child: Text(AppLocalizations.of(context).translate('not_image_yet'))),
       ),
     );
   }
@@ -344,7 +349,6 @@ class Loading extends StatelessWidget {
     return Container(
       height: 150,
       width: 150,
-      //decoration: BoxDecoration(color: Colors.white),
       child: const SpinKitCubeGrid(
         color: Colors.white,
         size: 150.0,

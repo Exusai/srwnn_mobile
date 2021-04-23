@@ -54,8 +54,8 @@ class _InferenceViewState extends State<InferenceView> {
     if (selector.executionOnline == true && widget.showAds == true){
       //Admob.initialize(Adds.appID);
       _bannerAd = BannerAd(
-        //adUnitId: Adds.banner, 
-        adUnitId: BannerAd.testAdUnitId,
+        adUnitId: Adds.banner, 
+        //adUnitId: BannerAd.testAdUnitId,
         size: AdSize.banner,
         listener: AdListener(
           // Called when an ad is successfully received.

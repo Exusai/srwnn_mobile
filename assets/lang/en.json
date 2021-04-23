@@ -112,5 +112,33 @@
     "not_available": "Not Available",
     "you_have": "You have ",
     "success":"Success",
-    "cr_added": "CR added to your account. You can also use CR with other services like Image Background Remover through the Web APP."
+    "cr_added": "CR added to your account. You can also use CR with other services like Image Background Remover through the Web APP.",
+
+
+    "settings": "Settings",
+    "fast_processing": "Fast processing (Large images)",
+    "adjust_parameters_to_get_desired_result": "Adjust parameters and get a more accurate result. Not available with fast processing.",
+
+    "not_image_yet": "No image yet",
+    "remove_imageBG": "Remove backgrounds",
+    "original_image" : "Original Image",
+    "processed_image": "Processed Image",
+    "select_image": "Select image",
+    "process": "Process",
+    "download_image": "Download image",
+    "threshold": "Threshold",
+    "blur": "Filter blur",
+    "model": "Model",
+    "noise_level": "Noise level",
+    "style": "Style",
+    "blur_level": "Blur level",
+    "input_image": "Input image",
+    "output_image": "Output image",
+    "configuration": "Configuration",
+    "select_image_msg": "Please choose an image",
+    "filename": "Filename",
+    "size": "Size:",
+    "dimentions": "Dimentions:",    
+    "out_dim": "Expected output dimentions:",
+    "big_image_warning": "Big images will take longer to be processed and may fail. The server will try to reduce the image in order to avoid errors."
 }
