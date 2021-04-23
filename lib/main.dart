@@ -14,7 +14,6 @@ import 'package:srwnn_mobile/workingView.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'Controllers/ModelConfigs.dart';
 import 'Controllers/ModelSelector.dart';
-import 'Controllers/adds.dart';
 import 'Controllers/app_localizations.dart';
 import 'Controllers/authService.dart';
 import 'Models/subscriptionData.dart';
@@ -49,7 +48,7 @@ SRModelSelector selector = SRModelSelector();
 String message = 'msg_none';
 File image;
 enum Options {web, webApp, about, github, mail, login, faq, cr}
-
+bool qliOnline  = true;
 /*Future pickerGallery() async {
   final picker = ImagePicker();
   final pickedFile = await ImagePicker.getImage(source: ImageSource.gallery);
@@ -66,9 +65,11 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState(){
     super.initState();
+    
     //FirebaseAdMob.instance.initialize(appId: Adds.appID);
     
   }
+
   
   @override
   Widget build(BuildContext context) {
@@ -159,23 +160,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  //final picker = ImagePicker();
   final AuthService _authService = AuthService();
-  
-
-  /* Future getImage() async {
-    PickedFile pickedFile = await picker.getImage(source: ImageSource.gallery);
-    //imageCache.clear();
-    setState(() {
-      if (pickedFile != null){
-        image = File(pickedFile.path);
-      } else {
-        setState(() {
-          message = 'please_select_img';
-        });
-      }
-    });
-  } */
   Future  getImage() async {
     FilePickerResult result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
@@ -186,7 +171,6 @@ class _MyHomePageState extends State<MyHomePage> {
       //setState(() {filename = result.files.single.name;});
       //setState(() {fileSize = result.files.single.size;});
       //imgProp = image2.decodeImage(uploadedImage);
-      
     } else {
       setState(() {
         message = 'please_select_img';
@@ -195,7 +179,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   int _page = 0;
-  GlobalKey _bottomNavigationKey = GlobalKey();
+  //GlobalKey _bottomNavigationKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
@@ -232,7 +216,7 @@ class _MyHomePageState extends State<MyHomePage> {
       extendBodyBehindAppBar: true,
       extendBody: true,
       appBar: AppBar(
-        title: Text('ExusAI Super Resolution'),
+        title: Text(qliOnline ? 'ExusAI Super Resolution' : 'Server Under Mantainance'),
         centerTitle: false,
         actions: [
           new PopupMenuButton<Options>(
@@ -554,10 +538,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
       ) : Center(child: Text("Soon/Pronto"),),
-
     );
   }
-  
-
   
 }
