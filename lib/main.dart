@@ -7,6 +7,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:srwnn_mobile/Controllers/databaseService.dart';
 import 'package:srwnn_mobile/Controllers/urlLauncher.dart';
+import 'package:srwnn_mobile/NewUI/wrapper.dart';
 import 'package:srwnn_mobile/buyCR.dart';
 import 'package:srwnn_mobile/dialogs.dart';
 import 'package:srwnn_mobile/removeBG.dart';
@@ -49,12 +50,6 @@ String message = 'msg_none';
 File image;
 enum Options {web, webApp, about, github, mail, login, faq, cr}
 bool qliOnline  = true;
-/*Future pickerGallery() async {
-  final picker = ImagePicker();
-  final pickedFile = await ImagePicker.getImage(source: ImageSource.gallery);
-  File img = File(pickedFile.path);
-  image = img;
-}*/
 
 class MyApp extends StatefulWidget {
   @override
@@ -65,9 +60,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState(){
     super.initState();
-    
     //FirebaseAdMob.instance.initialize(appId: Adds.appID);
-    
   }
 
   
@@ -76,21 +69,18 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       title: 'ExusAI Super Resulution',
       theme: ThemeData(
-        //primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
-        //backgroundColor: Color(0xff303030),
-        //primaryColor: Colors.red[700],
-        //canvasColor: Color(CE0452),
+        backgroundColor: Color(0xff1A1A1A),
         brightness: Brightness.dark,
-        primaryColor: Colors.blue[900],
-        accentColor: Colors.pinkAccent,
+        primaryColor: Color(0xff242424),
+        accentColor: Color(0xff3187F5),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
-            primary: Colors.pinkAccent,
+            primary: Color(0xff3187F5),
             enableFeedback: true,
             textStyle: TextStyle(
               fontFamily: 'Roboto',
-              fontWeight: FontWeight.w300,
+              //fontWeight: FontWeight.w300,
             )
           ),  
         ),
@@ -161,7 +151,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final AuthService _authService = AuthService();
-  Future  getImage() async {
+  /* Future  getImage() async {
     FilePickerResult result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
       allowedExtensions: ['jpg', 'JPG', 'jpeg', 'JPEG', 'png', 'PNG',],
@@ -176,16 +166,16 @@ class _MyHomePageState extends State<MyHomePage> {
         message = 'please_select_img';
       });
     }
-  }
+  } */
 
-  int _page = 0;
+  //int _page = 0;
   //GlobalKey _bottomNavigationKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<Usuario>(context) ?? Usuario(uid: '', isAnon: true);
     
-    Widget selectImageButton(bool showAds) {
+    /* Widget selectImageButton(bool showAds) {
       return ElevatedButton(
         onPressed: () async {
           //print("getting image");
@@ -211,13 +201,20 @@ class _MyHomePageState extends State<MyHomePage> {
         },
         child: Text(AppLocalizations.of(context).translate('select_image_tr'),)
       );
-    }
+    } */
     return Scaffold(
       extendBodyBehindAppBar: true,
       extendBody: true,
       appBar: AppBar(
-        title: Text(qliOnline ? 'ExusAI Super Resolution' : 'Server Under Mantainance'),
+        title: Text(
+          qliOnline ? 'ExusAI' : 'Server Under Mantainance',
+          style: TextStyle(
+            fontWeight: FontWeight.w300,
+            fontSize: 28
+          ),
+        ),
         centerTitle: false,
+        elevation: 0,
         actions: [
           new PopupMenuButton<Options>(
             icon: Icon(Icons.more_horiz,),
@@ -324,8 +321,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
       
-      
-      bottomNavigationBar: CurvedNavigationBar(
+      /* bottomNavigationBar: CurvedNavigationBar(
         backgroundColor: Colors.transparent,
         color: Color.fromARGB(255, 32, 32, 32),
         height: 50,
@@ -339,9 +335,11 @@ class _MyHomePageState extends State<MyHomePage> {
             _page = index;
           });
         },
-      ),
+      ), */
 
-      body: _page == 0 ? Container(
+      body: Wrapper()
+
+      /* body: _page == 0 ? Container(
         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 0),
         child: ListView(
           //mainAxisAlignment: MainAxisAlignment.center,
@@ -537,7 +535,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ],
           ),
         ),
-      ) : Center(child: Text("Soon/Pronto"),),
+      ) : Center(child: Text("Soon/Pronto"),), */
     );
   }
   

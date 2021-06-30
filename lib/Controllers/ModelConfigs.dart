@@ -11,17 +11,17 @@ final Map<int, Widget> styles = <int, Widget>{
 };
 
 final Map<int, Widget> noise = <int, Widget>{
-  0: Text('0'),
-  1: Text('1'),
-  2: Text('2'),
-  3: Text('3'),
+  0: Text('    0    '),
+  1: Text('    1    '),
+  2: Text('    2    '),
+  3: Text('    3    '),
 };
 
 final Map<int, Widget> blur = <int, Widget>{
-  0: Text('0'),
-  1: Text('1'),
-  2: Text('2'),
-  3: Text('3'),
+  0: Text('    0    '),
+  1: Text('    1    '),
+  2: Text('    2    '),
+  3: Text('    3    '),
 };
 
 final Map<int, Widget> expand = <int, Widget>{
