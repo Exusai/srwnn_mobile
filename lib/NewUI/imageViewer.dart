@@ -1,14 +1,21 @@
+import 'dart:io';
 import 'dart:typed_data';
+import 'package:srwnn_mobile/Models/user.dart';
 import 'package:flutter/material.dart';
+import 'package:gallery_saver/gallery_saver.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:photo_view/photo_view.dart';
-import 'package:srwnn_mobile/removeBG.dart';
+import 'package:srwnn_mobile/Controllers/databaseService.dart';
+import '../dialogs.dart';
+import 'LoadingSmall.dart';
 
 class ImageViwer extends StatefulWidget {
   final Uint8List image;
   final Uint8List postProcessed;
   final String filename;
   final bool loading;
-  ImageViwer({this.image, this.postProcessed, this.filename, this.loading});
+  final Usuario user;
+  ImageViwer({this.image, this.postProcessed, this.filename, this.loading, this.user});
 
   @override
   _ImageViwerState createState() => _ImageViwerState();
@@ -42,13 +49,17 @@ class _ImageViwerState extends State<ImageViwer> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  IconButton(
+                  TextButton.icon(
+                    label: Text("Compare"),
+                    style: TextButton.styleFrom(
+                      primary: Colors.white
+                    ),
                     onPressed: widget.postProcessed != null ? () {
                       setState(() {
                         displayPostProcessed = !displayPostProcessed;
                       });
                     } : null, 
-                    icon: Icon(Icons.compare)
+                    icon: Icon(Icons.compare,)
                   ),
                   Flexible(
                     flex: 1,
@@ -71,8 +82,17 @@ class _ImageViwerState extends State<ImageViwer> {
                     ),
                   ),
                   IconButton(
-                    onPressed: widget.postProcessed != null ? () {
-                      // TODO: save
+                    onPressed: widget.postProcessed != null ? () async {
+                      if (widget.user.isAnon == true) {
+                        print("Show DIALOG");
+                        showDialog(context: context, builder: (_) => logToDownload(context));
+                      } else {
+                        var imgPath = await getTemporaryDirectory();
+                        File imageNoBG = new File('${imgPath.path}/noBGIMG.png')..writeAsBytesSync(widget.postProcessed); 
+                        GallerySaver.saveImage(imageNoBG.path, albumName: '2xImg');
+                        await DatabaseService(uid: widget.user.uid).processedImageCount();
+                        showDialog(context: context, builder: (_) => imageSaved(context));
+                      } 
                     } : null, 
                     icon: Icon(Icons.save_alt, color: widget.postProcessed != null ? Theme.of(context).accentColor : Colors.grey,),
                   ),

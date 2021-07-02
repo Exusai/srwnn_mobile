@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 import 'package:file_picker/file_picker.dart';
+//import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_switch/flutter_switch.dart';
@@ -8,9 +9,14 @@ import 'package:provider/provider.dart';
 import 'package:srwnn_mobile/Controllers/ModelConfigs.dart';
 import 'package:srwnn_mobile/Controllers/adds.dart';
 import 'package:srwnn_mobile/Controllers/app_localizations.dart';
+import 'package:srwnn_mobile/Controllers/databaseService.dart';
 import 'package:srwnn_mobile/Models/bgRemove.dart';
+import 'package:srwnn_mobile/Models/subscriptionData.dart';
 import 'package:srwnn_mobile/Models/user.dart';
 import 'package:srwnn_mobile/NewUI/imageViewer.dart';
+import 'package:srwnn_mobile/workingView.dart';
+import '../MAXDLS.dart';
+import '../dialogs.dart';
 import '../main.dart';
 import 'package:flutter/material.dart';
 import 'package:srwnn_mobile/NewUI/srwnnExampleView.dart';
@@ -108,10 +114,10 @@ class _WrapperState extends State<Wrapper> {
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<Usuario>(context) ?? Usuario(uid: '', isAnon: true);
-    double width = MediaQuery.of(context).size.width;
+    //double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
 
-    Widget processButton = ElevatedButton(
+    Widget processButtonBGR = ElevatedButton(
       onPressed: image == null ? null :  () async {
         setState(() => loading = true);
         if (showADS || user.isAnon && isInstertitialReady){
@@ -137,11 +143,14 @@ class _WrapperState extends State<Wrapper> {
             setState(() => error = 'Server Error, try again later.');  
           }
           _postProcess();
+          setState(() => loading = false);
         }
-        
       },
       child: Text(AppLocalizations.of(context).translate("process"))
     );
+
+    
+
     return ListView(
       children: [
         SizedBox(height: 10,),
@@ -157,6 +166,7 @@ class _WrapperState extends State<Wrapper> {
               postProcessed: postProcessed, 
               filename: filename, 
               loading: loading,
+              user: user
             ),
           ),
         ),
@@ -206,7 +216,10 @@ class _WrapperState extends State<Wrapper> {
                 Divider(),
                 Container(
                   alignment: Alignment.center,
-                  child: controllers(processButton),
+                  child: controllers(
+                    checkCreddits(user, processButtonBGR),
+                    user,
+                  ),
                 )
               ],
             ),
@@ -219,7 +232,7 @@ class _WrapperState extends State<Wrapper> {
     );
   }
 
-  Widget controllers(processBtn){
+  Widget controllers(processBtn, user){
     /// 
     /// Super Resolution Controls
     /// 
@@ -291,12 +304,7 @@ class _WrapperState extends State<Wrapper> {
           SizedBox(height: 10,),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 80),
-            child: ElevatedButton(
-              onPressed: image != null ? (){
-                
-              } : null, 
-              child: Text(AppLocalizations.of(context).translate('process'),)
-            ),
+            child: checkCredditsSR(user),
           ),
           SizedBox(height: 10,),
         ],
@@ -388,12 +396,70 @@ class _WrapperState extends State<Wrapper> {
     }
   }
 
+  Widget selectImageButton(bool showAds){
+    return ElevatedButton(
+      onPressed: image != null ? () async {
+        Navigator.push(context,MaterialPageRoute(builder: (context) => new InferenceView(image: image, modelPath: selector.getModelPath(), showAds: showAds,)),);
+      } : null, 
+      child: Text(AppLocalizations.of(context).translate('process'),)
+    );
+  }
+
+  Widget checkCredditsSR(user) {
+    return selector.executionOnline == false ? selectImageButton(false) : !user.isAnon ? StreamBuilder<UserCredits>(
+      stream: CheckOutService(uid: user.uid).userCR,
+      initialData: UserCredits(credits: 0),
+      builder: (context, snapshot1){
+        UserCredits userCredits = snapshot1.data ?? UserCredits(credits: 0);
+        if (userCredits.credits == 0) {
+          return selectImageButton(true);
+        } else {
+          return selectImageButton(false);
+        }
+      },
+    ) : selectImageButton(true);
+  }
+
+  Widget checkCreddits(user, btn){
+    return !user.isAnon ? StreamBuilder<UserCredits>(
+      stream: CheckOutService(uid: user.uid).userCR,
+      initialData: UserCredits(credits: 0),
+      builder: (context, snapshot1) {                        
+        UserCredits userCredits = snapshot1.data ?? UserCredits(credits: 0);
+        if (userCredits.credits == 0) {
+          // si aún no descarga 20 puede procesar
+          return StreamBuilder<int>(
+            stream: DatabaseService(uid: user.uid).userDownloads,
+            builder: (context, snapshot2) {
+              int downloads = snapshot2.data ?? 0;
+              if (downloads >= MAXDLS) {
+                //no puede procesar btn
+                return ElevatedButton(
+                  onPressed: image == null ? null : () {
+                    showDialog(context: context, builder: (_) => upgradeDialog(context, user.uid));
+                  },
+                  child: Text(AppLocalizations.of(context).translate("process"))
+                );
+              } else {
+                //aún puede procesar btn
+                showADS = true;
+                return btn;
+              }
+            },
+          );
+        } else {
+          // puede procesar btn
+          return btn;
+        }
+      },
+    ) : btn;
+    
+  }
+
   void _postProcess() async {
     postProcessed = await compute(postProcess, [image.readAsBytesSync(), newImage, blur, threshold]);
     setState(() => loading = false);
   }
-
-  
 
   GestureDetector categoriesBuild(int index, BuildContext context) {
     return GestureDetector(

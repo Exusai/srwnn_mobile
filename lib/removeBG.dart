@@ -1,4 +1,4 @@
-import 'dart:typed_data';
+/* import 'dart:typed_data';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:gallery_saver/gallery_saver.dart';
@@ -77,10 +77,10 @@ class _BackgroundRemoverState extends State<BackgroundRemover> {
   
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
-    var padding = MediaQuery.of(context).padding;
-    double height3 = height - padding.top - kToolbarHeight;
+    //double width = MediaQuery.of(context).size.width;
+    //double height = MediaQuery.of(context).size.height;
+    //var padding = MediaQuery.of(context).padding;
+    //double height3 = height - padding.top - kToolbarHeight;
     
     final user = Provider.of<Usuario>(context) ?? Usuario(uid: '', isAnon: true);
 
@@ -357,3 +357,4 @@ class Loading extends StatelessWidget {
   }
 }
 
+ */

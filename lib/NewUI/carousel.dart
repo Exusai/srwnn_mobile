@@ -6,7 +6,7 @@ List<String> imgList = [
   //'assets/icon.png',
   'assets/Banners/Banner2.png',
   'assets/Banners/Banner4.png',
-  'assets/Banners/Banner5.png',
+  //'assets/Banners/Banner5.png',
   //'assets/Banners/BanneBGR1.png',
   'assets/Banners/BannerBGR2.png',
   //'assets/Banners/BannerBGR3.png',
