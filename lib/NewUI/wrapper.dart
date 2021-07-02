@@ -35,7 +35,7 @@ String filename;
 
 
 class _WrapperState extends State<Wrapper> {
-  List<String> categories = ["Súper Resolution", "Background Remover", "Soon"];
+  List<String> categories = ["Super Resolution", "Background Remover", "Soon"];
   int selectedIndex = 0;
 
   double threshold = 0.5;
@@ -97,7 +97,7 @@ class _WrapperState extends State<Wrapper> {
           isInstertitialReady = false;
         },
         onAdClosed: (Ad ad) {
-          ad.dispose();
+          //ad.dispose();
           isInstertitialReady = false;
         },
       ),
@@ -111,6 +111,7 @@ class _WrapperState extends State<Wrapper> {
     _interstitialAd?.dispose();
   }
 
+
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<Usuario>(context) ?? Usuario(uid: '', isAnon: true);
@@ -118,7 +119,7 @@ class _WrapperState extends State<Wrapper> {
     double height = MediaQuery.of(context).size.height;
 
     Widget processButtonBGR = ElevatedButton(
-      onPressed: image == null ? null :  () async {
+      onPressed: image == null ? null : loading ? null :  () async {
         setState(() => loading = true);
         if (showADS || user.isAnon && isInstertitialReady){
           _interstitialAd.show();
@@ -149,8 +150,6 @@ class _WrapperState extends State<Wrapper> {
       child: Text(AppLocalizations.of(context).translate("process"))
     );
 
-    
-
     return ListView(
       children: [
         SizedBox(height: 10,),
@@ -174,7 +173,7 @@ class _WrapperState extends State<Wrapper> {
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 100),
           child: ElevatedButton(
-            onPressed: () async {
+            onPressed: loading ? null : () async {
               await getImage();
             }, 
             child: Text(AppLocalizations.of(context).translate('select_image_tr'),)
@@ -386,6 +385,14 @@ class _WrapperState extends State<Wrapper> {
               ),
             ),
           ),
+          SizedBox(height: 10,),
+          Text(
+              error,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Colors.orange[900],
+              ),
+            ),
           SizedBox(height: 10,),
           processBtn,
           SizedBox(height: 10,),

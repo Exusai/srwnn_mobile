@@ -61,13 +61,13 @@ class _LoadingState extends State<Loading> {
   Widget build(BuildContext context) {
     
     return Container(
-      color: Color(0xffF2F2F2),
+      color: Color(0xff1A1A1A),
       child: Center(
         child: Column(
           children: [
             Spacer(),
             SpinKitCubeGrid(
-              color: Colors.blue,
+              color: Colors.white,
               size: 80.0,
             ),
             SizedBox(height: 10,),
