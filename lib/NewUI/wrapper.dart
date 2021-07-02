@@ -1,11 +1,21 @@
-
+import 'dart:typed_data';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter_switch/flutter_switch.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:provider/provider.dart';
 import 'package:srwnn_mobile/Controllers/ModelConfigs.dart';
+import 'package:srwnn_mobile/Controllers/adds.dart';
 import 'package:srwnn_mobile/Controllers/app_localizations.dart';
-
+import 'package:srwnn_mobile/Models/bgRemove.dart';
+import 'package:srwnn_mobile/Models/user.dart';
+import 'package:srwnn_mobile/NewUI/imageViewer.dart';
 import '../main.dart';
 import 'package:flutter/material.dart';
 import 'package:srwnn_mobile/NewUI/srwnnExampleView.dart';
+import 'carousel.dart';
+import 'dart:io';
 
 class Wrapper extends StatefulWidget {
   //const Wrapper({ Key? key }) : super(key: key);
@@ -15,16 +25,123 @@ class Wrapper extends StatefulWidget {
 }
 
 //SRModelSelector selector = SRModelSelector();
+String filename;
 
 
 class _WrapperState extends State<Wrapper> {
-  List<String> categories = ["Súper Resolution", "Background Remover", "New", "Soon"];
+  List<String> categories = ["Súper Resolution", "Background Remover", "Soon"];
   int selectedIndex = 0;
+
+  double threshold = 0.5;
+  int blur = 0;
+  bool loading = false;
+  //File uploadedImage;
+  Uint8List newImage;
+  Uint8List postProcessed;
+
+  String filename;
+  String error = '';
+
+  bool showADS = false;
+  bool fastProcess = true;
+
+  InterstitialAd _interstitialAd;
+  bool isInstertitialReady = false;
+
+  Future  getImage() async {
+    FilePickerResult result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['jpg', 'JPG', 'jpeg', 'JPEG', 'png', 'PNG',],
+    );
+    if(result != null) {
+      setState(() {
+        image = File(result.files.single.path);
+        filename = result.files.single.name;
+        newImage = null;
+        postProcessed = null;
+      });
+      //setState(() {filename = result.files.single.name;});
+      //setState(() {fileSize = result.files.single.size;});
+      //imgProp = image2.decodeImage(uploadedImage);
+    } else {
+      setState(() {
+        message = 'please_select_img';
+      });
+    }
+  }
+
+  @override
+  void initState(){
+    super.initState();
+    //FirebaseAdMob.instance.initialize(appId: Adds.appID);
+    _interstitialAd = InterstitialAd(
+      adUnitId: Adds.loading,
+      //adUnitId: InterstitialAd.testAdUnitId,
+      request: AdRequest(),
+      listener: AdListener(
+        onAdLoaded: (Ad ad){
+          // Ad is now ready to show at any time.
+          print("intersticial cargado");
+          isInstertitialReady = true;
+          
+        },
+        onAdFailedToLoad: (Ad ad, LoadAdError error) {
+          print(error);
+          ad.dispose();
+          isInstertitialReady = false;
+        },
+        onAdClosed: (Ad ad) {
+          ad.dispose();
+          isInstertitialReady = false;
+        },
+      ),
+    );
+    _interstitialAd.load();
+  }
+
+  @override
+  void dispose(){
+    super.dispose();
+    _interstitialAd?.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<Usuario>(context) ?? Usuario(uid: '', isAnon: true);
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
+
+    Widget processButton = ElevatedButton(
+      onPressed: image == null ? null :  () async {
+        setState(() => loading = true);
+        if (showADS || user.isAnon && isInstertitialReady){
+          _interstitialAd.show();
+        }
+        if (fastProcess) {
+          try {
+            postProcessed = await BGRemoverOnline.removeBGFast('0000', image.readAsBytesSync());
+            setState(() => error = '');  
+          } on Exception {
+            setState(() => error = 'Server Error, try again later.'); 
+          } on Error {
+            setState(() => error = 'Server Error, try again later.'); 
+          }
+          setState(() => loading = false);
+        } else {
+          try {
+            newImage = await BGRemoverOnline.removeBG('0000', image.readAsBytesSync());
+            setState(() => error = '');  
+          } on Exception {
+            setState(() => error = 'Server Error, try again later.');  
+          } on Error {
+            setState(() => error = 'Server Error, try again later.');  
+          }
+          _postProcess();
+        }
+        
+      },
+      child: Text(AppLocalizations.of(context).translate("process"))
+    );
     return ListView(
       children: [
         SizedBox(height: 10,),
@@ -32,17 +149,23 @@ class _WrapperState extends State<Wrapper> {
           padding: EdgeInsets.symmetric(horizontal: 10),
           child: Container(
             alignment: Alignment.center,
-            height: height/3.5,
+            height: image == null ? height/3.5 : height/2.5,
             //width: 40,
-            child: SRWNNExample(inImg: selector.getImageInExample(), outImg: selector.getImageOutExmaple(),),
+            //child: SRWNNExample(inImg: selector.getImageInExample(), outImg: selector.getImageOutExmaple(),),
+            child: image == null ? Carousel() : ImageViwer(
+              image: image.readAsBytesSync(), 
+              postProcessed: postProcessed, 
+              filename: filename, 
+              loading: loading,
+            ),
           ),
         ),
         SizedBox(height: 10,),
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: 80),
+          padding: EdgeInsets.symmetric(horizontal: 100),
           child: ElevatedButton(
-            onPressed: (){
-              
+            onPressed: () async {
+              await getImage();
             }, 
             child: Text(AppLocalizations.of(context).translate('select_image_tr'),)
           ),
@@ -83,7 +206,7 @@ class _WrapperState extends State<Wrapper> {
                 Divider(),
                 Container(
                   alignment: Alignment.center,
-                  child: controllers(),
+                  child: controllers(processButton),
                 )
               ],
             ),
@@ -91,25 +214,23 @@ class _WrapperState extends State<Wrapper> {
           ),
         ),
         SizedBox(height: 10,),
-        
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 80),
-          child: ElevatedButton(
-            onPressed: (){
-              
-            }, 
-            child: Text(AppLocalizations.of(context).translate('process'),)
-          ),
-        ),
-        SizedBox(height: 10,),
+        //SizedBox(height: 10,),
       ],
     );
   }
 
-  Widget controllers(){
+  Widget controllers(processBtn){
+    /// 
+    /// Super Resolution Controls
+    /// 
     if (selectedIndex == 0){
       return Column(
         children: [
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            child: SRWNNExample(inImg: selector.getImageInExample(), outImg: selector.getImageOutExmaple(),),
+          ),
+          SizedBox(height: 10),
           Text(
             AppLocalizations.of(context).translate('style_tr'),
             textAlign: TextAlign.center,
@@ -150,7 +271,7 @@ class _WrapperState extends State<Wrapper> {
           ),
           SizedBox(height: 5,),
           CupertinoSlidingSegmentedControl(
-            children: blur, 
+            children: blurLevel, 
             onValueChanged: (int val) {
               setState(() {
                 selector.blurLevel = val;
@@ -167,13 +288,112 @@ class _WrapperState extends State<Wrapper> {
                 color: Colors.orange[900],
               ),
             ),
-            SizedBox(height: 10,),
+          SizedBox(height: 10,),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 80),
+            child: ElevatedButton(
+              onPressed: image != null ? (){
+                
+              } : null, 
+              child: Text(AppLocalizations.of(context).translate('process'),)
+            ),
+          ),
+          SizedBox(height: 10,),
+        ],
+      );
+    } 
+    /// 
+    /// BGR Controls
+    /// 
+    if (selectedIndex == 1){
+      return Column(
+        children: [
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            child: Row(
+              mainAxisSize: MainAxisSize.max, 
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Text(AppLocalizations.of(context).translate('fast_processing')),
+                Spacer(),
+                FlutterSwitch(
+                  value: fastProcess, 
+                  height: 20.0,
+                  toggleSize: 20.0,
+                  width: 40,
+                  padding: 0,
+                  onToggle: (bool val) {
+                    setState(() {
+                      fastProcess = val;
+                    });
+                  }
+                )
+              ],
+            ),
+          ),
+          SizedBox(height: 10,),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            child: IgnorePointer(
+              ignoring: fastProcess,
+              child: ExpansionTile(
+                subtitle: Text(AppLocalizations.of(context).translate('adjust_parameters_to_get_desired_result'), style: TextStyle(color: fastProcess ? Colors.white.withAlpha(30) : Colors.white),),
+                title: Text(AppLocalizations.of(context).translate('settings'), style: TextStyle(color: fastProcess ? Colors.white.withAlpha(30) : Colors.white)),
+                initiallyExpanded: false,
+                tilePadding: EdgeInsets.zero,
+                childrenPadding: EdgeInsets.zero,
+                children: [
+                  Text(AppLocalizations.of(context).translate('threshold'), style: TextStyle(color: fastProcess ? Colors.white.withAlpha(30) : Colors.white)),
+                  Slider(
+                    value: threshold,
+                    onChanged: fastProcess ? null : (postProcessed == null  || newImage  == null) ? null : (double value){
+                      setState(() => threshold = value);
+                    },
+                    onChangeEnd: (double value){
+                      setState(() => loading = true);
+                      _postProcess();
+                    },
+                    min: .05,
+                    max: 0.95,
+                    divisions: 18,
+                    label: threshold.toStringAsFixed(2),
+                  ),
+                  Text(AppLocalizations.of(context).translate('blur'), style: TextStyle(color: fastProcess ? Colors.white.withAlpha(30) : Colors.white)),
+                  Slider(
+                    value: blur.toDouble(),
+                    divisions: 20,
+                    label: blur.toString(),
+                    onChanged: fastProcess ? null : (postProcessed == null  || newImage  == null) ? null : (double value){
+                      setState(() => blur = value.toInt());
+                    },
+                    onChangeEnd: (_) async {
+                      setState(() => loading = true);
+                      _postProcess();
+                    },
+                    min: 0,
+                    max: 20,
+                  ),
+                  
+                ],
+              ),
+            ),
+          ),
+          SizedBox(height: 10,),
+          processBtn,
+          SizedBox(height: 10,),
         ],
       );
     } else {
       return Container();
     }
   }
+
+  void _postProcess() async {
+    postProcessed = await compute(postProcess, [image.readAsBytesSync(), newImage, blur, threshold]);
+    setState(() => loading = false);
+  }
+
+  
 
   GestureDetector categoriesBuild(int index, BuildContext context) {
     return GestureDetector(

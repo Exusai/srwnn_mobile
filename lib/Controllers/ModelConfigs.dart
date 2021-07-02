@@ -17,7 +17,7 @@ final Map<int, Widget> noise = <int, Widget>{
   3: Text('    3    '),
 };
 
-final Map<int, Widget> blur = <int, Widget>{
+final Map<int, Widget> blurLevel = <int, Widget>{
   0: Text('    0    '),
   1: Text('    1    '),
   2: Text('    2    '),

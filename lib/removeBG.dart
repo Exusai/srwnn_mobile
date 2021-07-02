@@ -120,7 +120,7 @@ class _BackgroundRemoverState extends State<BackgroundRemover> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         //---Titulo                     ---//
-        Container(
+        /* Container(
           color: Colors.grey[900],
           height: 40,
           child: Row(
@@ -151,7 +151,7 @@ class _BackgroundRemoverState extends State<BackgroundRemover> {
               SizedBox(height: 10,),
             ],
           ),
-        ),
+        ), */
         //---Botones, siliders y etc---//
         Container(
           child: Column(
