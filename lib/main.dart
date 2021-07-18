@@ -3,25 +3,18 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
-//import 'package:file_picker/file_picker.dart';
 import 'package:provider/provider.dart';
-//import 'package:srwnn_mobile/Controllers/databaseService.dart';
 import 'package:srwnn_mobile/Controllers/urlLauncher.dart';
 import 'package:srwnn_mobile/NewUI/wrapper.dart';
 import 'package:srwnn_mobile/buyCR.dart';
 import 'package:srwnn_mobile/dialogs.dart';
-//import 'package:srwnn_mobile/removeBG.dart';
-//import 'package:srwnn_mobile/workingView.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-//import 'Controllers/ModelConfigs.dart';
 import 'Controllers/ModelSelector.dart';
 import 'Controllers/app_localizations.dart';
 import 'Controllers/authService.dart';
-//import 'Models/subscriptionData.dart';
 import 'Models/user.dart';
 import 'authViews/auth.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
-//import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -63,7 +56,6 @@ class _MyAppState extends State<MyApp> {
     //FirebaseAdMob.instance.initialize(appId: Adds.appID);
   }
 
-  
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -80,7 +72,6 @@ class _MyAppState extends State<MyApp> {
             enableFeedback: true,
             textStyle: TextStyle(
               fontFamily: 'Roboto',
-              //fontWeight: FontWeight.w300,
             )
           ),  
         ),
@@ -151,57 +142,11 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final AuthService _authService = AuthService();
-  /* Future  getImage() async {
-    FilePickerResult result = await FilePicker.platform.pickFiles(
-      type: FileType.custom,
-      allowedExtensions: ['jpg', 'JPG', 'jpeg', 'JPEG', 'png', 'PNG',],
-    );
-    if(result != null) {
-      setState(() {image = File(result.files.single.path);});
-      //setState(() {filename = result.files.single.name;});
-      //setState(() {fileSize = result.files.single.size;});
-      //imgProp = image2.decodeImage(uploadedImage);
-    } else {
-      setState(() {
-        message = 'please_select_img';
-      });
-    }
-  } */
-
-  //int _page = 0;
-  //GlobalKey _bottomNavigationKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<Usuario>(context) ?? Usuario(uid: '', isAnon: true);
     
-    /* Widget selectImageButton(bool showAds) {
-      return ElevatedButton(
-        onPressed: () async {
-          //print("getting image");
-          await getImage();
-          //go to next wea and pass image and info
-          //print("got image");
-          if (image != null ) {
-            Navigator.push(context,MaterialPageRoute(builder: (context) => new InferenceView(image: image, modelPath: selector.getModelPath(), showAds: showAds,)),);
-          } else {
-            /* try {
-              await retrieveLostData();
-              //Navigator.push(context,MaterialPageRoute(builder: (context) => new InferenceView(image: image, modelPath: selector.getModelPath(), showAds: showAds,)),);
-            } on Exception {
-              setState(() {
-                message = 'please_select_img';
-              });
-            } */
-            //await getImage();
-            setState(() {
-              message = 'please_select_img';
-            });
-          }
-        },
-        child: Text(AppLocalizations.of(context).translate('select_image_tr'),)
-      );
-    } */
     return Scaffold(
       extendBodyBehindAppBar: true,
       extendBody: true,
@@ -321,221 +266,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
       
-      /* bottomNavigationBar: CurvedNavigationBar(
-        backgroundColor: Colors.transparent,
-        color: Color.fromARGB(255, 32, 32, 32),
-        height: 50,
-        items: <Widget>[
-          Icon(Icons.select_all_outlined, size: 30),
-          Icon(Icons.image_outlined, size: 30),
-          Icon(Icons.image_aspect_ratio, size: 30),
-        ],
-        onTap: (index) {
-          setState(() {
-            _page = index;
-          });
-        },
-      ), */
-
       body: Wrapper()
-
-      /* body: _page == 0 ? Container(
-        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 0),
-        child: ListView(
-          //mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            SizedBox(height: 10,),
-            Container(
-              decoration: BoxDecoration(color: Colors.black.withOpacity(0.60)),
-              child: Column(
-                children: [
-                  SizedBox(height: 5,),
-                  Text(
-                    'Example',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  SizedBox(height: 5,),
-                  Row(
-                    children: [
-                      Spacer(),
-                      Text(
-                        'Image input',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      Spacer(),
-                      Text(
-                        'Image Output',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      Spacer(),
-                    ],
-                  ),
-                  SizedBox(height: 5,),
-                ],
-              ),
-            ),
-
-            Container(
-              child: Row(
-                children: [
-                  //Spacer(),
-                  Expanded(
-                    child: Image(
-                      image: AssetImage(selector.getImageInExample()),
-                      fit: BoxFit.fitWidth,
-                      //height: 160,
-                    ),
-                  ),
-                  Expanded(
-                    child: Image(
-                      image: AssetImage(selector.getImageOutExmaple()),
-                      fit: BoxFit.fitWidth,
-                      //height: 160,
-                    ),
-                  ),
-                  //Spacer(),
-                ],
-              ),
-            ),
-            SizedBox(height: 10,),
-            Text(
-              AppLocalizations.of(context).translate('model_tr'),
-              textAlign: TextAlign.center,
-            ),
-            SizedBox(height: 5,),
-            CupertinoSlidingSegmentedControl(
-              children: models, 
-              onValueChanged: (int val) {
-                setState(() {
-                  selector.model = val;
-                  message = selector.updateParameters();
-                });
-              },
-              groupValue: selector.model,
-            ),
-            SizedBox(height: 10,),
-
-            Text(
-              AppLocalizations.of(context).translate('style_tr'),
-              textAlign: TextAlign.center,
-            ),
-            SizedBox(height: 5,),
-            CupertinoSlidingSegmentedControl(
-              children: styles, 
-              onValueChanged: (int val) {
-                setState(() {
-                  selector.style = val;
-                  message = selector.updateParameters();
-                });
-              },
-              groupValue: selector.style,
-            ),
-            SizedBox(height: 10,),
-
-            Text(
-              AppLocalizations.of(context).translate('noise_lvl'),
-              textAlign: TextAlign.center,
-            ),
-            SizedBox(height: 5,),
-            CupertinoSlidingSegmentedControl(
-              children: noise, 
-              onValueChanged: (int val) {
-                setState(() {
-                  selector.noiseLevel = val;
-                  message = selector.updateParameters();
-                });
-              },
-              groupValue: selector.noiseLevel,
-            ),
-            SizedBox(height: 10,),
-
-            Text(
-              AppLocalizations.of(context).translate('blur_lvl'),
-              textAlign: TextAlign.center,
-            ),
-            SizedBox(height: 5,),
-            CupertinoSlidingSegmentedControl(
-              children: blur, 
-              onValueChanged: (int val) {
-                setState(() {
-                  selector.blurLevel = val;
-                  message = selector.updateParameters();
-                });
-              },
-              groupValue: selector.blurLevel,
-            ),
-            SizedBox(height: 10,),
-
-            // Disable execution on local
-            /* Row(
-              children: [
-                Spacer(),
-                Column(
-                  children: [
-                    Text(
-                      AppLocalizations.of(context).translate('execution_tr'),
-                      textAlign: TextAlign.center,
-                    ),
-                    SizedBox(height: 5,),
-                    CupertinoSlidingSegmentedControl(
-                      children: execution, 
-                      onValueChanged: (int val) {
-                        setState(() {
-                          if (val == 0){
-                            selector.executionOnline = false;
-                          } else {
-                            selector.executionOnline = true;
-                          }
-                          message = selector.updateParameters();
-                        });
-                      },
-                      groupValue: selector.executionOnline == true ? 1 : 0,
-                    ),
-                    SizedBox(height: 10,),
-                  ],
-                ),
-                Spacer(), 
-              ],
-            ), */
-
-            Text(
-              AppLocalizations.of(context).translate(message),
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Colors.orange[900],
-              ),
-            ),
-            SizedBox(height: 5,),
-
-            selector.executionOnline == false ? selectImageButton(false) : !user.isAnon ? StreamBuilder<UserCredits>(
-              stream: CheckOutService(uid: user.uid).userCR,
-              initialData: UserCredits(credits: 0),
-              builder: (context, snapshot1){
-                UserCredits userCredits = snapshot1.data ?? UserCredits(credits: 0);
-                if (userCredits.credits == 0) {
-                  return selectImageButton(true);
-                } else {
-                  return selectImageButton(false);
-                }
-              },
-            ) : selectImageButton(true),
-
-            SizedBox(height: 5,),
-          ],
-        ),
-      ) : _page == 1 ? Container(
-        child: Center(
-          //child: Text("REMOVEBG"),
-          child: ListView(
-            children: [
-              BackgroundRemover(),
-            ],
-          ),
-        ),
-      ) : Center(child: Text("Soon/Pronto"),), */
     );
   }
   

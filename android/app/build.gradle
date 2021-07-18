@@ -47,9 +47,8 @@ android {
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "com.exus.srwnn_mobile"
-        minSdkVersion 29
+        minSdkVersion 20
         targetSdkVersion 29
-        //compileSdkVersion = 29
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         multiDexEnabled true
