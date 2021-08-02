@@ -24,8 +24,6 @@ import 'carousel.dart';
 import 'dart:io';
 
 class Wrapper extends StatefulWidget {
-  //const Wrapper({ Key? key }) : super(key: key);
-
   @override
   _WrapperState createState() => _WrapperState();
 }
@@ -35,7 +33,7 @@ String filename;
 
 
 class _WrapperState extends State<Wrapper> {
-  List<String> categories = ["Super Resolution", "Background Remover", "Soon"];
+  List<String> categories = ["Super Resolution", "Background Remover"];
   int selectedIndex = 0;
 
   double threshold = 0.5;
@@ -66,9 +64,6 @@ class _WrapperState extends State<Wrapper> {
         newImage = null;
         postProcessed = null;
       });
-      //setState(() {filename = result.files.single.name;});
-      //setState(() {fileSize = result.files.single.size;});
-      //imgProp = image2.decodeImage(uploadedImage);
     } else {
       setState(() {
         message = 'please_select_img';
@@ -497,12 +492,6 @@ class _WrapperState extends State<Wrapper> {
                 )
               ],
             ),
-            /* SizedBox(width: 10,),
-            Container(
-              width: 1,
-              height: 20,
-              color: Colors.grey,
-            ) */
           ],
         ),
       ),

@@ -16,7 +16,7 @@
          FlutterApplication and put your custom class here. -->x         
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="ExusAI - Neural filters"
+        android:label="ExusAI - AI Super Resolution"
         android:icon="@mipmap/ic_launcher">
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
