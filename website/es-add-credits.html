@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Créditos - ExusAI</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/icofont/icofont.min.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
+  <link href="assets/vendor/venobox/venobox.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top header-inner-pages">
+    <div class="container-fluid">
+      <div class="row justify-content-center">
+        <div class="col-xl-9 d-flex align-items-center">
+            <h1 class="logo mr-auto"><a href="index.html">ExusAI</a></h1>
+
+          <nav class="nav-menu d-none d-lg-block">
+            <ul>
+                <li class="active"><a href="index.html">Inicio</a></li>
+                <li><a href="index.html#services">Servicios</a></li>
+                <li><a href="index.html#pricing">Suscripción</a></li>
+                <li><a href="index.html#about">Acerca de </a></li>
+                <li><a href="index.html#contact">Contacto</a></li>
+
+            </ul>
+          </nav><!-- .nav-menu -->
+
+          <!-- <a href="#about" class="get-started-btn scrollto">Get Started</a> -->
+          <a href="https://app.exusai.com/" class="get-started-btn scrollto">Probar</a>
+        </div>
+      </div>
+
+    </div>
+  </header><!-- End Header -->
+
+  <main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <section class="breadcrumbs">
+      <div class="container">
+        <div class="d-flex justify-content-between align-items-center">
+          <h2>Añadir créditos de procesamiento</h2>
+          <ol>
+            <li><a href="index.html">Inicio</a></li>
+            <li>Añadir créditos</li>
+          </ol>
+        </div>
+      </div>
+    </section><!-- End Breadcrumbs -->
+    <!-- MAIN -->
+    <section class="inner-page">
+      <!-- <div class="container">
+        <h2>
+          hola
+        </h2>
+      </div> -->
+      <div class="row align-items-center">
+        <div class="col-md-6 " data-aos="fade-up" data-aos-delay="100">
+
+          <!-- LOGIN MODAL -->
+          
+          <div class="mx-auto" style="width: 400px;">
+            <div class="container">
+              <h4>Login</h4><br />
+              <form id="login-form">
+                <div class="input-field">
+                  <input type="email" id="login-email" required />
+                  <label for="login-email">Email address</label>
+                </div>
+                <div class="input-field">
+                  <input type="password" id="login-password" required />
+                  <label for="login-password">Your password</label>
+                </div>
+                <button class="btn blue darken-2 z-depth-0">Login</button>
+              </form>
+            </div>
+          </div>
+
+          <!-- SI ESTA LOGEADO MOSTRAR ESTO, SINO LOGIN -->
+
+          <div class="mx-auto" style="width: 400px;">
+            <div class="container">
+              <p>
+                <!-- Añade <b>5 créditos</b> a tu cuenta, <b>1 crédito te permite procesar y descargar una imágen adicional</b> a las 15 gratis de cada mes y son acumulables. -->
+                <b>Compra créditos (cr)</b> para poder seguir procesando y descargando imágenes. Un crédito es igual a procesar y descargar una imágen, son acumulables y se suman a tus 15 gratis de cada mes.
+              </p>
+              <div id="smart-button-container">
+                <div style="text-align: center;">
+                  <div style="margin-bottom: 1.25rem;">
+                    <!-- <p>Compra créditos para poder seguir procesando y descargando imágenes, son acumulables y se suman a tus 15 gratis de cada mes.</p> -->
+                    <select id="item-options"><option value="5cr" price="25">5cr - 25 MXN</option><option value="10cr" price="50">10cr - 50 MXN</option><option value="15" price="75">15 - 75 MXN</option><option value="20" price="80">20 - 80 MXN</option><option value="30" price="100">30 - 100 MXN</option></select>
+                    <select style="visibility: hidden" id="quantitySelect"></select>
+                  </div>
+                <div id="paypal-button-container"></div>
+                </div>
+              </div>
+              <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=MXN" data-sdk-integration-source="button-factory"></script>
+              <script>
+                function initPayPalButton() {
+                  var shipping = 0;
+                  var itemOptions = document.querySelector("#smart-button-container #item-options");
+                  var quantity = parseInt();
+                  var quantitySelect = document.querySelector("#smart-button-container #quantitySelect");
+                  if (!isNaN(quantity)) {
+                    quantitySelect.style.visibility = "visible";
+                  }
+                  var orderDescription = 'Compra créditos para poder seguir procesando y descargando imágenes, son acumulables y se suman a tus 15 gratis de cada mes.';
+                  if(orderDescription === '') {
+                    orderDescription = 'Item';
+                  }
+                  paypal.Buttons({
+                    style: {
+                      shape: 'pill',
+                      color: 'gold',
+                      layout: 'vertical',
+                      label: 'paypal',
+                      
+                    },
+                    createOrder: function(data, actions) {
+                      var selectedItemDescription = itemOptions.options[itemOptions.selectedIndex].value;
+                      var selectedItemPrice = parseFloat(itemOptions.options[itemOptions.selectedIndex].getAttribute("price"));
+                      var tax = (0 === 0) ? 0 : (selectedItemPrice * (parseFloat(0)/100));
+                      if(quantitySelect.options.length > 0) {
+                        quantity = parseInt(quantitySelect.options[quantitySelect.selectedIndex].value);
+                      } else {
+                        quantity = 1;
+                      }
+                
+                      tax *= quantity;
+                      tax = Math.round(tax * 100) / 100;
+                      var priceTotal = quantity * selectedItemPrice + parseFloat(shipping) + tax;
+                      priceTotal = Math.round(priceTotal * 100) / 100;
+                      var itemTotalValue = Math.round((selectedItemPrice * quantity) * 100) / 100;
+                
+                      return actions.order.create({
+                        purchase_units: [{
+                          description: orderDescription,
+                          amount: {
+                            currency_code: 'MXN',
+                            value: priceTotal,
+                            breakdown: {
+                              item_total: {
+                                currency_code: 'MXN',
+                                value: itemTotalValue,
+                              },
+                              shipping: {
+                                currency_code: 'MXN',
+                                value: shipping,
+                              },
+                              tax_total: {
+                                currency_code: 'MXN',
+                                value: tax,
+                              }
+                            }
+                          },
+                          items: [{
+                            name: selectedItemDescription,
+                            unit_amount: {
+                              currency_code: 'MXN',
+                              value: selectedItemPrice,
+                            },
+                            
+                            quantity: quantity
+                          }]
+                        }]
+                      });
+                    },
+                    onApprove: function(data, actions) {
+                      return actions.order.capture().then(function(details) {
+                        alert('Transaction completed by ' + details.payer.name.given_name + '!');
+                        var selectedItemDescription = itemOptions.options[itemOptions.selectedIndex].value;
+                        var cr = parseFloat(itemOptions.options[itemOptions.selectedIndex].getAttribute("value"));
+                        alert('Se compraron ' + cr);
+                      });
+                    },
+                    onError: function(err) {
+                      console.log(err);
+                      alert('error o cancelado');
+                    },
+                  }).render('#paypal-button-container');
+                }
+                initPayPalButton();
+              </script>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="container">
+            <img src="assets/img/icon.png" class="rounded-lg img-fluid" alt="app icon">  
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+  <!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-lg-3 col-md-6 footer-contact">
+            <h3>ExusAI</h3>
+            <p>
+              Ciudad de México <br>
+              México <br><br>
+              <strong>Email:</strong> a.a.r.samuel99@gmail.com<br>
+            </p>
+          </div>
+
+          <div class="col-lg-2 col-md-6 footer-links">
+            <h4>Useful Links</h4>
+            <ul>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Inicio</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#about">Acerca de</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#services">Servicio</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="/terms-of-service.html">Terminos de uso</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="/privacy.html">Aviso de privacidad</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="copyright-wrap d-md-flex py-4">
+        <div class="mr-md-auto text-center text-md-left">
+          <div class="copyright">
+            &copy; Copyright <strong><span>ExusAI</span></strong>. All Rights Reserved
+          </div>
+          <div class="credits">
+            <!-- All the links in the footer should remain intact. -->
+            <!-- You can delete the links only if you purchased the pro version. -->
+            <!-- Licensing information: https://bootstrapmade.com/license/ -->
+            <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/techie-free-skin-bootstrap-3/ -->
+            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+          </div>
+        </div>
+        <div class="social-links text-center text-md-right pt-3 pt-md-0">
+          <a href="https://www.youtube.com/channel/UCrXOw6Ygnp62QhRxFuU13PQ/featured" class="youtube"><i class="bx bxl-youtube"></i></a>
+          <a href="https://twitter.com/exus_ai" class="twitter"><i class="bx bxl-twitter"></i></a>
+          <a href="https://www.facebook.com/Exusai-348213423034310" class="facebook"><i class="bx bxl-facebook"></i></a>
+          <!-- <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a> -->
+          <a href="https://www.linkedin.com/in/samuel-arellano-a-4a5674197/" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+        </div>
+      </div>
+
+    </div>
+  </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/jquery/jquery.min.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/jquery.easing/jquery.easing.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/waypoints/jquery.waypoints.min.js"></script>
+  <script src="assets/vendor/counterup/counterup.min.js"></script>
+  <script src="assets/vendor/owl.carousel/owl.carousel.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/venobox/venobox.min.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+  <!-- paypal -->
+  <!-- <script
+    src="https://www.paypal.com/sdk/js?client-id=AYj6Wds87dAA8jxKqXmc2f7vQCbwuM1TZ6XqvUaMN_s3UUROD-lgcg5rtnP3UX5Q0zyPQAkNW4x72OvY"> // Required. Replace SB_CLIENT_ID with your sandbox client ID.
+  </script> -->
+  <!-- paypal -->
+
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <!-- <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-app.js"></script> -->
+
+  <!-- TODO: Add SDKs for Firebase products that you want to use https://firebase.google.com/docs/web/setup#available-libraries -->
+  <!-- <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-analytics.js"></script>
+  <script defer src="https://www.gstatic.com/firebasejs/7.23.0/firebase-auth.js"></script>
+  <script defer src="https://www.gstatic.com/firebasejs/7.23.0/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-firestore.js"></script> -->
+
+
+  <!-- <script>
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    var firebaseConfig = {
+      apiKey: "AIzaSyCCjnY3QNi3MSgpSptE_v56Yuz5FD4KkjQ",
+      authDomain: "srwnnads.firebaseapp.com",
+      databaseURL: "https://srwnnads.firebaseio.com",
+      projectId: "srwnnads",
+      storageBucket: "srwnnads.appspot.com",
+      messagingSenderId: "564495334688",
+      appId: "1:564495334688:web:80db72de49511f3832ab45",
+      measurementId: "G-DBQ9WB7RS0"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+    db.settings({ timestampsInSnapshots: true });
+  </script> -->
+  <!-- Compiled and minified JavaScript -->
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script src="scripts/auth.js"></script> -->
+  <!-- <script src="scripts/index.js"></script> -->
+
+</body>
+
+</script>
+</html>
