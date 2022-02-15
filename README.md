@@ -1,4 +1,8 @@
-# srwnn_mobile
+# srwnn_mobile 
+
+https://user-images.githubusercontent.com/47704357/153986488-fbb8c22b-24bd-4f3d-b2d8-19006ec2191b.mp4
+
+
  Flutter implemetation of my SuperResolutionWaifuNeuralNetwork based on [waifu2x](https://github.com/nagadomi/waifu2x).
  
  Image dataset colected using [PixivUtil2](https://github.com/Nandaka/PixivUtil2).
